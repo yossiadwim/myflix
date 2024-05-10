@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    width: 10px; /* Adjust scrollbar width */
+    height: 5px; /* Adjust scrollbar height */
+  }
+  
+  /* Style the scrollbar track */
+  ::-webkit-scrollbar-track {
+    /* background: #ffffff; Light gray background */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Style the scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Dark gray thumb */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Style the thumb when hovering over the scrollbar */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ef4444; /* Darker gray on hover */
+  }
+  
+.active{
+    color: #ef4444;
+}
+
+body{
+  background-color: black;
+}
