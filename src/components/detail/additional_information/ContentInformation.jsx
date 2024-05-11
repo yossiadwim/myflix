@@ -48,7 +48,7 @@ const ContentInformation = ({
                   <a
                     key={i}
                     href=""
-                    className="text-md m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-none hover:bg-red-500"
+                    className="text-md m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
                   >
                     {keyword.name}
                   </a>
@@ -91,7 +91,7 @@ const ContentInformation = ({
             <h1 className="text-lg font-bold text-white">Keywords</h1>
             <div className="">
               {state === "tv"
-                ? tv?.keywords?.results.map((keyword, i) => {
+                ? tv?.keywords?.results.slice(0, 20).map((keyword, i) => {
                     return (
                       <a
                         key={i}
@@ -102,17 +102,7 @@ const ContentInformation = ({
                       </a>
                     );
                   })
-                : keywords?.keywords?.map((keyword, i) => {
-                    return (
-                      <a
-                        key={i}
-                        href=""
-                        className="text-md m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
-                      >
-                        {keyword.name}
-                      </a>
-                    );
-                  })}
+                : null}
             </div>
           </div>
         </div>

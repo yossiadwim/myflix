@@ -25,6 +25,8 @@ const Details = (props) => {
   const [collection, setCollection] = useState([]);
 
   useEffect(() => {
+
+    // window.scrollTo(0, 0);
     const fetchDetail = async (id) => {
       try {
         if (state === 'movie') {
@@ -54,7 +56,6 @@ const Details = (props) => {
   }, [id, state]);
 
 
-
   return (
     <>
       <CarouselDetail
@@ -63,7 +64,7 @@ const Details = (props) => {
         state={state}
         tv={tv}
       ></CarouselDetail>
-      <div className="container mt-56 flex">
+      <div className="container pt-80 flex">
         <div className="w-3/4">
           <ContentDetail
             cast={cast}
@@ -78,6 +79,8 @@ const Details = (props) => {
             seasons={tv.seasons}
             videos_tv = {tv.videos}
             images_tv = {tv.images}
+            recommendations_movie={movie.recommendations}
+            recommendations_tv = {tv.recommendations}
           ></ContentDetail>
         </div>
 

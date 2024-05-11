@@ -2,6 +2,7 @@
 import Cast from "../components/Fragment/Cast";
 import Media from "../components/Fragment/Media";
 import Collection from "../components/detail/collection/Collection";
+import Recommendations from "../components/detail/recommendations/Recommendations";
 import Review from "../components/detail/reviews/Review";
 import Seasons from "../components/detail/seasons/Seasons";
 
@@ -18,6 +19,8 @@ const ContentDetail = ({
   seasons,
   videos_tv,
   images_tv,
+  recommendations_movie,
+  recommendations_tv,
 }) => {
   return (
     <>
@@ -35,7 +38,7 @@ const ContentDetail = ({
         <Review review={review} review_tv={review_tv} state={state}></Review>
       </div>
 
-      <div className="pb-36 pt-24">
+      <div className="pb-32 pt-24">
         <Media
           video={video}
           backdrops={backdrops}
@@ -47,8 +50,16 @@ const ContentDetail = ({
         ></Media>
       </div>
 
+      {collection?.length === 0 ? null : (
+        <div className="pb-36 pt-10">
+          <Collection collection={collection}></Collection>
+        </div>
+      )}
       <div className="pb-36 pt-10">
-        <Collection collection={collection}></Collection>
+        <Recommendations
+          state={state}
+          recommendations_movie={recommendations_movie} recommendations_tv={recommendations_tv}
+        ></Recommendations>
       </div>
     </>
   );

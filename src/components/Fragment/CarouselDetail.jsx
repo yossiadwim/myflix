@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import { useState } from "react";
 
@@ -14,7 +15,7 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
     <>
       <Navbar></Navbar>
       <div className="bg h-[650px] w-full object-cover">
-        <div className="bg-opacity-100">
+        <div className="bg-opacity-100 ">
           {state === "tv" ? (
             <img
               className="absolute inset-0 h-screen w-screen object-cover brightness-50"
@@ -34,23 +35,31 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
 
         <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
           <div className="flex">
-            <div className="mx-20 my-10 w-3/5 pb-20 pt-20">
+            <div className="mx-20 my-5 w-3/5 pb-20 pt-28">
               <div className="">
-                {state === "tv" ? (
+                {state === "tv" && tv?.images?.logos?.length !== 0 ? (
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${tv?.images?.logos[0]?.file_path}`}
-                    className="w-80"
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${
-                      logo?.logos?.filter((item) => item.iso_639_1 === "en")[0]
-                        .file_path
+                    src={`https://image.tmdb.org/t/p/w300${
+                      tv?.images?.logos?.filter(
+                        (item) => item.iso_639_1 === "en",
+                      )[0].file_path
                     }`}
-                    className="w-72"
+                    className="w-48"
                     alt=""
                   />
+                ) : state === "movie" && logo?.logos?.filter((item) => item.iso_639_1 === "en").length !== 0 ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300${
+                      logo?.logos?.filter((item) => item.iso_639_1 === "en")[0]
+                        ?.file_path
+                    }`}
+                    className=""
+                    alt=""
+                  />
+                ) : state === "tv" ? (
+                  <p className="text-5xl font-bold text-white">{tv.name}</p>
+                ) : (
+                  <p className="text-5xl font-bold text-white">{movie.title}</p>
                 )}
 
                 {state === "tv"
@@ -154,7 +163,7 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                     </p>
                   ) : (
                     <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
-                    {showMore
+                      {showMore
                         ? movie?.overview
                         : movie?.overview?.slice(0, 250) + "..."}
                     </p>
@@ -223,6 +232,25 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                   </button>{" "}
                   <p className="mx-2 my-4">Add to list</p>
                 </div>
+              </div>
+              <div className="mt-5 flex">
+                {state === "movie"
+                  ? movie?.credits?.crew
+                      ?.filter(
+                        (crew) =>
+                          crew.job === "Director" || crew.job === "Writer",
+                      )
+                      .map((crew, index) => (
+                        <div className="" key={index}>
+                          <Link>
+                            <p className="mr-10 mt-4 text-xl font-medium text-white hover:text-red-500">
+                              {crew.name}
+                            </p>
+                          </Link>
+                          <p className="font-light text-white">{crew.job}</p>
+                        </div>
+                      ))
+                  : null}
               </div>
             </div>
             <div className="mx-10 my-10 w-2/5 items-center  pb-20 pt-20 transition delay-0 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">

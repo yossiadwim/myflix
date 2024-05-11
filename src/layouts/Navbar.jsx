@@ -7,7 +7,7 @@ const Navbar = () => {
   //   setIsOpen(!isOpen);
   // };
 
-  window.onscroll = function() {
+  window.onscroll = function () {
     const navbar = document.querySelector("header");
     if (window.scrollY > 10) {
       navbar.classList.add("backdrop-blur-sm");
@@ -16,81 +16,16 @@ const Navbar = () => {
     }
   };
 
-
-
   return (
-    <header className="fixed left-0 top-0 flex w-full items-center bg-transparent shadow-sm z-[999]">
+    <header className="fixed left-0 top-0 z-[999] flex w-full items-center bg-transparent shadow-sm">
       <div className="container">
-        <div className="relative flex items-center justify-between">
-          <div className="">
-            {/* <img className="block py-6" src="./img/tmdb.png" alt="" /> */}
+        <div className=" relative flex items-center">
+          <div className="mx-16">
+            <a href="/">
+              <img className="block hover:opacity-75" src="/img/tmdb.png" alt="" />
+            </a>
           </div>
-          <div className="flex items-center ">
-            {/* <button className="text-white lg:hidden" onClick={toogleMenu}>
-              {isOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#ffffff"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="#ffffff"
-                  className="h-6 w-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-            </button>
-            {isOpen ? null : (
-              <nav
-                id="nav-menu"
-                className="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:hidden"
-              >
-                <ul className="block">
-                  <li className="group">
-                    <a
-                      href="#hero"
-                      className="mx-8 flex py-2 text-base font-semibold text-black group-hover:text-teal-500"
-                    >
-                      Movie
-                    </a>
-                  </li>
-                  <li className="group">
-                    <a
-                      href="#about"
-                      className="mx-8 flex py-2 text-base font-semibold text-black group-hover:text-teal-500"
-                    >
-                      TV Shows
-                    </a>
-                  </li>
-                  <li className="group">
-                    <a
-                      href="#portofolio"
-                      className="mx-8 flex py-2 text-base font-semibold text-black group-hover:text-teal-500"
-                    >
-                      People
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            )} */}
-
+          <div className="flex w-full items-center">
             <nav
               id="nav-menu"
               className="right4 absolute top-full  hidden w-full max-w-[250] rounded-lg py-5 shadow-lg lg:static lg:block lg:max-w-full lg:rounded-none lg:shadow-none"
@@ -122,6 +57,28 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
+          </div>
+          <div className="">
+            <span className="absolute inset-y-0 flex items-center pl-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-6 w-6  fill-white "
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+            <input
+              type="text"
+              placeholder="Search"
+              name="search"
+              className="rounded-full border-2 bg-transparent p-2 pl-10 pr-3 text-white placeholder:text-white focus:border-red-500 focus:outline-none"
+            />
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ const Carousel = () => {
           <div className="mx-36 mt-20 w-2/5 pb-20 pt-20">
             <img
               src={`https://image.tmdb.org/t/p/w500${logo}`}
-              className=""
+              className="w-80"
               alt=""
             />
             {/* <p className="mt-5 font-sans text-6xl font-bold text-white">
@@ -79,8 +79,8 @@ const Carousel = () => {
                 vote )
               </p>
             </div>
-            <div className="">
-              <p className="mt-10 font-sans text-xl leading-relaxed tracking-normal text-white">
+            <div className="mt-5 ">
+              <p className="font-sans text-xl leading-relaxed tracking-normal text-white">
                 {movies.overview}
               </p>
             </div>

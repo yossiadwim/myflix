@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 const Collection = ({ collection }) => {
   return (
@@ -20,18 +22,18 @@ const Collection = ({ collection }) => {
               <p className="text-4xl font-medium text-white">
                 Part of the {collection?.name}{" "}
               </p>
-              <div className="mt-2 flex">
-                <p className=" mr-1 text-lg text-white">Includes</p>
+              <div className="mt-2">
+                <p className=" mr-1 inline-flex text-lg text-white">Includes</p>
                 {collection?.parts?.map((collection, i) => {
                   if (i !== 0) {
                     return (
-                      <p key={i} className="text-lg text-white">
+                      <p key={i} className="inline-flex text-lg text-white">
                         , {collection?.original_title}
                       </p>
                     );
                   } else {
                     return (
-                      <p key={i} className="text-lg text-white">
+                      <p key={i} className="inline-flex text-lg text-white">
                         {collection?.original_title}
                       </p>
                     );
@@ -39,14 +41,16 @@ const Collection = ({ collection }) => {
                 })}
               </div>
               <div className="group mt-4">
-                <button className="rounded-full border-2  px-3 py-2 text-lg font-medium text-white hover:border-white hover:bg-white">
-                  <a
-                    href=""
-                    className="font-bold text-white group-hover:text-black"
-                  >
+                <Link
+                  to={`/collection/${collection?.id}/${collection?.name
+                    .toLowerCase()
+                    .replace(/:/g, "")
+                    .replace(/ /g, "-")}`}
+                >
+                  <button className="rounded-full border-2  px-3 py-2 text-lg font-medium text-white hover:text-black hover:border-white hover:bg-white">
                     VIEW THE COLLECTION
-                  </a>
-                </button>
+                  </button>
+                </Link> 
               </div>
             </div>
           </div>
