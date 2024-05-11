@@ -28,13 +28,13 @@ const Collection = ({ collection }) => {
                   if (i !== 0) {
                     return (
                       <p key={i} className="inline-flex text-lg text-white">
-                        , {collection?.original_title}
+                        , {collection?.title}
                       </p>
                     );
                   } else {
                     return (
                       <p key={i} className="inline-flex text-lg text-white">
-                        {collection?.original_title}
+                        {collection?.title}
                       </p>
                     );
                   }

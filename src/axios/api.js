@@ -111,12 +111,12 @@ export const getTVSeriesDetail = async (id) => {
 
 export const getPersonDetails = async (id) => {
   const response = await axios.get(
-    `${baseUrl}/person/${id}?append_to_response=images,movie_credits,tv_credits`,
+    `${baseUrl}/person/${id}?append_to_response=images,movie_credits,tv_credits,combined_credits`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
   );
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 

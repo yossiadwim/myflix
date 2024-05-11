@@ -11,10 +11,69 @@ const Person = ({ person }) => {
         <aside className="w-1/5 ">
           <div className="">
             <img
-              src={`https://image.tmdb.org/t/p/h632${person.profile_path}`}
+              src={`https://image.tmdb.org/t/p/h632${person?.profile_path}`}
               alt=""
               className="rounded-lg transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
             />
+          </div>
+          <div className="mt-64 border-r border-slate-800">
+            <h1 className="text-4xl font-bold text-white">Personal Info</h1>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Stage Name</p>
+              <p className="text-lg text-white">{person?.name}</p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Known For</p>
+              <p className="text-lg text-white">
+                {person?.known_for_department}
+              </p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Known Credits</p>
+              <p className="text-lg text-white">
+                {person?.combined_credits?.cast?.length}
+              </p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Gender</p>
+              <p className="text-lg text-white">
+                {person?.gender === 0
+                  ? "Not set / not specified"
+                  : person?.gender === 1
+                    ? "Female"
+                    : person?.gender === 2
+                      ? "Male"
+                      : "Non-binary"}
+              </p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Birthday</p>
+              <p className="text-lg text-white">
+                {new Date(person?.birthday).toLocaleString("en-us", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}{" "}
+                {} (
+                {Math.floor(
+                  (Date.now() - Date.parse(person?.birthday)) /
+                    (1000 * 60 * 60 * 24 * 365.25),
+                )}{" "}
+                years old)
+              </p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Place of Birth</p>
+              <p className="text-lg text-white">{person?.place_of_birth}</p>
+            </div>
+            <div className="my-5">
+              <p className="text-2xl font-medium text-white">Also Known As</p>
+              {person?.also_known_as?.map((item, index) => (
+                <p className="text-lg text-white" key={index}>
+                  {item}
+                </p>
+              ))}
+            </div>
           </div>
         </aside>
         <section className="w-4/5 ">
@@ -23,7 +82,7 @@ const Person = ({ person }) => {
             <p className="mb-3 mt-10 text-2xl font-medium text-white">
               Biography
             </p>
-            <div className="text-lg  font-medium text-white">
+            <div className="text-lg font-medium text-white">
               {showMore ? (
                 <div
                   dangerouslySetInnerHTML={{
@@ -51,7 +110,9 @@ const Person = ({ person }) => {
               </button>
             </div>
 
-            <p className="mx-6 mt-5 text-2xl font-medium text-white">Known for</p>
+            <p className="mx-6 mt-5 text-2xl font-medium text-white">
+              Known for
+            </p>
             <div className="overflow-y-hidden">
               <div className="custom-scrollbar bg-transparent">
                 <div className="mx-5 my-5    flex h-fit w-fit flex-row ">

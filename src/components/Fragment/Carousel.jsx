@@ -27,7 +27,7 @@ const Carousel = () => {
     <>
       <Navbar></Navbar>
       <div className="h-[650px] w-full object-cover">
-        <div className="">
+        <div className="" >
           <img
             className="absolute inset-0 h-screen w-screen object-cover "
             src={`https://image.tmdb.org/t/p/original${movies.backdrop_path}`}

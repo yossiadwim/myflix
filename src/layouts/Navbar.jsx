@@ -1,12 +1,7 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  // const [isOpen, setIsOpen] = useState(true);
-
-  // const toogleMenu = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
   window.onscroll = function () {
     const navbar = document.querySelector("header");
     if (window.scrollY > 10) {
@@ -16,13 +11,19 @@ const Navbar = () => {
     }
   };
 
+  const [hover, setHover] = useState("");
+
   return (
     <header className="fixed left-0 top-0 z-[999] flex w-full items-center bg-transparent shadow-sm">
       <div className="container">
         <div className=" relative flex items-center">
           <div className="mx-16">
             <a href="/">
-              <img className="block hover:opacity-75" src="/img/tmdb.png" alt="" />
+              <img
+                className="block hover:opacity-75"
+                src="/img/tmdb.png"
+                alt=""
+              />
             </a>
           </div>
           <div className="flex w-full items-center">
@@ -35,6 +36,8 @@ const Navbar = () => {
                   <a
                     href="#hero"
                     className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
+                    onMouseMove={() => setHover("movie")}
+                    onMouseOut={() => setHover("")}
                   >
                     Movie
                   </a>
@@ -43,6 +46,8 @@ const Navbar = () => {
                   <a
                     href="#about"
                     className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
+                    onMouseOver={() => setHover("tv")}
+                    onMouseOut={() => setHover("")}
                   >
                     TV Shows
                   </a>
@@ -51,12 +56,71 @@ const Navbar = () => {
                   <a
                     href="#portofolio"
                     className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
+                    onMouseMove={() => setHover("people")}
+                    onMouseOut={() => setHover("")}
                   >
                     People
                   </a>
                 </li>
               </ul>
             </nav>
+            <div
+              id="movie-menu"
+              className={`absolute top-16 mx-1 ${hover === "movie" ? "block" : "hidden"} rounded-lg bg-black`}
+              onMouseMove={() => setHover("movie")}
+              onMouseOut={() => setHover("")}
+            >
+              <ul className="mx-5 my-2">
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  <Link to="/movie/popular">Popular</Link>
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Top Rated
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Now Playing
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Trending
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Upcoming
+                </li>
+              </ul>
+            </div>
+            <div
+              id="tv-menu"
+              className={`absolute top-16 mx-1 ml-28 ${hover === "tv" ? "block" : "hidden"} rounded-lg bg-black`}
+              onMouseMove={() => setHover("tv")}
+              onMouseOut={() => setHover("")}
+            >
+              <ul className="mx-5 my-2">
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Popular
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Top Rated
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Airing Today
+                </li>
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  On The Air
+                </li>
+              </ul>
+            </div>
+            <div
+              id="people-menu"
+              className={`absolute top-16 mx-1 ml-60 ${hover === "people" ? "block" : "hidden"} rounded-lg bg-black`}
+              onMouseMove={() => setHover("tv")}
+              onMouseOut={() => setHover("")}
+            >
+              <ul className="mx-5 my-2">
+                <li className="py-2 font-medium text-white hover:text-red-500">
+                  Popular People
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="">
             <span className="absolute inset-y-0 flex items-center pl-3">
