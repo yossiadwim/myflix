@@ -9,7 +9,7 @@ const CardCast = ({ id, profile_path, name, character, known_for_department }) =
 
   return (
     <>
-      <div className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
+      <div className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:opacity-50 hover:scale-105">
         <Link to={`/persons/${id}-${name.toLowerCase().replace(/ /g, "-")}`}>
           <img
             className="h-56 w-full rounded-lg"

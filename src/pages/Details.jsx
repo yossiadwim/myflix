@@ -11,6 +11,8 @@ import {
 import CarouselDetail from "../components/Fragment/CarouselDetail";
 import ContentDetail from "../layouts/ContentDetail";
 import Information from "../components/detail/additional_information/Information";
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 
 const Details = (props) => {
   const location = useLocation();
@@ -58,6 +60,7 @@ const Details = (props) => {
 
   return (
     <>
+      <Navbar></Navbar>
       <CarouselDetail
         movie={movie}
         logo={movie.images}
@@ -69,11 +72,13 @@ const Details = (props) => {
           <ContentDetail
             cast={cast}
             video={video}
+            movie={movie}
             review={movie.reviews}
             backdrops={movie.images}
             posters={movie.images}
             collection={collection}
             state={state}
+            tv={tv}
             cast_tv = {tv.credits}
             review_tv = {tv.reviews}
             seasons={tv.seasons}
@@ -88,6 +93,7 @@ const Details = (props) => {
           <Information movie={movie} tv={tv} state={state}></Information>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 };

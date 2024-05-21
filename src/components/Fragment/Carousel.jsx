@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { getMoviesNowPlaying, getDetailMovies } from "../../axios/api";
-import Navbar from "../../layouts/Navbar";
 import { Link } from "react-router-dom";
+
 
 const Carousel = () => {
   const [movies, setMovies] = useState([]);
@@ -25,7 +25,7 @@ const Carousel = () => {
   return (
     // eslint-disable-next-line no-undef
     <>
-      <Navbar></Navbar>
+      
       <div className="h-[650px] w-full object-cover">
         <div className="" >
           <img

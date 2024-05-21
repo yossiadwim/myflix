@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-const CardReview = ({ avatar_path, username, content, updated_at, rating }) => {
+const CardReview = ({ avatar_path, author, content, updated_at, rating }) => {
   // eslint-disable-next-line no-undef
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
   return (
-    <div className="w-full border-t-2 border-gray-900">
-      <div className="mt-5 rounded-lg border border-slate-700 p-6">
+    <div className="w-full border-t-2 border-slate-900">
+      <div className="mt-5 rounded-lg  bg-slate-900 p-6">
         <div className="flex w-full items-center px-2">
           <img
             className="mr-5 h-20 w-20 rounded-full"
@@ -14,8 +14,8 @@ const CardReview = ({ avatar_path, username, content, updated_at, rating }) => {
           />
           <div className="ml-5">
             <p className="text-xl font-bold text-white">
-              A review by
-              {username}
+              A review by {""}
+              {author}
             </p>
             <div className="mt-2 flex items-center">
               {!rating ? (
@@ -38,7 +38,7 @@ const CardReview = ({ avatar_path, username, content, updated_at, rating }) => {
                 </div>
               )}
               <p className="text-md mx-2 text-white">
-                Written by {username} on{" "}
+                Written by {author} on{" "}
                 {new Date(updated_at).toLocaleString("en-us", {
                   month: "long",
                   day: "numeric",

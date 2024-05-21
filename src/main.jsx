@@ -6,6 +6,8 @@ import Details from "./pages/Details.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Persons from "./pages/Persons.jsx";
 import "./index.css";
+import MoviesCasts from "./pages/MoviesCasts.jsx";
+import Reviews from "./pages/Reviews.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
     path: "/persons/:id",
     element: <Persons></Persons>,
   },
+  {
+    path:"/movies/:id/cast",
+    element: <MoviesCasts></MoviesCasts>
+  },
+  {
+    path: "/movies/:id/reviews",
+    element: <Reviews></Reviews>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

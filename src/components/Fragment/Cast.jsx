@@ -1,19 +1,29 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import CardCast from "../detail/cast/CardCast";
 
 // eslint-disable-next-line react/prop-types
-const Cast = ({ cast, cast_tv, state }) => {
+const Cast = ({ movie, tv, cast, cast_tv, state }) => {
   return (
     <>
       <div className="container flex items-end justify-between">
         <h1 className="mr-10 text-4xl font-medium text-white">Cast/Crew</h1>
-        <button className="text-2xl font-medium text-white hover:text-red-500">
-          Full Cast & Crew
-        </button>
+        <Link
+          to={
+            state === "movie"
+              ? `/movies/${movie?.id}-${movie?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+              : `/tv/${tv?.id}-${tv?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+          }
+          state={state}
+        >
+          <button className="text-2xl font-medium text-white hover:text-red-500">
+            Full Cast & Crew
+          </button>
+        </Link>
       </div>
       <div className="container mt-5 overflow-x-auto overflow-y-hidden border-t-2 border-gray-900">
         <div className="w-3/5">
-          <div className="flex h-[400px] min-w-fit flex-row">
+          <div className="flex h-fit min-w-fit flex-row">
             {state === "movie"
               ? cast?.cast?.slice(0, 15).map((cast, i) => {
                   return (
@@ -59,12 +69,15 @@ const Cast = ({ cast, cast_tv, state }) => {
               <div className="my-10 mr-5 flex h-56 w-40 justify-center">
                 <div className="flex items-center justify-center ">
                   <div className="group inline-flex">
-                    <a
-                      href=""
-                      className="text-md mx-1 font-medium text-white group-hover:text-red-500"
-                    >
-                      View More
-                    </a>
+                   
+                    <Link
+                      to={
+                        state === "movie"
+                          ? `/movies/${movie?.id}-${movie?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+                          : `/tv/${tv?.id}-${tv?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+                      }
+                      state={state}
+                    ><button className="text-md mx-1 font-medium text-white group-hover:text-red-500">View More</button></Link>
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

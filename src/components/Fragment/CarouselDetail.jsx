@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
-import Navbar from "../../layouts/Navbar";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
@@ -13,7 +12,7 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
 
   return (
     <>
-      <Navbar></Navbar>
+      
       <div className="bg h-[650px] w-full object-cover">
         <div className="bg-opacity-100 ">
           {state === "tv" ? (
@@ -41,8 +40,8 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                   <img
                     src={`https://image.tmdb.org/t/p/w300${
                       tv?.images?.logos?.filter(
-                        (item) => item.iso_639_1 === "en",
-                      )[0].file_path
+                        (item) => item?.iso_639_1 === "en"
+                      )[0]?.file_path
                     }`}
                     className="w-48"
                     alt=""
@@ -50,7 +49,7 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                 ) : state === "movie" && logo?.logos?.filter((item) => item.iso_639_1 === "en").length !== 0 ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w300${
-                      logo?.logos?.filter((item) => item.iso_639_1 === "en")[0]
+                      logo?.logos?.filter((item) => item?.iso_639_1 === "en")[0]
                         ?.file_path
                     }`}
                     className=""

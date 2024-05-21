@@ -11,6 +11,7 @@ const ContentDetail = ({
   video,
   review,
   backdrops,
+  movie,
   posters,
   collection,
   state,
@@ -25,7 +26,7 @@ const ContentDetail = ({
   return (
     <>
       <div className="">
-        <Cast cast={cast} cast_tv={cast_tv} state={state}></Cast>
+        <Cast movie={movie} cast={cast} cast_tv={cast_tv} state={state}></Cast>
       </div>
 
       {state === "tv" ? (
@@ -35,7 +36,7 @@ const ContentDetail = ({
       ) : null}
 
       <div className="pt-24">
-        <Review review={review} review_tv={review_tv} state={state}></Review>
+        <Review movie={movie} review={review} review_tv={review_tv} state={state}></Review>
       </div>
 
       <div className="pb-32 pt-24">

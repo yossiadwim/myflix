@@ -20,8 +20,8 @@ const Navbar = () => {
           <div className="mx-16">
             <a href="/">
               <img
-                className="block hover:opacity-75"
-                src="/img/tmdb.png"
+                className="block hover:opacity-75 w-40 "
+                src="/img/m.png"
                 alt=""
               />
             </a>
@@ -66,7 +66,7 @@ const Navbar = () => {
             </nav>
             <div
               id="movie-menu"
-              className={`absolute top-16 mx-1 ${hover === "movie" ? "block" : "hidden"} rounded-lg bg-black`}
+              className={`absolute top-16 mx-1 ${hover === "movie" ? "block" : "hidden"} rounded-lg bg-slate-900`}
               onMouseMove={() => setHover("movie")}
               onMouseOut={() => setHover("")}
             >
@@ -90,7 +90,7 @@ const Navbar = () => {
             </div>
             <div
               id="tv-menu"
-              className={`absolute top-16 mx-1 ml-28 ${hover === "tv" ? "block" : "hidden"} rounded-lg bg-black`}
+              className={`absolute top-16 mx-1 ml-28 ${hover === "tv" ? "block" : "hidden"} rounded-lg bg-slate-900`}
               onMouseMove={() => setHover("tv")}
               onMouseOut={() => setHover("")}
             >
@@ -111,8 +111,8 @@ const Navbar = () => {
             </div>
             <div
               id="people-menu"
-              className={`absolute top-16 mx-1 ml-60 ${hover === "people" ? "block" : "hidden"} rounded-lg bg-black`}
-              onMouseMove={() => setHover("tv")}
+              className={`absolute top-16 mx-1 ml-60 ${hover === "people" ? "block" : "hidden"} rounded-lg bg-slate-900`}
+              onMouseMove={() => setHover("people")}
               onMouseOut={() => setHover("")}
             >
               <ul className="mx-5 my-2">

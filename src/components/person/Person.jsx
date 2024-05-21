@@ -1,82 +1,28 @@
 import { useState } from "react";
-import MovieCredit from "./MovieCredit";
+import KnowFor from "./KnownFor";
 
 /* eslint-disable react/prop-types */
 const Person = ({ person }) => {
   const [showMore, setShowMore] = useState(false);
-
   return (
     <>
       <div className="container flex">
-        <aside className="w-1/5 ">
-          <div className="">
+        <div className="w-1/5">
+          {person?.profile_path ? (
             <img
-              src={`https://image.tmdb.org/t/p/h632${person?.profile_path}`}
-              alt=""
-              className="rounded-lg transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+              src={`https://image.tmdb.org/t/p/w500${person?.profile_path}`}
+              alt="person"
+              className="rounded-lg"
             />
-          </div>
-          <div className="mt-64 border-r border-slate-800">
-            <h1 className="text-4xl font-bold text-white">Personal Info</h1>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Stage Name</p>
-              <p className="text-lg text-white">{person?.name}</p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Known For</p>
-              <p className="text-lg text-white">
-                {person?.known_for_department}
-              </p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Known Credits</p>
-              <p className="text-lg text-white">
-                {person?.combined_credits?.cast?.length}
-              </p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Gender</p>
-              <p className="text-lg text-white">
-                {person?.gender === 0
-                  ? "Not set / not specified"
-                  : person?.gender === 1
-                    ? "Female"
-                    : person?.gender === 2
-                      ? "Male"
-                      : "Non-binary"}
-              </p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Birthday</p>
-              <p className="text-lg text-white">
-                {new Date(person?.birthday).toLocaleString("en-us", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}{" "}
-                {} (
-                {Math.floor(
-                  (Date.now() - Date.parse(person?.birthday)) /
-                    (1000 * 60 * 60 * 24 * 365.25),
-                )}{" "}
-                years old)
-              </p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Place of Birth</p>
-              <p className="text-lg text-white">{person?.place_of_birth}</p>
-            </div>
-            <div className="my-5">
-              <p className="text-2xl font-medium text-white">Also Known As</p>
-              {person?.also_known_as?.map((item, index) => (
-                <p className="text-lg text-white" key={index}>
-                  {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        </aside>
-        <section className="w-4/5 ">
+          ) : (
+            <img
+              src="/img/white.png"
+              alt="person"
+              className="h-96 w-[500px] rounded-lg"
+            />
+          )}
+        </div>
+        <div className="h-[750px] w-4/5 overflow-x-hidden">
           <div className="mx-10">
             <h1 className="text-4xl font-bold text-white">{person.name}</h1>
             <p className="mb-3 mt-10 text-2xl font-medium text-white">
@@ -89,7 +35,7 @@ const Person = ({ person }) => {
                     __html: person.biography?.replace(/\n/g, "<br/>"),
                   }}
                 />
-              ) : (
+              ) : person.biography?.length > 0 ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html:
@@ -98,16 +44,24 @@ const Person = ({ person }) => {
                         .replace(/\n/g, "<br/>") + "...",
                   }}
                 />
+              ) : (
+                <p className="text-white ">
+                  We dont have a biography for {person.name}.
+                </p>
               )}
             </div>
 
-            <div className="flex justify-end">
-              <button
-                className="mt-3 font-medium text-red-500 hover:text-red-800"
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? "Read less" : "Read more"}
-              </button>
+            <div className="flex justify-end ">
+              {person.biography?.length !== null  && (
+                <button
+                  className="mt-3 font-medium text-red-500 hover:text-red-800"
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore
+                    ? "Read less"
+                    : "Read more"}
+                </button>
+              )}
             </div>
 
             <p className="mx-6 mt-5 text-2xl font-medium text-white">
@@ -115,25 +69,38 @@ const Person = ({ person }) => {
             </p>
             <div className="overflow-y-hidden">
               <div className="custom-scrollbar bg-transparent">
-                <div className="mx-5 my-5    flex h-fit w-fit flex-row ">
-                  {person?.movie_credits?.cast
+                <div className="mx-5 my-5 flex h-fit w-fit flex-row ">
+                  {person?.combined_credits?.cast?.length > 0 ||
+                  person?.combined_credits?.cast
                     ?.sort((a, b) => b.popularity - a.popularity)
-                    .slice(0, 10)
+                    .slice(0, 30)
+                    .filter((movie) => movie.media_type === "movie")
                     .map((movie, i) => {
                       return (
-                        <MovieCredit
+                        <KnowFor
                           key={i}
                           id={movie.id}
                           poster_path={movie.poster_path}
                           title={movie.title}
-                        ></MovieCredit>
+                          overview={movie.overview}
+                          character={movie.character}
+                          vote_average={movie.vote_average}
+                          media_type={movie.media_type}
+                          release_date={movie.release_date}
+                          original_name={movie.original_name}
+                          first_air_date={movie.first_air_date}
+                        ></KnowFor>
                       );
-                    })}
+                    })
+                    ? person?.combined_credits?.crew?.map((movie, i) => {
+                        return <KnowFor key={i} {...movie} />;
+                      })
+                    : null}
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </>
   );
