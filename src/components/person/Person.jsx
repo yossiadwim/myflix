@@ -52,14 +52,12 @@ const Person = ({ person }) => {
             </div>
 
             <div className="flex justify-end ">
-              {person.biography?.length !== null  && (
+              {person.biography?.length !== null && (
                 <button
                   className="mt-3 font-medium text-red-500 hover:text-red-800"
                   onClick={() => setShowMore(!showMore)}
                 >
-                  {showMore
-                    ? "Read less"
-                    : "Read more"}
+                  {showMore ? "Read less" : "Read more"}
                 </button>
               )}
             </div>
@@ -70,11 +68,10 @@ const Person = ({ person }) => {
             <div className="overflow-y-hidden">
               <div className="custom-scrollbar bg-transparent">
                 <div className="mx-5 my-5 flex h-fit w-fit flex-row ">
-                  {person?.combined_credits?.cast?.length > 0 ||
-                  person?.combined_credits?.cast
+                  {person?.combined_credits?.cast
                     ?.sort((a, b) => b.popularity - a.popularity)
-                    .slice(0, 30)
                     .filter((movie) => movie.media_type === "movie")
+                    .slice(0, 20)
                     .map((movie, i) => {
                       return (
                         <KnowFor
@@ -91,11 +88,7 @@ const Person = ({ person }) => {
                           first_air_date={movie.first_air_date}
                         ></KnowFor>
                       );
-                    })
-                    ? person?.combined_credits?.crew?.map((movie, i) => {
-                        return <KnowFor key={i} {...movie} />;
-                      })
-                    : null}
+                    })}
                 </div>
               </div>
             </div>

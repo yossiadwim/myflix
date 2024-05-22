@@ -12,6 +12,7 @@ const ContentDetail = ({
   review,
   backdrops,
   movie,
+  tv,
   posters,
   collection,
   state,
@@ -41,6 +42,8 @@ const ContentDetail = ({
 
       <div className="pb-32 pt-24">
         <Media
+          movie={movie}
+          tv={tv}
           video={video}
           backdrops={backdrops}
           posters={posters}
@@ -48,6 +51,7 @@ const ContentDetail = ({
           videos_tv={videos_tv}
           posters_tv={images_tv?.posters}
           backdrops_tv={images_tv?.backdrops}
+          
         ></Media>
       </div>
 

@@ -3,9 +3,11 @@ import { useState } from "react";
 import CardVideos from "../detail/media/videos/CardVideos";
 import CardBackdrops from "../detail/media/backdrops/CardBackdrops";
 import CardPosters from "../detail/media/posters/CardPosters";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const Media = ({
+  movie,
   video,
   backdrops,
   posters,
@@ -15,6 +17,7 @@ const Media = ({
   backdrops_tv,
 }) => {
   const [active, setActive] = useState("videos");
+
   return (
     <>
       {state === "movie" ? (
@@ -47,9 +50,20 @@ const Media = ({
             </button>
           </div>
           <div className="items-end">
-            <p className="text-white">{
-              active === 'videos' ? 'View All Videos' : active === 'backdrops' ? 'View All Backdrops' : active === 'posters' ? 'View All Posters' : ''
-            }</p>
+            <Link
+              to={`/movies/${movie?.id}-${movie?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/videos`}
+              state={state}
+            >
+              <p className="text-white hover:text-red-500">
+                {active === "videos"
+                  ? "View All Videos"
+                  : active === "backdrops"
+                    ? "View All Backdrops"
+                    : active === "posters"
+                      ? "View All Posters"
+                      : ""}
+              </p>
+            </Link>
           </div>
         </div>
       ) : state === "tv" ? (
@@ -82,9 +96,15 @@ const Media = ({
             </button>
           </div>
           <div className="items-end">
-            <p className="text-white">{
-              active === 'videos' ? 'View All Videos' : active === 'backdrops' ? 'View All Backdrops' : active === 'posters' ? 'View All Posters' : ''
-            }</p>
+            <p className="text-white">
+              {active === "videos"
+                ? "View All Videos"
+                : active === "backdrops"
+                  ? "View All Backdrops"
+                  : active === "posters"
+                    ? "View All Posters"
+                    : ""}
+            </p>
           </div>
         </div>
       ) : null}

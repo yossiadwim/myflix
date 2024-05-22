@@ -4,12 +4,15 @@ import ReactPaginate from "react-paginate";
 
 /* eslint-disable react/prop-types */
 const PersonContent = ({ person }) => {
-  const [hover, setHover] = useState(false);
-  const [type, setType] = useState("movie");
+  const [hoverType, setHoverType] = useState(false);
+  const [hoverDepartment, setHoverDepartment] = useState(false);
+
+  const [type, setType] = useState("all");
+  const [dep, setDepartment] = useState("All");
 
   const [currentPage, setCurrentPage] = useState(0);
-  
   const [perPage] = useState(3);
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -17,12 +20,33 @@ const PersonContent = ({ person }) => {
   const indexOfLastItem = (currentPage + 1) * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
 
-  const length = getYear(person?.combined_credits?.cast);
-  const cast = getYear(person?.combined_credits?.cast).slice(indexOfFirstItem, indexOfLastItem);
+  let cast =
+    type === "all"
+      ? getYear(person?.combined_credits?.cast).slice(
+          indexOfFirstItem,
+          indexOfLastItem,
+        )
+      : getYear(
+          person?.combined_credits?.cast?.filter(
+            (item) => item.media_type === type,
+            (item) => item.department === dep,
+          ),
+        ).slice(indexOfFirstItem, indexOfLastItem);
+
+  let length =
+    type || dep === "all"
+      ? getYear(person?.combined_credits?.cast)
+      : getYear(
+          person?.combined_credits?.cast?.filter(
+            (item) => item.media_type === type,
+            (item) => item.department === dep,
+          ),
+        );
 
   useEffect(() => {
     setCurrentPage(0);
   }, [person]);
+
   return (
     <>
       <div className="container flex pb-20">
@@ -136,39 +160,27 @@ const PersonContent = ({ person }) => {
             <h1 className="mx-10 py-5 text-4xl font-medium text-white">
               {person?.known_for_department}
             </h1>
+
             <div
-              className="group flex items-end py-5"
-              onMouseOver={() => setHover(true)}
-              onMouseLeave={() => setHover("")}
+              className="group flex items-end"
+              onMouseOver={() => setHoverType(true)}
+              onMouseLeave={() => setHoverType("")}
             >
-              {/* <button className="inline-flex items-center text-2xl font-medium text-white hover:text-red-500">
-                {type == "movie" ? "Movies" : "TV Series"} (
-                {type === "movie"
-                  ? currentItemsMovie?.length
-                  : person?.combined_credits?.cast?.filter(
-                      (credits) => credits.media_type === "tv",
-                    ).length}
-                )
-                <span className="fill-white hover:fill-red-500">
-                  {hover ? (
+              <div className="group mx-10 py-5">
+                <button className="flex items-center text-2xl text-white">
+                  {type === "all"
+                    ? "All"
+                    : type === "movie"
+                      ? "Movies"
+                      : type === "tv"
+                        ? "TV Shows"
+                        : "-"}
+                  <span className="ml-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="mx-2 h-6 w-6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="mx-2 h-6 w-6 "
+                      className="h-6 w-6 fill-white"
                     >
                       <path
                         fillRule="evenodd"
@@ -176,26 +188,116 @@ const PersonContent = ({ person }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  )}
-                </span>
-              </button> */}
+                  </span>
+                </button>
+              </div>
               <div
-                className={`absolute -bottom-40 rounded-lg ${hover ? "block" : "hidden"} bg-slate-900`}
+                className={`absolute -bottom-60 rounded-lg ${hoverType ? "block" : "hidden"} bg-slate-900`}
               >
                 <ul className="mx-5 my-2">
-                  <li className="my-1 py-2 text-lg font-medium text-white hover:text-red-500">
+                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
                     <button
-                      onClick={() => setType(type === "movie" ? "tv" : "movie")}
+                      onClick={() => setType("all")}
+                      className={`${type === "all" ? "text-red-500" : ""}`}
                     >
-                      {type === "movie" ? "TV Series" : "Movies"}{" "}
+                      All {"(" + person?.combined_credits?.cast?.length + ")"}
+                    </button>
+                  </li>
+                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
+                    <button
+                      onClick={() => setType("movie")}
+                      className={`${type === "movie" ? "text-red-500" : ""}`}
+                    >
+                      Movies{" "}
+                      {"(" +
+                        person?.combined_credits?.cast?.filter(
+                          (item) => item.media_type === "movie",
+                        ).length +
+                        ")"}
+                    </button>
+                  </li>
+                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
+                    <button
+                      onClick={() => setType("tv")}
+                      className={`${type === "tv" ? "text-red-500" : ""}`}
+                    >
+                      TV Shows{" "}
+                      {"(" +
+                        person?.combined_credits?.cast?.filter(
+                          (item) => item.media_type === "tv",
+                        ).length +
+                        ")"}
                     </button>
                   </li>
                 </ul>
               </div>
             </div>
+
+            <div
+              className="group flex items-end"
+              onMouseOver={() => setHoverDepartment(true)}
+              onMouseLeave={() => setHoverDepartment("")}
+            >
+              <div className="group mx-10 py-5">
+                <button className="flex items-center text-2xl text-white">
+                  Department
+                  <span className="ml-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-6 w-6 fill-white"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <div
+                className={`absolute -bottom-[380px] right-[750px]  rounded-lg ${hoverDepartment ? "block" : "hidden"} bg-slate-900`}
+              >
+                <ul className="mx-5 my-2">
+                  <li
+                    className={`text-md mt-1 px-2 py-1 font-medium text-white `}
+                  >
+                    <button
+                      className={` ${dep === "all" ? "text-red-500" : "text-white"} hover:text-red-500`}
+                      onClick={() => setDepartment("all")}
+                    >
+                      All
+                    </button>
+                  </li>
+                  {[
+                    ...new Set(
+                      person?.combined_credits?.crew
+                        ?.sort((a, b) =>
+                          a.department.localeCompare(b.department),
+                        )
+                        .map((crew) => crew.department),
+                    ),
+                  ].map((department, i) => (
+                    <li
+                      key={i}
+                      className="text-md mt-1 px-2 py-2 font-medium text-white "
+                    >
+                      <button
+                        className={`${dep === department ? "text-red-500" : "text-white"} hover:text-red-500`}
+                        onClick={() => setDepartment(department)}
+                      >
+                        {department}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
           <div className="">
-            <div className="h-fit overflow-auto">
+            <div className="h-fit ">
               {cast?.map((data, i) => {
                 const children = [];
                 data[Object.keys(data)].forEach((item) => {
@@ -222,7 +324,9 @@ const PersonContent = ({ person }) => {
                     <p className="mx-10 h-fit w-fit text-4xl font-medium text-white">
                       {Object.keys(data)}
                     </p>
-                    <div className="mx-10  flex gap-x-5 py-5">{children}</div>
+                    <div className="mx-10 grid w-fit grid-cols-6 gap-y-5 py-5">
+                      {children}
+                    </div>
                   </div>
                 );
               })}
@@ -230,9 +334,7 @@ const PersonContent = ({ person }) => {
 
             <ReactPaginate
               className="my-14 flex justify-center gap-14 text-white "
-              pageCount={
-                Math.ceil(length?.length/perPage)
-              }
+              pageCount={Math.ceil(length?.length / perPage)}
               pageRangeDisplayed={5}
               marginPagesDisplayed={1}
               onPageChange={handlePageClick}

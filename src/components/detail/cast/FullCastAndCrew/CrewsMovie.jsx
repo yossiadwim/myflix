@@ -8,7 +8,6 @@ const CrewsMovie = ({ movie, state }) => {
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
   const [hover, setHover] = useState(false);
-
   const [dep, setDepartment] = useState("All");
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -111,7 +110,7 @@ const CrewsMovie = ({ movie, state }) => {
                     className="text-md mt-1 px-4 py-1 font-medium text-white hover:text-red-500"
                   >
                     <button
-                      className={` ${dep === department ? "text-red-500" : "text-white"}`}
+                      className={`${dep === department ? "text-red-500" : "text-white"}`}
                       onClick={() => setDepartment(department)}
                     >
                       {department}
