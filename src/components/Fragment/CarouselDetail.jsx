@@ -2,111 +2,79 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
-// eslint-disable-next-line react/prop-types
-const CarouselDetail = ({ movie, logo, tv, state }) => {
-  // eslint-disable-next-line no-undef
-  // const baseImgURL = process.env.REACT_APP_BASEIMGURL;
-
+const CarouselDetail = ({ data }) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
     <>
-      
       <div className="bg h-[650px] w-full object-cover">
         <div className="bg-opacity-100 ">
-          {state === "tv" ? (
+          {
             <img
               className="absolute inset-0 h-screen w-screen object-cover brightness-50"
-              src={`https://image.tmdb.org/t/p/original${tv?.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
               alt=""
             />
-          ) : state === "movie" ? (
-            <img
-              className="absolute inset-0 h-screen w-screen object-cover brightness-50"
-              src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-              alt=""
-            />
-          ) : (
-            ""
-          )}
+          }
         </div>
 
         <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
           <div className="flex">
             <div className="mx-20 my-5 w-3/5 pb-20 pt-28">
               <div className="">
-                {state === "tv" && tv?.images?.logos?.length !== 0 ? (
+                {data?.images?.logos?.filter((item) => item.iso_639_1 === "en")
+                  .length !== 0 ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w300${
-                      tv?.images?.logos?.filter(
-                        (item) => item?.iso_639_1 === "en"
+                      data?.images?.logos?.filter(
+                        (item) => item?.iso_639_1 === "en",
                       )[0]?.file_path
                     }`}
-                    className="w-48"
+                    className="w-56"
                     alt=""
                   />
-                ) : state === "movie" && logo?.logos?.filter((item) => item.iso_639_1 === "en").length !== 0 ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300${
-                      logo?.logos?.filter((item) => item?.iso_639_1 === "en")[0]
-                        ?.file_path
-                    }`}
-                    className=""
-                    alt=""
-                  />
-                ) : state === "tv" ? (
-                  <p className="text-5xl font-bold text-white">{tv.name}</p>
                 ) : (
-                  <p className="text-5xl font-bold text-white">{movie.title}</p>
+                  <p className="text-5xl font-bold text-white">
+                    {data.name || data.title}
+                  </p>
                 )}
 
-                {state === "tv"
-                  ? tv?.genres?.map((genre, i) => {
-                      return (
-                        <p
-                          key={i}
-                          className="mr-2 mt-5 inline-flex rounded-lg border border-gray-400 px-2 py-1 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500 hover:shadow-sm"
-                        >
-                          {genre.name}
-                        </p>
-                      );
-                    })
-                  : movie?.genres?.map((genre, i) => {
-                      return (
-                        <p
-                          key={i}
-                          className="mr-2 mt-5 inline-flex rounded-lg border border-gray-400 px-2 py-1 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500 hover:shadow-sm"
-                        >
-                          {genre.name}
-                        </p>
-                      );
-                    })}
+                {data?.genres?.map((genre, i) => {
+                  return (
+                    <p
+                      key={i}
+                      className="mr-2 mt-5 inline-flex rounded-lg border border-gray-400 px-2 py-1 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500 hover:shadow-sm"
+                    >
+                      {genre.name}
+                    </p>
+                  );
+                })}
               </div>
               <div className="my-3 flex">
                 <p className="mr-2 text-xl font-medium text-white">
-                  {state === "tv"
-                    ? new Date(tv?.first_air_date).toLocaleString("en-us", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })
-                    : new Date(movie?.release_date).toLocaleString("en-us", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}{" "}
+                  {new Date(
+                    data?.release_date || data?.first_air_date,
+                  ).toLocaleString("en-us", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}{" "}
                 </p>
 
                 <div className="">
-                  {state === "tv" ? (
-                    " "
-                  ) : (
+                  {
                     <p className="mx-1 text-xl font-medium text-white">
-                      ({Math.floor(movie?.runtime / 60)} Hour{" "}
-                      {Math.floor(movie?.runtime % 60) || "--"} min)
+                      {data?.runtime
+                        ? "(" +
+                          Math.floor(data?.runtime / 60) +
+                          "Hour" +
+                          " " +
+                          Math.floor(data?.runtime % 60) +
+                          "min" +
+                          ")"
+                        : ""}
                     </p>
-                  )}
+                  }
                 </div>
 
                 <div className="flex items-start space-x-2">
@@ -127,46 +95,31 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                     </svg>
                   </span>
                   <div className="">
-                    {state === "tv" ? (
+                    {
                       <p className="font-sans text-lg text-white">
-                        {Math.round(tv?.vote_average * 10) / 10} (
-                        {tv?.vote_count} vote )
+                        {Math.round(data?.vote_average * 10) / 10} (
+                        {data?.vote_count} vote )
                       </p>
-                    ) : (
-                      <p className="font-sans text-lg text-white">
-                        {Math.round(movie?.vote_average * 10) / 10} (
-                        {movie?.vote_count} vote )
-                      </p>
-                    )}
+                    }
                   </div>
                 </div>
               </div>
               <div className="group">
                 <div className="group">
-                  {state === "tv" ? (
+                  {
                     <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
-                      <i>{tv?.tagline}</i>
+                      <i>{data?.tagline}</i>
                     </p>
-                  ) : (
-                    <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
-                      <i>{movie?.tagline}</i>
-                    </p>
-                  )}
+                  }
                 </div>
                 <div className="group">
-                  {state === "tv" ? (
+                  {
                     <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
                       {showMore
-                        ? tv?.overview
-                        : tv?.overview?.slice(0, 250) + "..."}
+                        ? data?.overview
+                        : data?.overview?.slice(0, 250) + "..."}
                     </p>
-                  ) : (
-                    <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
-                      {showMore
-                        ? movie?.overview
-                        : movie?.overview?.slice(0, 250) + "..."}
-                    </p>
-                  )}
+                  }
                   <button
                     onClick={() => setShowMore(!showMore)}
                     className="font-medium text-red-500 hover:text-red-700"
@@ -233,39 +186,30 @@ const CarouselDetail = ({ movie, logo, tv, state }) => {
                 </div>
               </div>
               <div className="mt-5 flex">
-                {state === "movie"
-                  ? movie?.credits?.crew
-                      ?.filter(
-                        (crew) =>
-                          crew.job === "Director" || crew.job === "Writer",
-                      )
-                      .map((crew, index) => (
-                        <div className="" key={index}>
-                          <Link>
-                            <p className="mr-10 mt-4 text-xl font-medium text-white hover:text-red-500">
-                              {crew.name}
-                            </p>
-                          </Link>
-                          <p className="font-light text-white">{crew.job}</p>
-                        </div>
-                      ))
-                  : null}
+                {data?.credits?.crew
+                  ?.filter(
+                    (crew) => crew.job === "Director" || crew.job === "Writer",
+                  )
+                  .map((crew, index) => (
+                    <div className="" key={index}>
+                      <Link>
+                        <p className="mr-10 mt-4 text-xl font-medium text-white hover:text-red-500">
+                          {crew.name}
+                        </p>
+                      </Link>
+                      <p className="font-light text-white">{crew.job}</p>
+                    </div>
+                  ))}
               </div>
             </div>
             <div className="mx-10 my-10 w-2/5 items-center  pb-20 pt-20 transition delay-0 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
-              {state === "tv" ? (
+              {
                 <img
                   className="h-[500px] rounded-lg"
-                  src={`https://image.tmdb.org/t/p/original${tv?.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
                   alt=""
                 />
-              ) : (
-                <img
-                  className="h-[500px] rounded-lg"
-                  src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-                  alt=""
-                />
-              )}
+              }
             </div>
           </div>
         </div>

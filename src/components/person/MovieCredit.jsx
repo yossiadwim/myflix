@@ -36,7 +36,7 @@ const MovieCredit = ({
             onMouseLeave={() => setHover(false)}
           />
           <div
-            className={`absolute h-fit  w-[350px] bg-slate-900 ${hover ? "block" : "hidden"} rounded-md`}
+            className={`absolute h-fit w-[350px] bg-slate-900 ${hover ? "block" : "hidden"} rounded-md`}
           >
             <div className="mx-5 my-5 flex items-center ">
               <h1 className="text-2xl font-bold text-white">{title}</h1>

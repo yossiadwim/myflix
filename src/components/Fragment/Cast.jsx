@@ -3,19 +3,16 @@ import { Link } from "react-router-dom";
 import CardCast from "../detail/cast/CardCast";
 
 // eslint-disable-next-line react/prop-types
-const Cast = ({ movie, tv, cast, cast_tv, state }) => {
+const Cast = ({ data, state }) => {
+
+
   return (
     <>
       <div className="container flex items-end justify-between">
         <h1 className="mr-10 text-4xl font-medium text-white">Cast/Crew</h1>
         <Link
-          to={
-            state === "movie"
-              ? `/movies/${movie?.id}-${movie?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
-              : `/tv/${tv?.id}-${tv?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
-          }
-          state={state}
-        >
+          to={`/${state}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/casts`}
+        state={state}>
           <button className="text-2xl font-medium text-white hover:text-red-500">
             Full Cast & Crew
           </button>
@@ -24,22 +21,11 @@ const Cast = ({ movie, tv, cast, cast_tv, state }) => {
       <div className="container mt-5 overflow-x-auto overflow-y-hidden border-t-2 border-gray-900">
         <div className="w-3/5">
           <div className="flex h-fit min-w-fit flex-row">
-            {state === "movie"
-              ? cast?.cast?.slice(0, 15).map((cast, i) => {
-                  return (
-                    <CardCast
-                      key={i}
-                      id={cast.id}
-                      name={cast.name}
-                      character={cast.character}
-                      profile_path={cast.profile_path}
-                      state={"movie"}
-                    ></CardCast>
-                  );
-                })
-              : null}
+            {data?.credits?.cast?.slice(0, 15).map((cast, i) => {
+              return <CardCast key={i} {...cast}></CardCast>;
+            })}
 
-            {state == "tv" && cast_tv?.cast?.length == 0
+            {/* {state == "tv" && cast_tv?.cast?.length == 0
               ? cast_tv?.crew?.slice(0, 15).map((crew, i) => {
                   return (
                     <CardCast
@@ -63,21 +49,22 @@ const Cast = ({ movie, tv, cast, cast_tv, state }) => {
                       state={"tv"}
                     ></CardCast>
                   );
-                })}
+                })} */}
 
-            {state === "movie" && cast?.cast?.length > 5 ? (
+            {data?.credits?.cast?.length > 5 ? (
               <div className="my-10 mr-5 flex h-56 w-40 justify-center">
                 <div className="flex items-center justify-center ">
                   <div className="group inline-flex">
-                   
                     <Link
                       to={
-                        state === "movie"
-                          ? `/movies/${movie?.id}-${movie?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
-                          : `/tv/${tv?.id}-${tv?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+                        `/movies/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast` ||
+                        `/tv/${data?.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
                       }
-                      state={state}
-                    ><button className="text-md mx-1 font-medium text-white group-hover:text-red-500">View More</button></Link>
+                    >
+                      <button className="text-md mx-1 font-medium text-white group-hover:text-red-500">
+                        View More
+                      </button>
+                    </Link>
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -95,16 +82,20 @@ const Cast = ({ movie, tv, cast, cast_tv, state }) => {
                   </div>
                 </div>
               </div>
-            ) : state === "tv" && cast_tv?.cast?.length > 5 ? (
+            ) : (
               <div className="my-10 mr-5 flex h-56 w-40 justify-center">
                 <div className="flex items-center justify-center ">
                   <div className="group inline-flex">
-                    <a
-                      href=""
-                      className="text-md mx-1 font-medium text-white group-hover:text-red-500"
+                    <Link
+                      to={
+                        `/movies/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast` ||
+                        `/tv/${data?.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/cast`
+                      }
                     >
-                      View More
-                    </a>
+                      <button className="text-md mx-1 font-medium text-white group-hover:text-red-500">
+                        View More
+                      </button>
+                    </Link>
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +113,7 @@ const Cast = ({ movie, tv, cast, cast_tv, state }) => {
                   </div>
                 </div>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

@@ -9,19 +9,17 @@ const MoviesCasts = () => {
   const location = useLocation();
   const state = location.state;
   const { id } = useParams();
-  const [movie, setMovie] = useState([]);
-  const [tv, setTV] = useState([]);
-
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchDetail = async (id) => {
       try {
         if (state === "movie") {
           const detailMovie = await getDetailMovies(id);
-          setMovie(detailMovie);
+          setData(detailMovie);
         } else if (state === "tv") {
           const detailTVSeries = await getTVSeriesDetail(id);
-          setTV(detailTVSeries);
+          setData(detailTVSeries);
         }
       } catch (error) {
         console.error("error : ", error);
@@ -34,11 +32,7 @@ const MoviesCasts = () => {
   return (
     <>
       <Navbar></Navbar>
-      <ContentMoviesCasts
-        movie={movie}
-        tv={tv}
-        state={state}
-      ></ContentMoviesCasts>
+      <ContentMoviesCasts data={data} state={state}></ContentMoviesCasts>
       <Footer></Footer>
     </>
   );

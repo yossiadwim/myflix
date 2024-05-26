@@ -2,14 +2,20 @@
 
 import { Link } from "react-router-dom";
 
-const CardCast = ({ id, profile_path, name, character, known_for_department }) => {
+const CardCast = ({
+  id,
+  profile_path,
+  name,
+  character,
+  known_for_department,
+}) => {
   // eslint-disable-next-line react/prop-types
   // eslint-disable-next-line no-undef
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
   return (
     <>
-      <div className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:opacity-50 hover:scale-105">
+      <div className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:opacity-50">
         <Link to={`/persons/${id}-${name.toLowerCase().replace(/ /g, "-")}`}>
           <img
             className="h-56 w-full rounded-lg"

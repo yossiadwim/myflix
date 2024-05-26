@@ -8,6 +8,7 @@ const CardMoviePopular = (props) => {
   // eslint-disable-next-line no-undef
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
+
   function hoverBackground(backdrop_path) {
     const element = document.getElementById("movie");
     const img = `https://image.tmdb.org/t/p/original${backdrop_path}`;
@@ -23,7 +24,7 @@ const CardMoviePopular = (props) => {
 
   return (
     <div className="mx-3 my-5 mt-7 h-20 w-56 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
-      <Link to={`/details/${id}-${ 
+      <Link to={`/${state}/${id}-${ 
         title.toLowerCase().replace(/:/g, '').replace(/ /g, '-')
       }`} state={state}>
         <img

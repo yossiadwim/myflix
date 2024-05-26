@@ -7,11 +7,13 @@ import Navbar from "../layouts/Navbar";
 const Home = () => {
   return (
     <>
-      <Navbar></Navbar>
-      <Carousel></Carousel>
-      <MoviePopular></MoviePopular>
-      <TVSeries></TVSeries>
-      <Footer></Footer>
+      <div className="">
+        <Navbar></Navbar>
+        <Carousel></Carousel>
+        <MoviePopular></MoviePopular>
+        <TVSeries></TVSeries>
+        <Footer></Footer>
+      </div>
     </>
   );
 };

@@ -9,17 +9,21 @@ const Carousel = () => {
   const [logo, setLogo] = useState();
 
   useEffect(() => {
-    getMoviesNowPlaying().then(async (data) => {
+
+    const fetchMovies = async () => {
+      const data = await getMoviesNowPlaying();
       const randomMovie = await data[Math.floor(Math.random() * data.length)];
       setMovies(randomMovie);
 
-      getDetailMovies(randomMovie.id).then(async (data) => {
-        const logo = await data?.images?.logos?.filter(
-          (item) => item.iso_639_1 === "en",
-        )[0].file_path;
-        setLogo(logo);
-      });
-    });
+      const detailMovie = await getDetailMovies(randomMovie?.id);
+      const logo = await detailMovie?.images?.logos?.filter(
+        (item) => item.iso_639_1 === "en",
+      )[0].file_path;
+      setLogo(logo);
+    };
+  
+
+    fetchMovies();
   }, []);
 
   return (
@@ -30,7 +34,7 @@ const Carousel = () => {
         <div className="" >
           <img
             className="absolute inset-0 h-screen w-screen object-cover "
-            src={`https://image.tmdb.org/t/p/original${movies.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original${movies?.backdrop_path}`}
             alt=""
           />
         </div>
@@ -38,23 +42,23 @@ const Carousel = () => {
         <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
           <div className="mx-36 mt-20 w-2/5 pb-20 pt-20">
             <img
-              src={`https://image.tmdb.org/t/p/w500${logo}`}
-              className="w-80"
-              alt=""
+              src={`https://image.tmdb.org/t/p/w300${logo}`}
+              className=""
+              alt="w-80"
             />
             {/* <p className="mt-5 font-sans text-6xl font-bold text-white">
               {movies.title}
             </p> */}
             <div className="flex">
               <p className="mr-2 mt-10 text-xl font-medium text-white">
-                {new Date(movies.release_date).toLocaleString("en-us", {
+                {new Date(movies?.release_date).toLocaleString("en-us", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
                 })}{" "}
               </p>
               <p className="mt-10 text-xl font-medium text-white">
-                Popularity ({movies.popularity})
+                Popularity ({movies?.popularity})
               </p>
             </div>
             <div className="mt-2 flex items-center space-x-2">
@@ -75,18 +79,18 @@ const Carousel = () => {
                 </svg>
               </span>
               <p className="font-sans text-lg text-white">
-                {Math.round(movies.vote_average * 10) / 10} ({movies.vote_count}{" "}
+                {Math.round(movies.vote_average * 10) / 10} ({movies?.vote_count}{" "}
                 vote )
               </p>
             </div>
             <div className="mt-5 ">
-              <p className="font-sans text-xl leading-relaxed tracking-normal text-white">
-                {movies.overview}
+              <p className="font-sans text-lg leading-relaxed tracking-normal text-white">
+                {movies?.overview}
               </p>
             </div>
             <div className="my-10 ">
               <Link
-                to={`/details/${movies.id}-${movies?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
+                to={`/details/${movies?.id}-${movies?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
                 state={"movie"}
               >
                 <button className="rounded-xl border px-10 py-4 font-semibold text-white transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">

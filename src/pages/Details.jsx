@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import {
   getDetailMovies,
-  getDetailMoviesVideos,
-  getCastMovies,
   getCollectionMovies,
   getTVSeriesDetail,
+  getLanguage,
 } from "../axios/api";
 import CarouselDetail from "../components/Fragment/CarouselDetail";
 import ContentDetail from "../layouts/ContentDetail";
@@ -14,40 +13,37 @@ import Information from "../components/detail/additional_information/Information
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 
-const Details = (props) => {
+const Details = () => {
   const location = useLocation();
   const state = location.state;
-
-
   const { id } = useParams();
-  const [movie, setMovie] = useState([]);
-  const [tv, setTV] = useState([]);
-  const [video, setVideo] = useState([]);
-  const [cast, setCast] = useState([]);
+  const [data, setData] = useState([]);
   const [collection, setCollection] = useState([]);
+  const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     const fetchDetail = async (id) => {
       try {
-        if (state === 'movie') {
+        if (state === "movie") {
           const detailMovie = await getDetailMovies(id);
-          setMovie(detailMovie);
+          setData(detailMovie);
 
-          const videoMovie = await getDetailMoviesVideos(id);
-          setVideo(videoMovie);
+          if (detailMovie?.belongs_to_collection) {
+            const collectionMovie = await getCollectionMovies(
+              detailMovie.belongs_to_collection.id,
+            );
+            setCollection(collectionMovie);
+          }
 
-          const castMovie = await getCastMovies(id);
-          setCast(castMovie);
-
-          const collectionMovie = await getCollectionMovies(
-            detailMovie.belongs_to_collection.id,
-          );
-          setCollection(collectionMovie);
-        } else if(state === 'tv') {
+          const languages = await getLanguage();
+          setLanguages(languages);
+        } else if (state === "tv") {
           const detailTVSeries = await getTVSeriesDetail(id);
-          setTV(detailTVSeries);
+          setData(detailTVSeries);
+
+          const languages = await getLanguage();
+          setLanguages(languages);
         }
       } catch (error) {
         console.error("error : ", error);
@@ -57,40 +53,21 @@ const Details = (props) => {
     fetchDetail(id);
   }, [id, state]);
 
-
+ 
   return (
     <>
       <Navbar></Navbar>
-      <CarouselDetail
-        movie={movie}
-        logo={movie.images}
-        state={state}
-        tv={tv}
-      ></CarouselDetail>
-      <div className="container pt-80 flex">
+      <CarouselDetail data={data}></CarouselDetail>
+      <div className="container flex pt-80">
         <div className="w-3/4">
-          <ContentDetail
-            cast={cast}
-            video={video}
-            movie={movie}
-            review={movie.reviews}
-            backdrops={movie.images}
-            posters={movie.images}
-            collection={collection}
-            state={state}
-            tv={tv}
-            cast_tv = {tv.credits}
-            review_tv = {tv.reviews}
-            seasons={tv.seasons}
-            videos_tv = {tv.videos}
-            images_tv = {tv.images}
-            recommendations_movie={movie.recommendations}
-            recommendations_tv = {tv.recommendations}
-          ></ContentDetail>
+          {state === "movie" ? (
+            <ContentDetail data={data} state={state} collection={collection}></ContentDetail>
+          ) : (
+            <ContentDetail data={data} state={state}></ContentDetail>
+          )}
         </div>
-
         <div className="shadow- mr-5 w-1/4">
-          <Information movie={movie} tv={tv} state={state}></Information>
+          <Information data={data} languages={languages}></Information>
         </div>
       </div>
       <Footer></Footer>

@@ -1,5 +1,5 @@
 import CardMoviePopular from "../components/home/CardMoviePopular";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import {
   getMoviesPopular,
   getMovieTopRated,
@@ -10,105 +10,35 @@ import {
 
 const MoviePopular = () => {
   const [movies, setMovies] = useState([]);
-
-  const fetchDataMovieTrending = useCallback(() => {
-    try {
-      document.getElementById("trending").classList.add("active");
-      document.getElementById("popular-movies").classList.remove("active");
-      document.getElementById("top-rated").classList.remove("active");
-      document.getElementById("upcoming").classList.remove("active");
-      document.getElementById("now-playing").classList.remove("active");
-      // const moviesPopular = getMovieTrending();
-      getMovieTrending().then((result) => {
-        setMovies(result);
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }, []);
-  // const fetchDataMovieTrending = async () => {
-  //   try {
-  //     document.getElementById("trending").classList.add("active");
-  //     document.getElementById("popular-movies").classList.remove("active");
-  //     document.getElementById("top-rated").classList.remove("active");
-  //     document.getElementById("upcoming").classList.remove("active");
-  //     document.getElementById("now-playing").classList.remove("active");
-  //     const moviesPopular = await getMovieTrending();
-  //     setMovies(moviesPopular);
-  //   } catch (error) {
-  //     console.error("Error fetching image:", error);
-  //   }
-  // };
-  const fetchDataMoviePopular = useCallback(() => {
-    try {
-      document.getElementById("popular-movies").classList.add("active");
-      document.getElementById("trending").classList.remove("active");
-      document.getElementById("top-rated").classList.remove("active");
-      document.getElementById("upcoming").classList.remove("active");
-      document.getElementById("now-playing").classList.remove("active");
-      // const moviesPopular =  getMoviesPopular();
-      getMoviesPopular().then((result) => {
-        setMovies(result);
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }, []);
-
-  const fetchDataTopRatedMovie = useCallback(() => {
-    try {
-      document.getElementById("top-rated").classList.add("active");
-      document.getElementById("trending").classList.remove("active");
-      document.getElementById("popular-movies").classList.remove("active");
-      document.getElementById("upcoming").classList.remove("active");
-      document.getElementById("now-playing").classList.remove("active");
-
-      getMovieTopRated().then((result) => {
-        setMovies(result);
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }, []);
-  const fetchDataMovieUpcoming = useCallback(() => {
-    try {
-      document.getElementById("upcoming").classList.add("active");
-      document.getElementById("trending").classList.remove("active");
-      document.getElementById("top-rated").classList.remove("active");
-      document.getElementById("popular-movies").classList.remove("active");
-      document.getElementById("now-playing").classList.remove("active");
-      getMoviesUpcoming().then((result) => {
-        setMovies(result);
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }, []);
-  const fetchDataMovieNowPlaying = useCallback(() => {
-    try {
-      document.getElementById("now-playing").classList.add("active");
-      document.getElementById("trending").classList.remove("active");
-      document.getElementById("top-rated").classList.remove("active");
-      document.getElementById("popular-movies").classList.remove("active");
-      document.getElementById("upcoming").classList.remove("active");
-
-      getMoviesNowPlaying().then((result) => {
-        setMovies(result);
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }, []);
+  const [type, setType] = useState("trending");
 
   useEffect(() => {
-    fetchDataMovieTrending();
-  }, [fetchDataMovieTrending]);
+    const fetchMovies = async () => {
+      if (type === "trending") {
+        const data = await getMovieTrending();
+        setMovies(data);
+      } else if (type === "popular") {
+        const data = await getMoviesPopular();
+        setMovies(data);
+      } else if (type === "toprated") {
+        const data = await getMovieTopRated();
+        setMovies(data);
+      } else if (type === "nowplaying") {
+        const data = await getMoviesNowPlaying();
+        setMovies(data);
+      } else if (type === "upcoming") {
+        const data = await getMoviesUpcoming();
+        setMovies(data);
+      }
+    };
+    fetchMovies();
+  }, [type]);
 
   return (
     <>
       <div
         id="movie"
-        className="container mt-56 rounded-lg bg-cover bg-center p-0 duration-500 ease-in-out"
+        className="container mt-80 rounded-lg bg-cover bg-center p-0 duration-500 ease-in-out"
       >
         <div className="bg-black/50 p-5">
           <div className="mx-6 my-5">
@@ -117,36 +47,36 @@ const MoviePopular = () => {
           <div className="mx-2 mb-5 flex">
             <button
               id="trending"
-              className="mx-5 text-2xl font-semibold text-white hover:text-red-500 "
-              onClick={() => fetchDataMovieTrending()}
+              className={`mx-5 text-2xl font-semibold ${type === "trending" ? "text-red-500" : "text-white"} hover:text-red-500 `}
+              onClick={() => setType("trending")}
             >
               Trending
             </button>
             <button
               id="popular-movies"
-              className="mx-5 text-2xl font-semibold text-white hover:text-red-500 "
-              onClick={() => fetchDataMoviePopular()}
+              className={`mx-5 text-2xl font-semibold ${type === "popular" ? "text-red-500" : "text-white"} hover:text-red-500 `}
+              onClick={() => setType("popular")}
             >
               Popular
             </button>
             <button
               id="top-rated"
-              className="mx-5 text-2xl font-semibold text-white hover:text-red-500"
-              onClick={() => fetchDataTopRatedMovie()}
+              className={`mx-5 text-2xl font-semibold ${type === "toprated" ? "text-red-500" : "text-white"} hover:text-red-500 `}
+              onClick={() => setType("toprated")}
             >
               Top Rated
             </button>
             <button
               id="now-playing"
-              className="mx-5 text-2xl font-semibold text-white hover:text-red-500 "
-              onClick={() => fetchDataMovieNowPlaying()}
+              className={`mx-5 text-2xl font-semibold ${type === "nowplaying" ? "text-red-500" : "text-white"} hover:text-red-500 `}
+              onClick={() => setType("nowplaying")}
             >
               Now Playing
             </button>
             <button
               id="upcoming"
-              className="mx-5 text-2xl font-semibold text-white hover:text-red-500"
-              onClick={() => fetchDataMovieUpcoming()}
+              className={`mx-5 text-2xl font-semibold ${type === "upcoming" ? "text-red-500" : "text-white"} hover:text-red-500 `}
+              onClick={() => setType("upcoming")}
             >
               Upcoming
             </button>

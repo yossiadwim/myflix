@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 
-const CrewsMovie = ({ movie, state }) => {
+const CrewsMovie = ({ data }) => {
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
   const [hover, setHover] = useState(false);
@@ -22,26 +22,22 @@ const CrewsMovie = ({ movie, state }) => {
 
   const currentItemsCrewMovie =
     dep == "All"
-      ? movie?.credits?.crew?.slice(indexOfFirstItem, indexOfLastItem)
-      : movie?.credits?.crew
+      ? data?.credits?.crew?.slice(indexOfFirstItem, indexOfLastItem)
+      : data?.credits?.crew
           ?.filter((crew) => crew.department === dep)
           .slice(indexOfFirstItem, indexOfLastItem);
 
-  // const currentItemsCrewMovie = movie?.credits?.crew?.filter((crew) => crew.department === dep).slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem,
-  // );
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [movie]);
+  }, [data]);
 
   return (
     <>
       <div className="container">
         <div className="flex items-end">
           <h1 className="mt-10 text-4xl font-bold text-white">
-            Crew ({movie?.credits?.crew?.length})
+            Crew ({data?.credits?.crew?.length})
           </h1>
           <div
             className=""
@@ -100,7 +96,7 @@ const CrewsMovie = ({ movie, state }) => {
 
                 {[
                   ...new Set(
-                    movie?.credits?.crew
+                    data?.credits?.crew
                       ?.sort((a, b) => a.department.localeCompare(b.department))
                       .map((crew) => crew.department),
                   ),
@@ -123,7 +119,7 @@ const CrewsMovie = ({ movie, state }) => {
         </div>
 
         <div className="my-5 grid h-fit grid-cols-7">
-          {state === "movie" &&
+          {
             currentItemsCrewMovie?.map((cast, i) => {
               return (
                 <div
@@ -160,9 +156,9 @@ const CrewsMovie = ({ movie, state }) => {
             className="my-14 flex w-fit justify-center gap-14 rounded-full bg-slate-900 px-10 py-3 font-medium text-white"
             pageCount={
               dep === "All"
-                ? Math.ceil(movie?.credits?.crew?.length / perPage)
+                ? Math.ceil(data?.credits?.crew?.length / perPage)
                 : Math.ceil(
-                    movie?.credits?.crew?.filter(
+                    data?.credits?.crew?.filter(
                       (crew) => crew?.department === dep,
                     )?.length / perPage,
                   )

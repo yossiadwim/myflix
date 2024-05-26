@@ -23,7 +23,7 @@ const CardTVSeries = (props) => {
   return (
     <>
       <div className="mx-3 mt-10 h-20 w-56 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
-        <Link to={`/details/${id}-${name.toLowerCase().replace(/:/g, '').replace(/ /g, '-')}`} state={state} >
+        <Link to={`/${state}/${id}-${name.toLowerCase().replace(/:/g, '').replace(/ /g, '-')}`} state={state} >
         
           <img
             className="h-80 w-full rounded-lg"

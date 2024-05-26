@@ -9,6 +9,7 @@ import "./index.css";
 import MoviesCasts from "./pages/MoviesCasts.jsx";
 import Reviews from "./pages/Reviews.jsx";
 import Videos from "./pages/Videos.jsx";
+import Backdrops from "./pages/Backdrops.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
   },
   {
-    path: "/details/:id",
+    path: "/:state/:id",
     element: <Details></Details>,
   },
   {
@@ -29,17 +30,21 @@ const router = createBrowserRouter([
     element: <Persons></Persons>,
   },
   {
-    path:"/movies/:id/cast",
-    element: <MoviesCasts></MoviesCasts>
+    path: "/:state/:id/casts" ,
+    element: <MoviesCasts></MoviesCasts>,
   },
   {
-    path: "/movies/:id/reviews",
-    element: <Reviews></Reviews>
+    path: "/:state/:id/reviews",
+    element: <Reviews></Reviews>,
   },
   {
-    path: "/movies/:id/videos",
-    element: <Videos></Videos>
-  }
+    path: "/:state/:id/videos",
+    element: <Videos></Videos>,
+  },
+  {
+    path: "/:state/:id/backdrops",
+    element: <Backdrops></Backdrops>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

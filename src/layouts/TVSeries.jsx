@@ -11,85 +11,37 @@ import CardTVSeries from "../components/home/CardTVSeries";
 
 const TVSeries = () => {
   const [tvSeries, setTvSeries] = useState([]);
-
-  const fetchDataTVSeriesTrending = async () => {
-    try {
-      document.getElementById("trending-tv").classList.add("active");
-      document.getElementById("airing-today").classList.remove("active");
-      document.getElementById("top-rated-tv").classList.remove("active");
-      document.getElementById("on-the-air").classList.remove("active");
-      document.getElementById("popular-tv").classList.remove("active");
-      const tv_series = await getTVSeriesTrending();
-      setTvSeries(tv_series);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-
-  const fetchDataTVSeriesTopRated = async () => {
-    try {
-      document.getElementById("top-rated-tv").classList.add("active");
-      document.getElementById("trending-tv").classList.remove("active");
-      document.getElementById("airing-today").classList.remove("active");
-      document.getElementById("on-the-air").classList.remove("active");
-      document.getElementById("popular-tv").classList.remove("active");
-
-      const topRatedTVSeries = await getTVSeriesTopRated();
-      setTvSeries(topRatedTVSeries);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-  const fetchDataMovieOnTheAir = async () => {
-    try {
-      document.getElementById("on-the-air").classList.add("active");
-      document.getElementById("trending-tv").classList.remove("active");
-      document.getElementById("top-rated-tv").classList.remove("active");
-      document.getElementById("airing-today").classList.remove("active");
-      document.getElementById("popular-tv").classList.remove("active");
-      const tv_series_on_the_air = await getTVSeriesOnTheAir();
-      setTvSeries(tv_series_on_the_air);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-  const fetchDataTVSeriesAiringToday = async () => {
-    try {
-      document.getElementById("popular-tv").classList.remove("active");
-      document.getElementById("trending-tv").classList.remove("active");
-      document.getElementById("top-rated-tv").classList.remove("active");
-      document.getElementById("airing-today").classList.add("active");
-      document.getElementById("on-the-air").classList.remove("active");
-
-      const topRatedMovie = await getTVSeriesAiringToday();
-      setTvSeries(topRatedMovie);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-  const fetchDataTVSeriesPopular = async () => {
-    try {
-      document.getElementById("popular-tv").classList.add("active");
-      document.getElementById("trending-tv").classList.remove("active");
-      document.getElementById("top-rated-tv").classList.remove("active");
-      document.getElementById("airing-today").classList.remove("active");
-      document.getElementById("on-the-air").classList.remove("active");
-
-      const topRatedMovie = await getTVSeriesPopular();
-      setTvSeries(topRatedMovie);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
+  const [type, setType] = useState("trending");
 
   useEffect(() => {
-    fetchDataTVSeriesTrending();
-  }, []);
+    const fetchTVSeries = async () => {
+      if (type === "trending") {
+        const data = await getTVSeriesTrending();
+        setTvSeries(data);
+      } else if (type === "airing-today") {
+        const data = await getTVSeriesAiringToday();
+        setTvSeries(data);
+      } else if (type === "on-the-air") {
+        const data = await getTVSeriesOnTheAir();
+        setTvSeries(data);
+      } else if (type === "popular") {
+        const data = await getTVSeriesPopular();
+        setTvSeries(data);
+      } else if (type === "top-rated") {
+        const data = await getTVSeriesTopRated();
+        setTvSeries(data);
+      }
+    };
+    fetchTVSeries();
+  }, [type]);
 
   return (
     <>
       <div className="mb-36 h-full bg-gradient-to-r from-transparent to-black bg-cover bg-center  pt-24 ">
-        <div id="tv" className="container h-full rounded-lg bg-cover bg-center p-0">
+        <div
+          id="tv"
+          className="container h-full rounded-lg bg-cover bg-center p-0"
+        >
           <div className=" bg-black/50 p-5">
             <div className="mx-5 pt-16">
               <h1 className="text-6xl font-medium text-white">TV Series</h1>
@@ -97,36 +49,36 @@ const TVSeries = () => {
             <div className="mx-2 my-5 mb-5 flex">
               <button
                 id="trending-tv"
-                className="mx-5 text-2xl font-semibold text-white hover:text-red-500"
-                onClick={() => fetchDataTVSeriesTrending()}
+                className={`mx-5 text-2xl font-semibold ${type === "trending" ? "text-red-500" : "text-white"}  hover:text-red-500`}
+                onClick={() => setType("trending")}
               >
                 Trending
               </button>
               <button
                 id="airing-today"
-                className="mx-5 text-2xl font-semibold text-white hover:text-red-500 "
-                onClick={() => fetchDataTVSeriesAiringToday()}
+                className={`mx-5 text-2xl font-semibold ${type === "airing-today" ? "text-red-500" : "text-white"} hover:text-red-500`}
+                onClick={() => setType("airing-today")}
               >
                 Airing Today
               </button>
               <button
                 id="top-rated-tv"
-                className="mx-5 text-2xl font-semibold text-white hover:text-red-500"
-                onClick={() => fetchDataTVSeriesTopRated()}
+                className={`mx-5 text-2xl font-semibold ${type === "top-rated" ? "text-red-500" : "text-white"} hover:text-red-500`}
+                onClick={() => setType("top-rated")}
               >
                 Top Rated
               </button>
               <button
                 id="popular-tv"
-                className="mx-5 text-2xl font-semibold text-white hover:text-red-500 "
-                onClick={() => fetchDataTVSeriesPopular()}
+                className={`mx-5 text-2xl font-semibold ${type === "popular" ? "text-red-500" : "text-white"} hover:text-red-500`}
+                onClick={() => setType("popular")}
               >
                 Popular
               </button>
               <button
                 id="on-the-air"
-                className="mx-5 text-2xl font-semibold text-white hover:text-red-500"
-                onClick={() => fetchDataMovieOnTheAir()}
+                className={`mx-5 text-2xl font-semibold ${type === "on-the-air" ? "text-red-500" : "text-white"} hover:text-red-500`}
+                onClick={() => setType("on-the-air")}
               >
                 On The Air
               </button>

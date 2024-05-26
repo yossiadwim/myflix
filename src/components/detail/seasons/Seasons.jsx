@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import CardSeasons from "./CardSeasons";
 
-const Seasons = ({ seasons }) => {
+const Seasons = ({ data }) => {
   return (
     <>
       <div className="flex items-end justify-between">
@@ -13,20 +13,13 @@ const Seasons = ({ seasons }) => {
           </button>
         </Link>
       </div>
-      {seasons
-        ?.filter((season) => new Date(season.air_date))
+      {data?.seasons?.filter((season) => new Date(season.air_date))
         .sort((a, b) => new Date(b.air_date) - new Date(a.air_date))
         .slice(0, 2)
         .map((season, i) => (
           <CardSeasons
             key={i}
-            name={season.name}
-            air_date={season.air_date}
-            episode_count={season.episode_count}
-            overview={season.overview}
-            season_number={season.season_number}
-            vote_average={season.vote_average}
-            poster_path={season.poster_path}
+            {...season}
           />
         ))}
     </>

@@ -81,7 +81,7 @@ export const getTVSeriesTopRated = async () => {
 
 export const getDetailMovies = async (id) => {
   const response = await axios.get(
-    `${baseUrl}/movie/${id}?append_to_response=reviews,keywords,images,recommendations,credits`,
+    `${baseUrl}/movie/${id}?append_to_response=reviews,keywords,images,videos,recommendations,credits`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -109,6 +109,15 @@ export const getTVSeriesDetail = async (id) => {
   return response.data;
 };
 
+
+export const getLanguage = async () => {
+  const response = await axios.get(`${baseUrl}/configuration/languages`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data);
+  return response.data;
+}
+
 export const getPersonDetails = async (id) => {
   const response = await axios.get(
     `${baseUrl}/person/${id}?append_to_response=images,movie_credits,tv_credits,combined_credits,external_ids`,
@@ -117,28 +126,5 @@ export const getPersonDetails = async (id) => {
     },
   );
   // console.log(response.data);
-  return response.data;
-};
-
-export const getDetailMoviesImages = async (id) => {
-  const response = await axios.get(`${baseUrl}/movie/${id}/images`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  // console.log(response.data.results);
-  return response.data;
-};
-export const getDetailMoviesVideos = async (id) => {
-  const response = await axios.get(`${baseUrl}/movie/${id}/videos`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  // console.log(response.data.results);
-  return response.data;
-};
-
-export const getCastMovies = async (id) => {
-  const response = await axios.get(`${baseUrl}/movie/${id}/credits`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  // console.log(response.data.results);
   return response.data;
 };
