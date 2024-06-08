@@ -4,7 +4,7 @@ import CardCast from "../detail/cast/CardCast";
 
 // eslint-disable-next-line react/prop-types
 const Cast = ({ data, state }) => {
-
+  
 
   return (
     <>
@@ -12,7 +12,8 @@ const Cast = ({ data, state }) => {
         <h1 className="mr-10 text-4xl font-medium text-white">Cast/Crew</h1>
         <Link
           to={`/${state}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/casts`}
-        state={state}>
+          state={state}
+        >
           <button className="text-2xl font-medium text-white hover:text-red-500">
             Full Cast & Crew
           </button>

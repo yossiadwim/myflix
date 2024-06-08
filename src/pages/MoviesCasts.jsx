@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ContentMoviesCasts from "../layouts/ContentMoviesCasts";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import { getDetailMovies, getTVSeriesDetail } from "../axios/api";
 
 const MoviesCasts = () => {
-  const location = useLocation();
-  const state = location.state;
-  const { id } = useParams();
+  const { state, id } = useParams();
   const [data, setData] = useState([]);
 
   useEffect(() => {

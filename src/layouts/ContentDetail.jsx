@@ -30,7 +30,7 @@ const ContentDetail = ({ data, collection, state }) => {
 
       {collection?.length !== 0 && collection !== undefined ? (
         <div className="pb-36 pt-10">
-          <Collection collection={collection}></Collection>
+          <Collection collection={collection} ></Collection>
         </div>
       ) : null}
 

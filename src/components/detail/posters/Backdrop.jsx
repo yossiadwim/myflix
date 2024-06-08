@@ -1,37 +1,43 @@
-/* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
-const Backdrop = ({ data,state }) => {
+
+/* eslint-disable react/prop-types */
+const Backdrop = ({ data, state }) => {
   return (
     <>
       <div className="bg-opacity-100 ">
-        <img
-          className="absolute inset-0 h-screen w-screen object-cover brightness-50"
-          src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
-          alt=""
-        />
+        {
+          <img
+            className="absolute inset-0 h-screen w-screen object-cover brightness-50"
+            src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
+            alt=""
+          />
+        }
       </div>
       <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
         <div className="flex h-1/2 items-end justify-center">
-          <img
-            src={`https://image.tmdb.org/t/p/w500${
-              data?.images?.logos?.filter((item) => item?.iso_639_1 === "en")[0]
-                ?.file_path
-            }`}
-            className="w-56"
-            alt=""
-          />
+          {
+            <img
+              src={`https://image.tmdb.org/t/p/w500${
+                data?.images?.logos?.filter(
+                  (item) => item?.iso_639_1 === "en",
+                )[0]?.file_path
+              }`}
+              className="w-56"
+              alt=""
+            />
+          }
         </div>
         <div className="my-5">
           <p className="flex justify-center py-2 text-6xl font-bold text-white">
-            {data?.title}
+            {data?.title || data?.name}
           </p>
           <p className="flex justify-center py-2 text-4xl font-medium tracking-wide text-white">
-            Backdrops
+            Posters
           </p>
           <Link
             className="group flex justify-center"
-            to={`/${state}/${data.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`} state={state}
+            to={`/${state}/${data.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
+            state={state}
           >
             <button className="group flex items-center justify-center text-white group-hover:text-red-500">
               <span className="mr-2 ">

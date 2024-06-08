@@ -3,17 +3,32 @@ import MoviePopular from "../layouts/MoviePopular";
 import TVSeries from "../layouts/TVSeries";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
   return (
     <>
-      <div className="">
-        <Navbar></Navbar>
-        <Carousel></Carousel>
-        <MoviePopular></MoviePopular>
-        <TVSeries></TVSeries>
-        <Footer></Footer>
-      </div>
+      <Navbar></Navbar>
+      {isLoading ? (
+        <div className="flex h-screen items-center justify-center ">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <div className="">
+          <Carousel></Carousel>
+          <MoviePopular></MoviePopular>
+          <TVSeries></TVSeries>
+        </div>
+      )}
+      <Footer></Footer>
     </>
   );
 };

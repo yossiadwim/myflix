@@ -15,12 +15,12 @@ const CardMoviePopular = (props) => {
     element.style.backgroundImage = `url(${img})`;
   }
 
-  function offHoverBackground() {
-    const element = document.getElementById("movie");
-    element.style.backgroundImage = ``;
-    element.style.backgroundColor = 'black';
+  // function offHoverBackground() {
+  //   const element = document.getElementById("movie");
+  //   element.style.backgroundImage = ``;
+  //   element.style.backgroundColor = 'black';
 
-  }
+  // }
 
   return (
     <div className="mx-3 my-5 mt-7 h-20 w-56 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
@@ -28,12 +28,12 @@ const CardMoviePopular = (props) => {
         title.toLowerCase().replace(/:/g, '').replace(/ /g, '-')
       }`} state={state}>
         <img
-          className="h-80 w-full rounded-lg"
+          className="h-80 w-full rounded-lg opacity-75 hover:opacity-100"
           src={`${baseImgURL}${poster_path}`}
           alt=""
           loading="lazy"
           onMouseOver={() => hoverBackground(backdrop_path)}
-          onMouseOut={()=> offHoverBackground()}
+          // onMouseOut={()=> offHoverBackground()}
         />
       </Link>
 

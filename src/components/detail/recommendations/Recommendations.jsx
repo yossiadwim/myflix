@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import CardRecommendation from "./CardRecommendations";
 
-const Recommendations = ({ data }) => {
+const Recommendations = ({ data, state }) => {
   return (
     <>
       <div className="flex items-end justify-between">
@@ -15,7 +15,7 @@ const Recommendations = ({ data }) => {
       </div>
       <div className="flex overflow-y-hidden">
         {data?.recommendations?.results?.map((recommendation, i) => {
-          return <CardRecommendation key={i} {...recommendation} />;
+          return <CardRecommendation key={i} {...recommendation} state={state} />;
         })}
       </div>
     </>

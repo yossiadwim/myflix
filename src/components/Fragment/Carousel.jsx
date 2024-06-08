@@ -3,35 +3,31 @@ import { useEffect, useState } from "react";
 import { getMoviesNowPlaying, getDetailMovies } from "../../axios/api";
 import { Link } from "react-router-dom";
 
-
 const Carousel = () => {
   const [movies, setMovies] = useState([]);
   const [logo, setLogo] = useState();
 
   useEffect(() => {
-
     const fetchMovies = async () => {
       const data = await getMoviesNowPlaying();
       const randomMovie = await data[Math.floor(Math.random() * data.length)];
-      setMovies(randomMovie);
 
       const detailMovie = await getDetailMovies(randomMovie?.id);
       const logo = await detailMovie?.images?.logos?.filter(
         (item) => item.iso_639_1 === "en",
       )[0].file_path;
+      setMovies(randomMovie);
       setLogo(logo);
     };
-  
-
+    
     fetchMovies();
   }, []);
 
   return (
     // eslint-disable-next-line no-undef
     <>
-      
       <div className="h-[650px] w-full object-cover">
-        <div className="" >
+        <div className="">
           <img
             className="absolute inset-0 h-screen w-screen object-cover "
             src={`https://image.tmdb.org/t/p/original${movies?.backdrop_path}`}
@@ -79,8 +75,8 @@ const Carousel = () => {
                 </svg>
               </span>
               <p className="font-sans text-lg text-white">
-                {Math.round(movies.vote_average * 10) / 10} ({movies?.vote_count}{" "}
-                vote )
+                {Math.round(movies.vote_average * 10) / 10} (
+                {movies?.vote_count} vote )
               </p>
             </div>
             <div className="mt-5 ">

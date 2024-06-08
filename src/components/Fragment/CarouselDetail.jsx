@@ -67,10 +67,10 @@ const CarouselDetail = ({ data }) => {
                       {data?.runtime
                         ? "(" +
                           Math.floor(data?.runtime / 60) +
-                          "Hour" +
+                          " Hour" +
                           " " +
                           Math.floor(data?.runtime % 60) +
-                          "min" +
+                          " min" +
                           ")"
                         : ""}
                     </p>

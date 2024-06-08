@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-
 /* eslint-disable react/prop-types */
-const Backdrop = ({ data, state }) => {
+import { Link } from "react-router-dom";
+const Backdrop = ({ data }) => {
   return (
     <>
       <div className="bg-opacity-100 ">
@@ -14,30 +13,29 @@ const Backdrop = ({ data, state }) => {
         }
       </div>
       <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
-        <div className="flex h-1/2 items-end justify-center">
-          {
-            <img
-              src={`https://image.tmdb.org/t/p/w500${
-                data?.images?.logos?.filter(
-                  (item) => item?.iso_639_1 === "en",
-                )[0]?.file_path
-              }`}
-              className="w-56"
-              alt=""
-            />
-          }
-        </div>
+            <div className="flex h-1/2 items-end justify-center">
+            {
+                <img
+                src={`https://image.tmdb.org/t/p/w500${
+                    data?.images?.logos?.filter(
+                    (item) => item?.iso_639_1 === "en",
+                    )[0]?.file_path
+                }`}
+                className="w-80"
+                alt=""
+                />
+            }
+            </div>
         <div className="my-5">
           <p className="flex justify-center py-2 text-6xl font-bold text-white">
             {data?.title || data?.name}
           </p>
-          <p className="flex justify-center py-2 text-4xl font-medium tracking-wide text-white">
-            Videos
+          <p className="flex justify-center py-2 text-4xl font-medium capitalize tracking-wide text-white">
+            Seasons
           </p>
           <Link
             className="group flex justify-center"
-            to={`/${state}/${data.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
-            state={state}
+            to={`/tv/${data.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
           >
             <button className="group flex items-center justify-center text-white group-hover:text-red-500">
               <span className="mr-2 ">

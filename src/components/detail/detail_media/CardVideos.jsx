@@ -6,33 +6,36 @@ const CardVideos = ({ video_key, name, id }) => {
 
   return (
     <>
-      <div
-        className="mx-5 my-5 flex h-60 w-80 items-center justify-center bg-cover bg-center"
-        style={{
-          backgroundImage: `url(https://i.ytimg.com/vi/${video_key}/hqdefault.jpg)`,
-        }}
-      >
-        <div className="flex items-center justify-center">
-          <button
-            className="rounded-full bg-black px-2 py-2"
-            onClick={() => setHidden(false)}
-          >
-            <span className="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-10 fill-white hover:fill-red-500"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </button>
+      <div className="">
+        <div
+          className=" mx-5 flex h-60 w-80 items-center justify-center bg-cover bg-center"
+          style={{
+            backgroundImage: `url(https://i.ytimg.com/vi/${video_key}/hqdefault.jpg)`,
+          }}
+        >
+          <div className="flex items-center justify-center">
+            <button
+              className="rounded-full bg-black px-2 py-2"
+              onClick={() => setHidden(false)}
+            >
+              <span className="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-10 fill-white hover:fill-red-500"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
+        <p className="text-center text-white">{name}</p>
       </div>
 
       <div

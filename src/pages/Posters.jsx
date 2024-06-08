@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getDetailMovies, getLanguage, getTVSeriesDetail } from "../axios/api";
 import Navbar from "../layouts/Navbar";
+import { useEffect, useState } from "react";
 import Footer from "../layouts/Footer";
-import Backdrop from "../components/detail/backdrops/Backdrop";
-import Content from "../components/detail/backdrops/Content";
+import Backdrop from "../components/detail/posters/Backdrop";
+import { getDetailMovies, getTVSeriesDetail } from "../axios/api";
 
-const Backdrops = () => {
-  window.scrollTo(0, 0);
+const Posters = () => {
   const { state, id } = useParams();
   const [data, setData] = useState([]);
-  const [languages, setLanguage] = useState([]);
 
   useEffect(() => {
     const fetchDetail = async (id) => {
@@ -22,24 +19,16 @@ const Backdrops = () => {
         setData(detail);
       }
     };
-
-    const fetchLanguage = async () => {
-      const languages = await getLanguage();
-      setLanguage(languages);
-    };
-
     fetchDetail(id);
-    fetchLanguage();
   }, [id, state]);
 
   return (
     <>
       <Navbar></Navbar>
       <Backdrop data={data} state={state}></Backdrop>
-      <Content data={data} languages={languages}></Content>
       <Footer></Footer>
     </>
   );
 };
 
-export default Backdrops;
+export default Posters;

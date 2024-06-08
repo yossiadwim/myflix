@@ -11,6 +11,7 @@ import {
 const MoviePopular = () => {
   const [movies, setMovies] = useState([]);
   const [type, setType] = useState("trending");
+  
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -88,12 +89,7 @@ const MoviePopular = () => {
                   return (
                     <CardMoviePopular
                       key={movie.id}
-                      id={movie.id}
-                      title={movie.title}
-                      poster_path={movie.poster_path}
-                      release_date={movie.release_date}
-                      vote_average={movie.vote_average}
-                      backdrop_path={movie.backdrop_path}
+                      {...movie}
                       state={"movie"}
                     ></CardMoviePopular>
                   );

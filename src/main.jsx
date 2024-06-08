@@ -8,8 +8,10 @@ import Persons from "./pages/Persons.jsx";
 import "./index.css";
 import MoviesCasts from "./pages/MoviesCasts.jsx";
 import Reviews from "./pages/Reviews.jsx";
-import Videos from "./pages/Videos.jsx";
-import Backdrops from "./pages/Backdrops.jsx";
+import MediaDetail from "./pages/MediaDetail.jsx";
+import Collections from "./pages/Collections.jsx";
+import Seasons from "./pages/Seasons.jsx";
+import MOvies from "./pages/Movies.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,13 +40,21 @@ const router = createBrowserRouter([
     element: <Reviews></Reviews>,
   },
   {
-    path: "/:state/:id/videos",
-    element: <Videos></Videos>,
+    path: "/:state/:id/:type",
+    element: <MediaDetail></MediaDetail>,
   },
   {
-    path: "/:state/:id/backdrops",
-    element: <Backdrops></Backdrops>,
+    path: "collection/:id/",
+    element: <Collections></Collections>,
   },
+  {
+    path: "/tv/:id/seasons",
+    element: <Seasons></Seasons>
+  },
+  {
+    path: "/movie/popular",
+    element: <MOvies></MOvies>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const Collection = ({ collection }) => {
-
   return (
     <>
-    
       <div
         className="container rounded-lg bg-cover bg-top p-0 "
         style={
@@ -43,7 +41,7 @@ const Collection = ({ collection }) => {
             </div>
             <div className="group mt-4">
               <Link
-                to={`/collection/${collection?.id}/${collection?.name
+                to={`/collection/${collection?.id}-${collection?.name
                   ?.toLowerCase()
                   .replace(/:/g, "")
                   .replace(/ /g, "-")}`}

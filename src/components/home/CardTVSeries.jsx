@@ -14,11 +14,11 @@ const CardTVSeries = (props) => {
     element.style.backgroundImage = `url(${img})`;
   }
 
-  function offHoverBackground() {
-    const element = document.getElementById("tv");
-    element.style.backgroundImage = ``;
-    element.style.backgroundColor = "black";
-  }
+  // function offHoverBackground() {
+  //   const element = document.getElementById("tv");
+  //   element.style.backgroundImage = ``;
+  //   element.style.backgroundColor = "black";
+  // }
 
   return (
     <>
@@ -26,12 +26,12 @@ const CardTVSeries = (props) => {
         <Link to={`/${state}/${id}-${name.toLowerCase().replace(/:/g, '').replace(/ /g, '-')}`} state={state} >
         
           <img
-            className="h-80 w-full rounded-lg"
+            className="h-80 w-full rounded-lg opacity-75 hover:opacity-100"
             src={`${baseImgURL}${poster_path}`}
             alt=""
             loading="lazy"
             onMouseOver={() => hoverBackground(backdrop_path)}
-            onMouseOut={() => offHoverBackground()}
+            // onMouseOut={() => offHoverBackground()}
           />
         </Link>
         <h3 className="mt-1 text-lg font-bold text-white">{name}</h3>

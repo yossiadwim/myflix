@@ -109,14 +109,20 @@ export const getTVSeriesDetail = async (id) => {
   return response.data;
 };
 
-
 export const getLanguage = async () => {
   const response = await axios.get(`${baseUrl}/configuration/languages`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data);
   return response.data;
-}
+};
+
+export const getGenre = async () => {
+  const response = await axios.get(`${baseUrl}/genre/movie/list`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
 
 export const getPersonDetails = async (id) => {
   const response = await axios.get(
@@ -128,3 +134,12 @@ export const getPersonDetails = async (id) => {
   // console.log(response.data);
   return response.data;
 };
+
+
+export const getSeasonsDetails = async (id, number) => {
+  const response = await axios.get(`${baseUrl}/tv/${id}/season/${number}?append_to_response=images,videos`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data);
+  return response.data;
+}

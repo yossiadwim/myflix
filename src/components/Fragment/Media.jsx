@@ -48,7 +48,7 @@ const Media = ({ data, state }) => {
                   ? `/${state}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/${active}`
                   : `/${state}/${data?.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/${active}`
               }
-            state={state}>
+            state={[state, active]}>
               <p className="text-white hover:text-red-500">
                 {active === "videos"
                   ? "View All Videos"
