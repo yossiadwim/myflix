@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Form } from "react-router-dom";
+import { Dropdown } from "flowbite-react";
 
 const Navbar = () => {
   window.onscroll = function () {
@@ -11,12 +12,21 @@ const Navbar = () => {
     }
   };
 
-  const [hover, setHover] = useState("");
   const [query, setQuery] = useState("");
+
+  const menu_movie = [
+    "Popular",
+    "Top Rated",
+    "Now Playing",
+    "Trending",
+    "Upcoming",
+  ];
+
+  const menu_tv = ["Popular", "Top Rated", "Airing Today", "On The Air"];
 
   return (
     <header className="fixed left-0 top-0 z-[999] flex w-full items-center bg-transparent shadow-sm">
-      <div className="container">
+      <div className="container ">
         <div className=" relative flex items-center">
           <div className="mx-16">
             <a href="/">
@@ -28,99 +38,50 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex w-full items-center">
-            <nav
-              id="nav-menu"
-              className="right4 absolute top-full  hidden w-full max-w-[250] rounded-lg py-5 shadow-lg lg:static lg:block lg:max-w-full lg:rounded-none lg:shadow-none"
-            >
-              <ul className="block lg:flex">
-                <li className="group">
-                  <a
-                    href="#hero"
-                    className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
-                    onMouseMove={() => setHover("movie")}
-                    onMouseOut={() => setHover("")}
+            <div className="mr-5 font-semibold text-white">
+              <Dropdown
+                label="Movies"
+                inline
+                className="border-none bg-slate-900"
+              >
+                {menu_movie.map((item, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    className="text-white hover:bg-slate-900 hover:text-red-500"
                   >
-                    Movies
-                  </a>
-                </li>
-                <li className="group">
-                  <a
-                    href="#about"
-                    className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
-                    onMouseOver={() => setHover("tv")}
-                    onMouseOut={() => setHover("")}
-                  >
-                    TV Shows
-                  </a>
-                </li>
-                <li className="group">
-                  <a
-                    href="#portofolio"
-                    className="mx-8 flex py-2 text-base font-bold text-white group-hover:text-red-500"
-                    onMouseMove={() => setHover("people")}
-                    onMouseOut={() => setHover("")}
-                  >
-                    People
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <div
-              id="movie-menu"
-              className={`absolute top-16 mx-1 ${hover === "movie" ? "block" : "hidden"} rounded-lg bg-slate-900`}
-              onMouseMove={() => setHover("movie")}
-              onMouseOut={() => setHover("")}
-            >
-              <ul className="mx-5 my-2">
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  <Link to="/movie/popular">Popular</Link>
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Top Rated
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Now Playing
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Trending
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Upcoming
-                </li>
-              </ul>
+                    {item}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown>
             </div>
-            <div
-              id="tv-menu"
-              className={`absolute top-16 mx-1 ml-28 ${hover === "tv" ? "block" : "hidden"} rounded-lg bg-slate-900`}
-              onMouseMove={() => setHover("tv")}
-              onMouseOut={() => setHover("")}
-            >
-              <ul className="mx-5 my-2">
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Popular
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Top Rated
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  Airing Today
-                </li>
-                <li className="py-2 font-medium text-white hover:text-red-500">
-                  On The Air
-                </li>
-              </ul>
+
+            <div className="mr-5 font-semibold text-white">
+              <Dropdown
+                label="TV Shows"
+                inline
+                className="border-none bg-slate-900"
+              >
+                {menu_tv.map((item, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    className="text-white hover:bg-slate-900 hover:text-red-500"
+                  >
+                    {item}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown>
             </div>
-            <div
-              id="people-menu"
-              className={`absolute top-16 mx-1 ml-60 ${hover === "people" ? "block" : "hidden"} rounded-lg bg-slate-900`}
-              onMouseMove={() => setHover("people")}
-              onMouseOut={() => setHover("")}
-            >
-              <ul className="mx-5 my-2">
-                <li className="py-2 font-medium text-white hover:text-red-500">
+
+            <div className="font-semibold text-white">
+              <Dropdown
+                label="People"
+                inline
+                className="border-none bg-slate-900"
+              >
+                <Dropdown.Item className="text-white hover:bg-slate-900 hover:text-red-500">
                   Popular People
-                </li>
-              </ul>
+                </Dropdown.Item>
+              </Dropdown>
             </div>
           </div>
           <div className="">

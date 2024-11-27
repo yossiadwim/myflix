@@ -18,21 +18,21 @@ const Collection = ({ collection }) => {
       >
         <div className="bg-black/60">
           <div className="px-5 py-20">
-            <p className="text-4xl font-medium text-white">
+            <p className="text-3xl font-medium text-white">
               Part of the {collection?.name}{" "}
             </p>
             <div className="mt-2">
-              <p className=" mr-1 inline-flex text-lg text-white">Includes</p>
+              <p className=" mr-1 inline-flex text-base text-white">Includes</p>
               {collection?.parts?.map((collection, i) => {
                 if (i !== 0) {
                   return (
-                    <p key={i} className="inline-flex text-lg text-white">
+                    <p key={i} className="inline-flex text-base text-white">
                       , {collection?.title}
                     </p>
                   );
                 } else {
                   return (
-                    <p key={i} className="inline-flex text-lg text-white">
+                    <p key={i} className="inline-flex text-base text-white">
                       {collection?.title}
                     </p>
                   );
@@ -46,7 +46,7 @@ const Collection = ({ collection }) => {
                   .replace(/:/g, "")
                   .replace(/ /g, "-")}`}
               >
-                <button className="rounded-full border-2  px-3 py-2 text-lg font-medium text-white hover:border-white hover:bg-white hover:text-black">
+                <button className="rounded-full border-2  px-3 py-2 text-base font-medium text-white hover:border-white hover:bg-white hover:text-black">
                   VIEW THE COLLECTION
                 </button>
               </Link>

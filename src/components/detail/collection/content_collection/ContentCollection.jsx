@@ -20,7 +20,7 @@ const ContentCollection = ({ collection, movies, genres }) => {
         movies={movies}
         genres={genres}
       ></Backdrop>
-      <div className="container py-20 pt-[900px]">
+      <div className="container pt-[850px] p-20">
         <h1 className="text-4xl font-medium text-white">Featured Cast</h1>
         <div className="my-5 grid grid-cols-5 gap-y-5">
           {[
@@ -100,9 +100,9 @@ const ContentCollection = ({ collection, movies, genres }) => {
 
       <div
         id="movie"
-        className="container p-0  mb-36 rounded-lg bg-cover bg-center"
+        className="container h-[700px] w-[85%] p-0 mb-36 rounded-lg bg-cover bg-center border"
       >
-        <div className="p-10 bg-black/50">
+        <div className="bg-black/60 bg-cover pt-14 pb-32 pl-10 pr-10">
           <h1 className="text-4xl font-medium text-white">
             {movies?.length} Movies
           </h1>

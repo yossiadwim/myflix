@@ -20,10 +20,10 @@ const PersonDetails = ({ person }) => {
           />
         )}
       </div>
-      <div className="absolute h-full w-full bg-gradient-to-b from-transparent to-black pt-36">
+      <div className="absolute h-full w-full bg-gradient-to-b from-transparent to-black pt-36 pr-24 pl-24">
         <Person person={person}></Person>
       </div>
-      <div className="pt-[600px]">
+      <div className="pt-[600px] mx-24">
         <PersonContent person={person}></PersonContent>
       </div>
     </>

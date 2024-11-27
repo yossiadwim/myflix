@@ -39,7 +39,7 @@ const Card = ({ data, state }) => {
         {data?.title || data?.name}
       </h3>
       <div className="flex items-center justify-between py-5">
-        <p className="mt-1 text-white">
+        <p className="mt-1 text-sm text-white">
           {data?.release_date || data?.first_air_date
             ? new Date(
                 data?.release_date || data?.first_air_date,
@@ -58,7 +58,7 @@ const Card = ({ data, state }) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke=""
-              className="h-6 w-6"
+              className="h-5 w-5"
             >
               <path
                 strokeLinecap="round"
@@ -67,7 +67,7 @@ const Card = ({ data, state }) => {
               />
             </svg>
           </span>
-          <p className="font-sans text-base text-white">
+          <p className="font-sans text-sm text-white">
             {Math.round(data?.vote_average * 10) / 10}
           </p>
         </div>

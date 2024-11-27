@@ -40,12 +40,10 @@ const CarouselHome = () => {
   return (
     // eslint-disable-next-line no-undef
     <>
-
-
-      <div className="h-[850px] w-full object-cover rounded-none">
+      <div className="h-[750px] w-full object-cover">
         <Carousel>
           {datas?.map((data) => (
-            <div className="h-[850px] w-full object-cover" key={data?.id}>
+            <div className="h-[800px] w-full object-cover" key={data?.id}>
               <div className="">
                 <img
                   className="absolute inset-0 h-screen w-screen object-cover opacity-50"
@@ -58,12 +56,14 @@ const CarouselHome = () => {
                 <div className="mx-36 mt-20 w-2/5 pb-20 pt-20">
                   <img
                     src={`https://image.tmdb.org/t/p/w300${
-                      detailDatas[datas.indexOf(data)]?.images?.logos?.filter(
+                      detailDatas[datas.indexOf(data)]?.images?.logos?.find(
                         (item) => item?.iso_639_1 === "en",
-                      )[0]?.file_path
+                      )?.file_path ||
+                      detailDatas[datas.indexOf(data)]?.images?.logos[0]
+                        ?.file_path
                     }`}
                     className=""
-                    alt="w-80"
+                    alt=""
                   />
 
                   <div className="flex">
@@ -105,7 +105,7 @@ const CarouselHome = () => {
                     </p>
                   </div>
                   <div className="mt-5 ">
-                    <p className="font-sans text-lg leading-relaxed tracking-normal text-white">
+                    <p className="font-sans text-base leading-relaxed tracking-normal text-white">
                       {showMore
                         ? data?.overview?.length > 100
                           ? data?.overview
@@ -121,10 +121,10 @@ const CarouselHome = () => {
                   </div>
                   <div className="my-10 ">
                     <Link
-                      to={`/${data?.media_type}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
+                      to={`/${data?.media_type}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
                       state={"movie"}
                     >
-                      <button className="rounded-xl border px-10 py-4 font-semibold text-white transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
+                      <button className="rounded-xl border px-10 py-4 font-semibold text-white  hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
                         Details
                       </button>
                     </Link>

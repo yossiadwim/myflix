@@ -4,53 +4,25 @@ import CardCast from "../detail/cast/CardCast";
 
 // eslint-disable-next-line react/prop-types
 const Cast = ({ data, state }) => {
-  
-
   return (
     <>
       <div className="container flex items-end justify-between">
-        <h1 className="mr-10 text-4xl font-medium text-white">Cast/Crew</h1>
+        <h1 className="mr-10 text-3xl font-medium text-white">Cast/Crew</h1>
         <Link
           to={`/${state}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/casts`}
           state={state}
         >
-          <button className="text-2xl font-medium text-white hover:text-red-500">
+          <button className="text-xl font-medium text-white hover:text-red-500">
             Full Cast & Crew
           </button>
         </Link>
       </div>
-      <div className="container mt-5 overflow-x-auto overflow-y-hidden border-t-2 border-gray-900">
+      <div className="container mt-5 overflow-x-auto overflow-y-hidden border-t-2 border-gray-900 ">
         <div className="w-3/5">
           <div className="flex h-fit min-w-fit flex-row">
             {data?.credits?.cast?.slice(0, 15).map((cast, i) => {
               return <CardCast key={i} {...cast}></CardCast>;
             })}
-
-            {/* {state == "tv" && cast_tv?.cast?.length == 0
-              ? cast_tv?.crew?.slice(0, 15).map((crew, i) => {
-                  return (
-                    <CardCast
-                      key={i}
-                      id={crew.id}
-                      name={crew.name}
-                      character={crew.character}
-                      profile_path={crew.profile_path}
-                      state={"tv"}
-                    ></CardCast>
-                  );
-                })
-              : cast_tv?.cast?.slice(0, 15).map((cast, i) => {
-                  return (
-                    <CardCast
-                      key={i}
-                      id={cast.id}
-                      name={cast.name}
-                      character={cast.character}
-                      profile_path={cast.profile_path}
-                      state={"tv"}
-                    ></CardCast>
-                  );
-                })} */}
 
             {data?.credits?.cast?.length > 5 ? (
               <div className="my-10 mr-5 flex h-56 w-40 justify-center">

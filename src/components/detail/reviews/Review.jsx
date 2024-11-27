@@ -11,7 +11,7 @@ const Review = ({ data, state }) => {
     <>
       <div className="container">
         <div className="flex items-end ">
-          <h1 className="mr-10 text-4xl font-medium text-white ">Social</h1>
+          <h1 className="mr-10 text-3xl font-medium text-white ">Social</h1>
           <Link
             to={
               data?.title
@@ -19,7 +19,7 @@ const Review = ({ data, state }) => {
                 : `/${state}/${data?.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/reviews`
             }
           state={state}>
-            <button className="mr-5 text-2xl font-medium text-white hover:text-red-500">
+            <button className="mr-5 text-xl font-medium text-white hover:text-red-500">
               {"Review" + " (" + data?.reviews?.total_results + ") " ||
                 "Review" + " (" + data?.reviews?.total_results + ") "}
             </button>

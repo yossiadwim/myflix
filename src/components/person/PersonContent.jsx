@@ -34,7 +34,7 @@ const PersonContent = ({ person }) => {
         ).slice(indexOfFirstItem, indexOfLastItem);
 
   let length =
-    type || dep === "all"
+    type  === "all"
       ? getYear(person?.combined_credits?.cast)
       : getYear(
           person?.combined_credits?.cast?.filter(
@@ -52,7 +52,7 @@ const PersonContent = ({ person }) => {
       <div className="container flex pb-20">
         <aside className="w-1/5">
           <div className="mt-80 border-slate-800">
-            <h1 className="text-4xl font-bold text-white">Personal Info</h1>
+            <h1 className="text-3xl font-bold text-white">Personal Info</h1>
             <div className="my-5 flex">
               <a
                 className="fill-white hover:fill-[#E4405F]"
@@ -60,7 +60,7 @@ const PersonContent = ({ person }) => {
                 target="blank"
               >
                 <svg
-                  className="h-6 w-6"
+                  className="h-5 w-5"
                   role="img"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const PersonContent = ({ person }) => {
               >
                 <svg
                   role="img"
-                  className="h-6 w-6"
+                  className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                   target="blank"
@@ -86,26 +86,26 @@ const PersonContent = ({ person }) => {
               </a>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Stage Name</p>
-              <p className="text-lg text-white">{person?.name}</p>
+              <p className="text-lg font-medium text-white">Stage Name</p>
+              <p className="text-base text-white">{person?.name}</p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Known For</p>
-              <p className="text-lg text-white">
+              <p className="text-lg font-medium text-white">Known For</p>
+              <p className="text-base text-white">
                 {person?.known_for_department}
               </p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Known Credits</p>
-              <p className="text-lg text-white">
+              <p className="text-lg font-medium text-white">Known Credits</p>
+              <p className="text-base text-white">
                 {person?.combined_credits?.cast?.length > 0
                   ? person?.combined_credits?.cast?.length
                   : person?.combined_credits?.crew?.length}
               </p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Gender</p>
-              <p className="text-lg text-white">
+              <p className="text-lg font-medium text-white">Gender</p>
+              <p className="text-base text-white">
                 {person?.gender === 0
                   ? "Not set / not specified"
                   : person?.gender === 1
@@ -118,8 +118,8 @@ const PersonContent = ({ person }) => {
               </p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Birthday</p>
-              <p className="text-lg text-white">
+              <p className="text-lg font-medium text-white">Birthday</p>
+              <p className="text-base text-white">
                 {person?.birthday
                   ? new Date(person?.birthday).toLocaleString("en-us", {
                       month: "long",
@@ -136,28 +136,28 @@ const PersonContent = ({ person }) => {
               </p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Place of Birth</p>
-              <p className="text-lg text-white">
+              <p className="text-lg font-medium text-white">Place of Birth</p>
+              <p className="text-base text-white">
                 {person?.place_of_birth ? person?.place_of_birth : "-"}
               </p>
             </div>
             <div className="my-5">
-              <p className="text-xl font-medium text-white">Also Known As</p>
+              <p className="text-lg font-medium text-white">Also Known As</p>
               {person?.also_known_as?.length > 0 ? (
                 person?.also_known_as?.map((item, index) => (
-                  <p className="text-lg text-white" key={index}>
+                  <p className="text-base text-white" key={index}>
                     {item}
                   </p>
                 ))
               ) : (
-                <p className="text-lg text-white">-</p>
+                <p className="text-base text-white">-</p>
               )}
             </div>
           </div>
         </aside>
         <section className="container mx-5 mt-64 w-4/5">
           <div className="mt-10 flex items-end">
-            <h1 className="mx-10 py-5 text-4xl font-medium text-white">
+            <h1 className="mx-10 py-5 text-3xl font-medium text-white">
               {person?.known_for_department}
             </h1>
 
@@ -192,10 +192,10 @@ const PersonContent = ({ person }) => {
                 </button>
               </div>
               <div
-                className={`absolute -bottom-60 rounded-lg ${hoverType ? "block" : "hidden"} bg-slate-900`}
+                className={`absolute -bottom-[300px] rounded-lg ${hoverType ? "block" : "hidden"} bg-slate-900`}
               >
                 <ul className="mx-5 my-2">
-                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
+                  <li className="my-1 py-1 text-base font-medium text-white hover:text-red-500">
                     <button
                       onClick={() => setType("all")}
                       className={`${type === "all" ? "text-red-500" : ""}`}
@@ -203,7 +203,7 @@ const PersonContent = ({ person }) => {
                       All {"(" + person?.combined_credits?.cast?.length + ")"}
                     </button>
                   </li>
-                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
+                  <li className="my-1 py-1 text-base font-medium text-white hover:text-red-500">
                     <button
                       onClick={() => setType("movie")}
                       className={`${type === "movie" ? "text-red-500" : ""}`}
@@ -216,7 +216,7 @@ const PersonContent = ({ person }) => {
                         ")"}
                     </button>
                   </li>
-                  <li className="my-1 py-1 text-lg font-medium text-white hover:text-red-500">
+                  <li className="my-1 py-1 text-base font-medium text-white hover:text-red-500">
                     <button
                       onClick={() => setType("tv")}
                       className={`${type === "tv" ? "text-red-500" : ""}`}
@@ -258,7 +258,7 @@ const PersonContent = ({ person }) => {
                 </button>
               </div>
               <div
-                className={`absolute -bottom-[380px] right-[750px]  rounded-lg ${hoverDepartment ? "block" : "hidden"} bg-slate-900`}
+                className={`absolute -bottom-[360px] right-[600px]  rounded-lg ${hoverDepartment ? "block" : "hidden"} bg-slate-900`}
               >
                 <ul className="mx-5 my-2">
                   <li
@@ -297,34 +297,24 @@ const PersonContent = ({ person }) => {
             </div>
           </div>
           <div className="">
-            <div className="h-fit ">
+            <div className="h-fit">
               {cast?.map((data, i) => {
                 const children = [];
                 data[Object.keys(data)].forEach((item) => {
                   children.push(
                     <MovieCredit
                       key={i}
-                      id={item.id}
-                      poster_path={item.poster_path}
-                      title={item.title || item.name}
-                      overview={item.overview}
-                      vote_average={item.vote_average}
-                      episode_count={item.episode_count}
-                      character={item.character}
-                      media_type={item.media_type}
-                      release_date={item.release_date || item.first_air_date}
-                      original_name={item.original_name}
-                      first_air_date={item.first_air_date}
+                      data={item}
                     ></MovieCredit>,
                   );
                 });
 
                 return (
                   <div key={i} className="my-5">
-                    <p className="mx-10 h-fit w-fit text-4xl font-medium text-white">
+                    <p className="mx-10 h-fit w-fit text-3xl font-medium text-white">
                       {Object.keys(data)}
                     </p>
-                    <div className="mx-10 grid w-fit grid-cols-6 gap-y-5 py-5">
+                    <div className="mx-10 grid w-fit grid-cols-6 gap-y-5 gap-x-8 py-5">
                       {children}
                     </div>
                   </div>

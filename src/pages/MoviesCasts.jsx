@@ -10,6 +10,7 @@ const MoviesCasts = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchDetail = async (id) => {
       try {
         if (state === "movie") {

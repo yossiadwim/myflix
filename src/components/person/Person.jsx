@@ -6,7 +6,7 @@ const Person = ({ person }) => {
   const [showMore, setShowMore] = useState(false);
   return (
     <>
-      <div className="container flex">
+      <div className="container flex ">
         <div className="w-1/5">
           {person?.profile_path ? (
             <img
@@ -28,7 +28,7 @@ const Person = ({ person }) => {
             <p className="mb-3 mt-10 text-2xl font-medium text-white">
               Biography
             </p>
-            <div className="text-lg font-medium text-white">
+            <div className="text-base font-medium text-white text-justify">
               {showMore ? (
                 <div
                   dangerouslySetInnerHTML={{
@@ -40,7 +40,7 @@ const Person = ({ person }) => {
                   dangerouslySetInnerHTML={{
                     __html:
                       person.biography
-                        ?.substring(0, 450)
+                        ?.substring(0, 400)
                         .replace(/\n/g, "<br/>") + "...",
                   }}
                 />

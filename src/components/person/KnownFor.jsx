@@ -23,7 +23,7 @@ const KnowFor = ({ id, poster_path, title, release_date }) => {
           to={`/details/${id}-${title?.toLowerCase().replace(/ /g, "-")}`}
           state={"movie"}
         >
-          <h3 className="text-md mt-2 text-center font-bold text-white hover:text-red-500">
+          <h3 className="text-sm mt-2 text-center font-bold text-white hover:text-red-500">
             {title}
           </h3>
           <p className="text-center text-sm font-bold text-white">

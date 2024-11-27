@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
 import ContentInformation from "./ContentInformation";
 
-const Information = ({ data, languages }) => {
-
+const Information = (data, languages) => {
   return (
     <>
       <ContentInformation
-      
-        {...data}
-        languages={languages}
+       {...data}
+        {...languages}
       ></ContentInformation>
     </>
   );

@@ -15,9 +15,9 @@ const Media = ({ data, state }) => {
       {
         <div className="flex items-end  justify-between">
           <div className="flex items-end ">
-            <h1 className="mr-10 text-4xl font-medium text-white">Media</h1>
+            <h1 className="mr-10 text-3xl font-medium text-white">Media</h1>
             <button
-              className={`mr-5 text-2xl font-medium  hover:text-red-500 ${
+              className={`mr-5 text-xl font-medium  hover:text-red-500 ${
                 active === "videos" ? "text-red-500" : "text-white"
               }`}
               onClick={() => setActive("videos")}
@@ -25,7 +25,7 @@ const Media = ({ data, state }) => {
               Videos ({data?.videos?.results?.length})
             </button>
             <button
-              className={`mr-5 text-2xl font-medium  hover:text-red-500 ${
+              className={`mr-5 text-xl font-medium  hover:text-red-500 ${
                 active === "backdrops" ? "text-red-500" : "text-white"
               }`}
               onClick={() => setActive("backdrops")}
@@ -33,7 +33,7 @@ const Media = ({ data, state }) => {
               Backdrops ({data?.images?.backdrops?.length})
             </button>
             <button
-              className={`mr-5 text-2xl font-medium hover:text-red-500 ${
+              className={`mr-5 text-xl font-medium hover:text-red-500 ${
                 active === "posters" ? "text-red-500" : "text-white"
               }`}
               onClick={() => setActive("posters")}
@@ -66,7 +66,7 @@ const Media = ({ data, state }) => {
       {active === "videos" ? (
         <div className="container mt-2 overflow-x-auto overflow-y-hidden border-t-2 border-gray-900">
           <div className="w-3/5">
-            <div className="flex h-[250px] min-w-fit">
+            <div className="flex h-[300px] min-w-fit">
               {data?.videos?.results?.length > 0 &&
                 data?.videos?.results
                   ?.sort((a, b) =>

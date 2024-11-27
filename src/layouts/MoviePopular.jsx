@@ -47,26 +47,29 @@ const MoviePopular = () => {
     <>
       <div
         id="movies"
-        className="container mt-52 rounded-lg bg-cover bg-center p-0 duration-500 ease-in-out"
+        className="container mt-52 w-[80%] rounded-lg bg-cover bg-center p-0 duration-500 ease-in-out"
       >
         <div className="bg-black/50 p-5">
-          <div className="mx-6 my-5">
-            <h1 className="text-6xl font-medium text-white">Movies</h1>
+          <div className="mx-6 my-5 flex">
+            <h1 className="text-5xl font-medium text-white">Movies</h1>
+            <div className="mx-2 my-4">
+              {types.map((item) => (
+                <button
+                  key={item.id}
+                  id={item.id}
+                  className={`mx-5 rounded-full text-lg pl-3 pr-3 font-semibold ${
+                    type === item.id
+                      ? "bg-gradient-to-r from-red-500 to-red-700 text-white"
+                      : "text-white"
+                  } hover:text-red-500`}
+                  onClick={() => setType(item.id)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="mx-2 mb-5 flex">
-            {types.map((item) => (
-              <button
-                key={item.id}
-                id={item.id}
-                className={`mx-5 text-2xl font-semibold ${
-                  type === item.id ? "text-red-500" : "text-white"
-                } hover:text-red-500`}
-                onClick={() => setType(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+
           <div className="container overflow-y-hidden p-0 ">
             <div className="custom-scrollbar bg-transparent">
               <div className="mx-5 flex h-[500px] min-w-fit flex-row">

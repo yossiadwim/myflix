@@ -38,18 +38,18 @@ const Backdrop = ({ collection, movies, genres }) => {
                 </p>
               );
             })}
-            <p className="my-2 text-xl font-medium capitalize tracking-wide text-white">
+            <p className="my-2 text-lg font-medium capitalize tracking-wide text-white">
               Overview
             </p>
             {
-              <p className="text-lg w-3/4 capitalize tracking-wide text-white">
+              <p className="text-base w-3/4 capitalize tracking-wide text-white">
                 {collection?.overview}
               </p>
             }
-            <p className="mt-5 text-lg font-medium text-white">
+            <p className="mt-5 text-base font-medium text-white">
               Number of movies: {collection?.parts?.length}
             </p>
-            <p className="text-lg font-medium text-white">
+            <p className="text-base font-medium text-white">
               Revenue:{" "}
               {Intl.NumberFormat("en-US", {
                 style: "currency",

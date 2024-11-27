@@ -44,22 +44,21 @@ const TVSeries = () => {
 
   return (
     <>
-      <div className="mb-36 h-full bg-gradient-to-r from-transparent to-black bg-cover bg-center  pt-24 ">
+      <div className="mb-36 h-full bg-gradient-to-r from-transparent to-black bg-cover bg-center pt-24 ">
         <div
           id="tv"
-          className="container h-full rounded-lg bg-cover bg-center p-0"
+          className="container w-[80%] rounded-lg bg-cover bg-center p-0"
         >
           <div className=" bg-black/50 p-5">
-            <div className="mx-5 pt-16">
-              <h1 className="text-6xl font-medium text-white">TV Series</h1>
-            </div>
-            <div className="mx-2 my-5 mb-5 flex">
+            <div className="mx-6 my-5 flex">
+              <h1 className="text-5xl font-medium text-white">TV Series</h1>
+              <div className="mx-2 my-4">
               {tvTypes.map((item) => (
                 <button
                   key={item.id}
                   id={`${item.id}-tv`}
-                  className={`mx-5 text-2xl font-semibold ${
-                    type === item.id ? "text-red-500" : "text-white"
+                  className={`mx-5 rounded-full text-lg pl-3 pr-3 font-semibold ${
+                    type === item.id ? "bg-gradient-to-r from-red-500 to-red-700 text-white" : "text-white"
                   } hover:text-red-500`}
                   onClick={() => setType(item.id)}
                 >
@@ -67,6 +66,8 @@ const TVSeries = () => {
                 </button>
               ))}
             </div>
+            </div>
+            
             <div className=" overflow-y-hidden">
               <div className="flex h-[500px]  min-w-fit flex-row">
                 {datas?.map((data) => {

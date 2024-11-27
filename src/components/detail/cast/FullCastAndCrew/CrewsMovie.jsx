@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import { Dropdown } from "flowbite-react";
 
 const CrewsMovie = ({ data }) => {
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
-  const [hover, setHover] = useState(false);
+  // const [hover, setHover] = useState(false);
   const [dep, setDepartment] = useState("All");
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -27,19 +28,18 @@ const CrewsMovie = ({ data }) => {
           ?.filter((crew) => crew.department === dep)
           .slice(indexOfFirstItem, indexOfLastItem);
 
-
   useEffect(() => {
     setCurrentPage(0);
   }, [data]);
 
   return (
     <>
-      <div className="container">
+      <div className="container pl-20 pr-20">
         <div className="flex items-end">
-          <h1 className="mt-10 text-4xl font-bold text-white">
+          <h1 className="mr-5 text-3xl font-bold text-white">
             Crew ({data?.credits?.crew?.length})
           </h1>
-          <div
+          {/* <div
             className=""
             onMouseOver={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
@@ -80,7 +80,7 @@ const CrewsMovie = ({ data }) => {
             </div>
 
             <div
-              className={`absolute left-[350px] ${hover ? "block" : "hidden"}`}
+              className={`absolute left-[300px] mt-1 ${hover ? "block" : "hidden"}`}
             >
               <ul className="rounded-lg bg-slate-900 py-1">
                 <li
@@ -115,42 +115,66 @@ const CrewsMovie = ({ data }) => {
                 ))}
               </ul>
             </div>
+          </div> */}
+
+          <div className="text-2xl font-bold text-white">
+            <Dropdown label="All" className="border-none bg-slate-900 " inline>
+              <Dropdown.Item
+                className={` ${dep === "All" ? "text-red-500" : "text-white hover:text-red-500"}`}
+                onClick={() => setDepartment("All")}
+              >
+                All
+              </Dropdown.Item>
+              {[
+                ...new Set(
+                  data?.credits?.crew
+                    ?.sort((a, b) => a.department.localeCompare(b.department))
+                    .map((crew) => crew.department),
+                ),
+              ].map((department, i) => (
+                <Dropdown.Item
+                  key={i}
+                  className={`${dep === department ? "text-red-500" : "text-white hover:text-red-500"}`}
+                  onClick={() => setDepartment(department)}
+                >
+                  {department}
+                </Dropdown.Item>
+              ))}
+            </Dropdown>
           </div>
         </div>
 
         <div className="my-5 grid h-fit grid-cols-7">
-          {
-            currentItemsCrewMovie?.map((cast, i) => {
-              return (
-                <div
-                  key={i}
-                  className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:opacity-50"
+          {currentItemsCrewMovie?.map((cast, i) => {
+            return (
+              <div
+                key={i}
+                className="my-5 mr-5 mt-7 w-40 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:opacity-50"
+              >
+                <Link
+                  to={`/persons/${cast?.id}-${cast?.name?.toLowerCase().replace(/ /g, "-")}`}
                 >
-                  <Link
-                    to={`/persons/${cast?.id}-${cast?.name?.toLowerCase().replace(/ /g, "-")}`}
-                  >
-                    <img
-                      className="h-56 w-full rounded-lg"
-                      src={
-                        cast?.profile_path
-                          ? `${baseImgURL}${cast?.profile_path}`
-                          : "/img/white.png"
-                      }
-                      alt=""
-                      loading="lazy"
-                    />
-                  </Link>
-                  <h3 className="text-md mt-1 font-bold text-white">
-                    {cast?.name}
-                  </h3>
-                  <p className="mt-1 text-white">
-                    {cast?.known_for_department}
-                  </p>
-                  <p className="mt-1 text-white">{cast?.job}</p>
-                </div>
-              );
-            })}
+                  <img
+                    className="h-56 w-full rounded-lg"
+                    src={
+                      cast?.profile_path
+                        ? `${baseImgURL}${cast?.profile_path}`
+                        : "/img/white.png"
+                    }
+                    alt=""
+                    loading="lazy"
+                  />
+                </Link>
+                <h3 className="text-md mt-1 font-bold text-white">
+                  {cast?.name}
+                </h3>
+                <p className="mt-1 text-white">{cast?.known_for_department}</p>
+                <p className="mt-1 text-white">{cast?.job}</p>
+              </div>
+            );
+          })}
         </div>
+
         <div className="flex justify-center">
           <ReactPaginate
             className="my-14 flex w-fit justify-center gap-14 rounded-full bg-slate-900 px-10 py-3 font-medium text-white"

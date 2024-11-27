@@ -1,31 +1,24 @@
 /* eslint-disable react/prop-types */
-const ContentInformation = ({
-  status,
-  original_language,
-  budget,
-  revenue,
-  keywords,
-  original_name,
-  type,
-  languages,
-}) => {
+const ContentInformation = ({data, languages}) => {
+
+
   return (
     <>
       <div className="mx-12">
         <div className="mb-5">
           <h1 className="text-lg font-bold text-white">Status</h1>
-          <p className="text-md text-white">{status}</p>
+          <p className="text-base text-white">{data?.status}</p>
         </div>
         <div className="mb-5">
-          {original_language ? (
+          {data?.original_language ? (
             <>
               <h1 className="text-lg font-bold text-white">
                 Original Language
               </h1>
-              <p className="text-md text-white">
+              <p className="text-base text-white">
                 {
                   languages?.find(
-                    (language) => language.iso_639_1 === original_language,
+                    (language) => language.iso_639_1 === data?.original_language,
                   )?.english_name
                 }
               </p>
@@ -34,67 +27,68 @@ const ContentInformation = ({
             ""
           )}
         </div>
-        {original_name ? (
+        {data?.original_name ? (
           <div className="mb-5">
             <h1 className="text-lg font-bold text-white">Original Name</h1>
-            <p className="text-md text-white">{original_name}</p>
+            <p className="text-base text-white">{data?.original_name}</p>
           </div>
         ) : (
           ""
         )}
-        {type ? (
+        {data?.type ? (
           <div className="mb-5">
             <h1 className="text-lg font-bold text-white">Type</h1>
-            <p className="text-md text-white">{type}</p>
+            <p className="text-base text-white">{data?.type}</p>
           </div>
         ) : (
           ""
         )}
- 
-        {budget && revenue ? (
+
+        {data?.budget && data?.revenue ? (
           <>
             <div className="mb-5">
               <h1 className="text-lg font-bold text-white">Budget</h1>
-              <p className="text-md text-white">
+              <p className="text-base text-white">
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
-                }).format(budget)}
+                }).format(data?.budget)}
               </p>
             </div>
             <div className="mb-10">
               <h1 className="text-lg font-bold text-white">Revenue</h1>
-              <p className="text-md text-white">
+              <p className="text-base text-white">
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
-                }).format(revenue)}
+                }).format(data?.revenue)}
               </p>
             </div>
           </>
         ) : (
           ""
         )}
+
         <div className="">
           <h1 className="text-lg font-bold text-white">Keywords</h1>
           <div className="">
-            {keywords?.keywords?.map((keyword, i) => {
+            {data?.keywords?.keywords?.map((keyword, i) => {
               return (
                 <a
                   key={i}
                   href=""
-                  className="text-md m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
+                  className="text-base m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
                 >
                   {keyword.name}
                 </a>
               );
             }) ||
-              keywords?.results?.map((keyword, i) => {
+              data?.keywords?.keywords?.map((keyword, i) => {
                 return (
                   <a
                     key={i}
                     href=""
-                    className="text-md m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
+                    className="text-base m-1 inline-flex rounded-md border px-1 py-1 text-white hover:border-red-500 hover:bg-red-500"
                   >
                     {keyword.name}
                   </a>

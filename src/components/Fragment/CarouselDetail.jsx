@@ -20,7 +20,7 @@ const CarouselDetail = ({ data }) => {
 
         <div className="absolute h-full w-full bg-opacity-100 bg-gradient-to-b from-transparent to-black">
           <div className="flex">
-            <div className="mx-20 my-5 w-3/5 pb-20 pt-28">
+            <div className="mx-28 my-5 w-3/5 pb-20 pt-28">
               <div className="">
                 {data?.images?.logos?.filter((item) => item.iso_639_1 === "en")
                   .length !== 0 ? (
@@ -43,7 +43,7 @@ const CarouselDetail = ({ data }) => {
                   return (
                     <p
                       key={i}
-                      className="mr-2 mt-5 inline-flex rounded-lg border border-gray-400 px-2 py-1 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500 hover:shadow-sm"
+                      className="mr-2 mt-5 inline-flex rounded-lg border border-gray-400 px-2 py-1 text-base font-medium text-white hover:border-red-500 hover:bg-red-500 hover:shadow-sm"
                     >
                       {genre.name}
                     </p>
@@ -51,7 +51,7 @@ const CarouselDetail = ({ data }) => {
                 })}
               </div>
               <div className="my-3 flex">
-                <p className="mr-2 text-xl font-medium text-white">
+                <p className="mr-2 text-base font-medium text-white">
                   {new Date(
                     data?.release_date || data?.first_air_date,
                   ).toLocaleString("en-us", {
@@ -63,7 +63,7 @@ const CarouselDetail = ({ data }) => {
 
                 <div className="">
                   {
-                    <p className="mx-1 text-xl font-medium text-white">
+                    <p className="mx-1 text-base font-medium text-white">
                       {data?.runtime
                         ? "(" +
                           Math.floor(data?.runtime / 60) +
@@ -77,7 +77,7 @@ const CarouselDetail = ({ data }) => {
                   }
                 </div>
 
-                <div className="flex items-start space-x-2">
+                <div className="flex items-center justify-center">
                   <span className="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const CarouselDetail = ({ data }) => {
                   </span>
                   <div className="">
                     {
-                      <p className="font-sans text-lg text-white">
+                      <p className="font-sans text-base text-white">
                         {Math.round(data?.vote_average * 10) / 10} (
                         {data?.vote_count} vote )
                       </p>
@@ -107,16 +107,16 @@ const CarouselDetail = ({ data }) => {
               <div className="group">
                 <div className="group">
                   {
-                    <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
+                    <p className="mt-5 font-sans text-base font-semibold leading-relaxed tracking-normal text-white">
                       <i>{data?.tagline}</i>
                     </p>
                   }
                 </div>
                 <div className="group">
-                  <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
+                  <p className="mt-5 font-sans text-base font-semibold leading-relaxed tracking-normal text-white">
                     {showMore
                       ? data?.overview?.length > 100
-                        ? data?.overview 
+                        ? data?.overview
                         : data?.overview
                       : data?.overview?.slice(0, 120) + "..."}
                   </p>
@@ -130,7 +130,7 @@ const CarouselDetail = ({ data }) => {
                 </div>
               </div>
               <div className="mt-5 flex">
-                <div className="inline-flex rounded-lg border border-gray-400 px-2 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500">
+                <div className="flex items-center justify-center rounded-lg border border-gray-400 px-1 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
                   <button className="mx-1 mb-2 mt-2">
                     <span className="">
                       <svg
@@ -139,7 +139,7 @@ const CarouselDetail = ({ data }) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="h-6 w-6"
+                        className="h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -151,7 +151,7 @@ const CarouselDetail = ({ data }) => {
                   </button>{" "}
                   <p className="mx-2 my-4">Watch Trailer</p>
                 </div>
-                <div className="mx-5 inline-flex rounded-lg border border-gray-400 px-2 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500">
+                <div className="mx-5 flex justify-center items-center rounded-lg border border-gray-400 px-2 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
                   <button className="mx-1 mb-2 mt-2">
                     <span className="">
                       <svg
@@ -166,7 +166,7 @@ const CarouselDetail = ({ data }) => {
                   </button>{" "}
                   <p className="mx-2 my-4">Add to favorite</p>
                 </div>
-                <div className=" inline-flex rounded-lg border border-gray-400 px-2 text-xl font-medium text-white hover:border-red-500 hover:bg-red-500">
+                <div className=" flex justify-center items-center rounded-lg border border-gray-400 px-2 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
                   <button className="mx-1 mb-2 mt-2">
                     <span className="">
                       <svg
@@ -194,19 +194,19 @@ const CarouselDetail = ({ data }) => {
                   .map((crew, index) => (
                     <div className="" key={index}>
                       <Link>
-                        <p className="mr-10 mt-4 text-xl font-medium text-white hover:text-red-500">
+                        <p className="mr-10 mt-4 text-xs font-medium text-white hover:text-red-500">
                           {crew.name}
                         </p>
                       </Link>
-                      <p className="font-light text-white">{crew.job}</p>
+                      <p className="font-light text-white text-xs">{crew.job}</p>
                     </div>
                   ))}
               </div>
             </div>
-            <div className="mx-10 my-10 w-2/5 items-center  pb-20 pt-20 transition delay-0 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
+            <div className="mx-10 my-10 w-2/5 items-center pb-20 pt-20">
               {
                 <img
-                  className="h-[500px] rounded-lg"
+                  className="h-[450px] rounded-lg"
                   src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
                   alt=""
                 />

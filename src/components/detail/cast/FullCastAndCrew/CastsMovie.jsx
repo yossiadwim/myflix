@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 const CastsMovie = ({ data }) => {
+  const baseImgURL = process.env.REACT_APP_BASEIMGURL;
   const [currentPage, setCurrentPage] = useState(0);
   const [perPage] = useState(14);
 
-  const baseImgURL = process.env.REACT_APP_BASEIMGURL;
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -24,10 +24,11 @@ const CastsMovie = ({ data }) => {
     indexOfFirstItem,
     indexOfLastItem,
   );
+  
   return (
     <>
-      <div className="container my-20 pt-[850px]">
-        <h1 className="mt-10 text-4xl font-bold text-white">
+      <div className="container my-20 p-20 pt-[850px]">
+        <h1 className="mt-10 text-3xl font-bold text-white">
           Cast ({data?.credits?.cast?.length})
         </h1>
         <div className="my-5 grid h-fit grid-cols-7">

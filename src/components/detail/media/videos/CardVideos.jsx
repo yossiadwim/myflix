@@ -6,7 +6,7 @@ const CardMedia = ({ video_key, name, id }) => {
   return (
     <>
       <div
-        className="mx-5 my-5 flex h-60 w-80 items-center justify-center bg-cover bg-center transition duration-300 hover:scale-105"
+        className="mx-5 my-5 flex h-60 w-96 items-center justify-center bg-center transition duration-300 hover:scale-105 rounded-xl"
         style={{
           backgroundImage: `url(https://i.ytimg.com/vi/${video_key}/hqdefault.jpg)`,
         }}

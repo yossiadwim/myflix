@@ -6,7 +6,7 @@ const Recommendations = ({ data, state }) => {
   return (
     <>
       <div className="flex items-end justify-between">
-        <h1 className="text-4xl font-medium text-white">Recommendations</h1>
+        <h1 className="text-3xl font-medium text-white">Recommendations</h1>
         <Link>
           <p className="text-base font-medium text-white hover:text-red-500">
             View all
