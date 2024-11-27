@@ -1,40 +1,34 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-const CardSeasons = ({
-  name,
-  air_date,
-  episode_count,
-  overview,
-  season_number,
-  vote_average,
-  poster_path,
-}) => {
+const CardSeasons = ({ data }) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
     <>
-      <div className="my-5 flex w-full flex-row items-start justify-items-start rounded-lg border border-slate-700 px-2">
+      <div className="my-5 flex w-full flex-row items-start justify-items-start rounded-lg border border-slate-700 bg-slate-700 px-2">
         <div className="my-5 h-fit w-fit bg-cover">
-          <Link to={`season/${season_number}`}>
+          <Link to={`season/${data?.season_number}`}>
             <img
-              src={`https://image.tmdb.org/t/p/w130_and_h195_bestv2${poster_path}`}
+              src={`https://image.tmdb.org/t/p/w130_and_h195_bestv2${data?.poster_path}`}
               alt="poster"
-              className="justify-items-center rounded-lg hover:opacity-50 mx-2"
+              className="mx-2 justify-items-center rounded-lg hover:opacity-50"
             />
           </Link>
         </div>
         <div className="mx-5 my-5 w-fit">
-          <Link to={`season/${season_number}`}>
-            <p className="text-2xl font-medium text-white hover:text-red-500">{name}</p>
+          <Link to={`season/${data?.season_number}`}>
+            <p className="text-2xl font-medium text-white hover:text-red-500">
+              {data?.name}
+            </p>
           </Link>
           <div className="my-3 flex items-center">
-            <div className="mr-3 flex rounded-md border p-1 hover:border-red-500 hover:bg-red-500">
+            <div className="mr-3 flex rounded-md border p-1 bg-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="#fcd34d"
-                className="h-5 w-5 mr-1"
+                className="mr-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"
@@ -42,19 +36,22 @@ const CardSeasons = ({
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="text-white">{vote_average}</p>
+              <p className="text-black" >{data?.vote_average}</p>
             </div>
             <p className="mr-3 text-white">
-              {new Date(air_date).toLocaleString("en-us", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
+              {data?.air_date
+                ? new Date(data.air_date).toLocaleString("en-us", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })
+                : "-"}
             </p>
-            <p className="text-white">{episode_count} episodes</p>
+            <p className="text-white">{data?.episode_count} episodes</p>
           </div>
           <p className="tex-white text-base leading-relaxed text-white">
-            {showMore ? overview : overview?.slice(0, 250) + "..."}
+            {showMore ? data?.overview : data?.overview?.slice(0, 150) + "..."}
+            
           </p>
           <button
             onClick={() => setShowMore(!showMore)}

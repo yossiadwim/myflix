@@ -1,4 +1,4 @@
-import Carousel from "../components/Fragment/Carousel";
+import Carousel from "../components/Fragment/CarouselHome";
 import MoviePopular from "../layouts/MoviePopular";
 import TVSeries from "../layouts/TVSeries";
 import Footer from "../layouts/Footer";

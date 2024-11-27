@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 const Navbar = () => {
   window.onscroll = function () {
@@ -12,6 +12,7 @@ const Navbar = () => {
   };
 
   const [hover, setHover] = useState("");
+  const [query, setQuery] = useState("");
 
   return (
     <header className="fixed left-0 top-0 z-[999] flex w-full items-center bg-transparent shadow-sm">
@@ -20,7 +21,7 @@ const Navbar = () => {
           <div className="mx-16">
             <a href="/">
               <img
-                className="block hover:opacity-75 w-40 "
+                className="block w-40 hover:opacity-75 "
                 src="/img/m.png"
                 alt=""
               />
@@ -39,7 +40,7 @@ const Navbar = () => {
                     onMouseMove={() => setHover("movie")}
                     onMouseOut={() => setHover("")}
                   >
-                    Movie
+                    Movies
                   </a>
                 </li>
                 <li className="group">
@@ -137,12 +138,16 @@ const Navbar = () => {
                 />
               </svg>
             </span>
-            <input
-              type="text"
-              placeholder="Search"
-              name="search"
-              className="rounded-full border-2 bg-transparent p-2 pl-10 pr-3 text-white placeholder:text-white focus:border-red-500 focus:outline-none"
-            />
+            <Form action="/search">
+              <input
+                type="text"
+                placeholder="Search"
+                name="query"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="rounded-full border-2 border-white  bg-transparent p-2 pl-10 pr-3 text-white placeholder:text-white focus:border-red-500 focus:outline-none focus:ring-transparent"
+              />
+            </Form>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ const Seasons = ({ data }) => {
         .map((season, i) => (
           <CardSeasons
             key={i}
-            {...season}
+            data={season}
           />
         ))}
     </>

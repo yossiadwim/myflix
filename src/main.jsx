@@ -11,7 +11,8 @@ import Reviews from "./pages/Reviews.jsx";
 import MediaDetail from "./pages/MediaDetail.jsx";
 import Collections from "./pages/Collections.jsx";
 import Seasons from "./pages/Seasons.jsx";
-import MOvies from "./pages/Movies.jsx";
+import Movies from "./pages/Movies.jsx";
+import Search from "./pages/Search.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/movie/popular",
-    element: <MOvies></MOvies>
+    element: <Movies></Movies>
+  },
+  {
+    path: '/search',
+    element: <Search></Search>
   }
 ]);
 

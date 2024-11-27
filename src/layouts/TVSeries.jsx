@@ -7,29 +7,36 @@ import {
   getTVSeriesTopRated,
 } from "../axios/api";
 
-import CardTVSeries from "../components/home/CardTVSeries";
+import Card from "../components/Fragment/Card";
 
 const TVSeries = () => {
-  const [tvSeries, setTvSeries] = useState([]);
+  const [datas, setDatas] = useState([]);
   const [type, setType] = useState("trending");
+  const tvTypes = [
+    { id: "trending", label: "Trending" },
+    { id: "airing-today", label: "Airing Today" },
+    { id: "top-rated", label: "Top Rated" },
+    { id: "popular", label: "Popular" },
+    { id: "on-the-air", label: "On The Air" },
+  ];
 
   useEffect(() => {
     const fetchTVSeries = async () => {
       if (type === "trending") {
         const data = await getTVSeriesTrending();
-        setTvSeries(data);
+        setDatas(data);
       } else if (type === "airing-today") {
         const data = await getTVSeriesAiringToday();
-        setTvSeries(data);
+        setDatas(data);
       } else if (type === "on-the-air") {
         const data = await getTVSeriesOnTheAir();
-        setTvSeries(data);
+        setDatas(data);
       } else if (type === "popular") {
         const data = await getTVSeriesPopular();
-        setTvSeries(data);
+        setDatas(data);
       } else if (type === "top-rated") {
         const data = await getTVSeriesTopRated();
-        setTvSeries(data);
+        setDatas(data);
       }
     };
     fetchTVSeries();
@@ -47,57 +54,23 @@ const TVSeries = () => {
               <h1 className="text-6xl font-medium text-white">TV Series</h1>
             </div>
             <div className="mx-2 my-5 mb-5 flex">
-              <button
-                id="trending-tv"
-                className={`mx-5 text-2xl font-semibold ${type === "trending" ? "text-red-500" : "text-white"}  hover:text-red-500`}
-                onClick={() => setType("trending")}
-              >
-                Trending
-              </button>
-              <button
-                id="airing-today"
-                className={`mx-5 text-2xl font-semibold ${type === "airing-today" ? "text-red-500" : "text-white"} hover:text-red-500`}
-                onClick={() => setType("airing-today")}
-              >
-                Airing Today
-              </button>
-              <button
-                id="top-rated-tv"
-                className={`mx-5 text-2xl font-semibold ${type === "top-rated" ? "text-red-500" : "text-white"} hover:text-red-500`}
-                onClick={() => setType("top-rated")}
-              >
-                Top Rated
-              </button>
-              <button
-                id="popular-tv"
-                className={`mx-5 text-2xl font-semibold ${type === "popular" ? "text-red-500" : "text-white"} hover:text-red-500`}
-                onClick={() => setType("popular")}
-              >
-                Popular
-              </button>
-              <button
-                id="on-the-air"
-                className={`mx-5 text-2xl font-semibold ${type === "on-the-air" ? "text-red-500" : "text-white"} hover:text-red-500`}
-                onClick={() => setType("on-the-air")}
-              >
-                On The Air
-              </button>
+              {tvTypes.map((item) => (
+                <button
+                  key={item.id}
+                  id={`${item.id}-tv`}
+                  className={`mx-5 text-2xl font-semibold ${
+                    type === item.id ? "text-red-500" : "text-white"
+                  } hover:text-red-500`}
+                  onClick={() => setType(item.id)}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
             <div className=" overflow-y-hidden">
               <div className="flex h-[500px]  min-w-fit flex-row">
-                {tvSeries.map((tv) => {
-                  return (
-                    <CardTVSeries
-                      key={tv.id}
-                      id={tv.id}
-                      name={tv.name}
-                      poster_path={tv.poster_path}
-                      first_air_date={tv.first_air_date}
-                      vote_average={tv.vote_average}
-                      backdrop_path={tv.backdrop_path}
-                      state={"tv"}
-                    ></CardTVSeries>
-                  );
+                {datas?.map((data) => {
+                  return <Card key={data.id} data={data} state="tv"></Card>;
                 })}
               </div>
             </div>

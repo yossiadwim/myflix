@@ -113,13 +113,14 @@ const CarouselDetail = ({ data }) => {
                   }
                 </div>
                 <div className="group">
-                  {
-                    <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
-                      {showMore
-                        ? data?.overview
-                        : data?.overview?.slice(0, 250) + "..."}
-                    </p>
-                  }
+                  <p className="mt-5 font-sans text-lg font-semibold leading-relaxed tracking-normal text-white">
+                    {showMore
+                      ? data?.overview?.length > 100
+                        ? data?.overview 
+                        : data?.overview
+                      : data?.overview?.slice(0, 120) + "..."}
+                  </p>
+
                   <button
                     onClick={() => setShowMore(!showMore)}
                     className="font-medium text-red-500 hover:text-red-700"

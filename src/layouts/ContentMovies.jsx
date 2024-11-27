@@ -6,7 +6,7 @@ const ContentMovies = ({ data }) => {
   return (
     <>
       <h1 className="container mt-28 text-4xl font-bold text-white">
-         Popular Movie
+         Popular Movies
       </h1>
       <div className="container my-10 flex">
         <div className="container w-1/4 ">

@@ -5,6 +5,14 @@ const token = process.env.REACT_APP_TOKEN;
 // eslint-disable-next-line no-undef
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
+export const getAllTrending = async () => {
+  const response = await axios.get(`${baseUrl}/trending/all/week`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  console.log(response.data.results);
+  return response.data.results;
+}
+
 export const getMoviesNowPlaying = async () => {
   const response = await axios.get(`${baseUrl}/movie/now_playing`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -138,6 +146,14 @@ export const getPersonDetails = async (id) => {
 
 export const getSeasonsDetails = async (id, number) => {
   const response = await axios.get(`${baseUrl}/tv/${id}/season/${number}?append_to_response=images,videos`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data);
+  return response.data;
+}
+
+export const getSearch = async (query, page = 1) => {
+  const response = await axios.get(`${baseUrl}/search/multi?query=${query}&page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data);

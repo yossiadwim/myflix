@@ -1,50 +1,54 @@
 /* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
-
-const CardMoviePopular = (props) => {
-  const { id, title, poster_path, release_date, vote_average, backdrop_path, state } =
-    props;
+const Card = ({ data, state }) => {
   // eslint-disable-next-line no-undef
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
-
-
-  function hoverBackground(backdrop_path) {
-    const element = document.getElementById("movie");
+  function hoverBackground(backdrop_path, state) {
+    const elementId = state === "movie" ? "movies" : "tv";
+    const element = document.getElementById(elementId);
     const img = `https://image.tmdb.org/t/p/original${backdrop_path}`;
     element.style.backgroundImage = `url(${img})`;
   }
 
-  // function offHoverBackground() {
-  //   const element = document.getElementById("movie");
-  //   element.style.backgroundImage = ``;
-  //   element.style.backgroundColor = 'black';
-
-  // }
-
   return (
     <div className="mx-3 my-5 mt-7 h-20 w-56 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
-      <Link to={`/${state}/${id}-${ 
-        title.toLowerCase().replace(/:/g, '').replace(/ /g, '-')
-      }`} state={state}>
-        <img
-          className="h-80 w-full rounded-lg opacity-75 hover:opacity-100"
-          src={`${baseImgURL}${poster_path}`}
+      <Link
+        to={`/${data?.media_type || state}/${data?.id}-${(
+          data?.title ||
+          data?.name ||
+          ""
+        )
+          .toLowerCase()
+          .replace(/:/g, "")
+          .replace(/ /g, "-")}`}
+      >
+        <div
+          className="h-80 w-full rounded-lg bg-white opacity-80 hover:opacity-100"
+          style={{
+            backgroundImage: `url(${data?.poster_path ? `${baseImgURL}${data?.poster_path}` : ""})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
           alt=""
           loading="lazy"
-          onMouseOver={() => hoverBackground(backdrop_path)}
-          // onMouseOut={()=> offHoverBackground()}
+          onMouseOver={() => hoverBackground(data?.backdrop_path, state)}
         />
       </Link>
 
-      <h3 className="mt-1 text-lg font-bold text-white">{title}</h3>
+      <h3 className="mt-1 text-base font-bold text-white">
+        {data?.title || data?.name}
+      </h3>
       <div className="flex items-center justify-between py-5">
         <p className="mt-1 text-white">
-          {new Date(release_date).toLocaleString("en-us", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
+          {data?.release_date || data?.first_air_date
+            ? new Date(
+                data?.release_date || data?.first_air_date,
+              ).toLocaleString("en-us", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })
+            : ""}
         </p>
         <div className="flex items-center">
           <span className="">
@@ -63,8 +67,8 @@ const CardMoviePopular = (props) => {
               />
             </svg>
           </span>
-          <p className="font-sans text-lg text-white">
-            {Math.round(vote_average * 10) / 10}
+          <p className="font-sans text-base text-white">
+            {Math.round(data?.vote_average * 10) / 10}
           </p>
         </div>
       </div>
@@ -72,4 +76,4 @@ const CardMoviePopular = (props) => {
   );
 };
 
-export default CardMoviePopular;
+export default Card;
