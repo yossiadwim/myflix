@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import Carousel from "../components/Fragment/CarouselHome";
 import MoviePopular from "../layouts/MoviePopular";
 import TVSeries from "../layouts/TVSeries";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
-import { useEffect, useState } from "react";
 import Trailer from "../layouts/Trailer";
 
 const Home = () => {
