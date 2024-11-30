@@ -4,11 +4,13 @@ import TVSeries from "../layouts/TVSeries";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
 import { useEffect, useState } from "react";
+import Trailer from "../layouts/Trailer";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -25,6 +27,7 @@ const Home = () => {
         <div className="">
           <Carousel></Carousel>
           <MoviePopular></MoviePopular>
+          <Trailer></Trailer>
           <TVSeries></TVSeries>
         </div>
       )}

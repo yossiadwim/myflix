@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <Persons></Persons>,
   },
   {
-    path: "/:state/:id/casts" ,
+    path: "/:state/:id/casts",
     element: <MoviesCasts></MoviesCasts>,
   },
   {
@@ -50,16 +50,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/tv/:id/seasons",
-    element: <Seasons></Seasons>
+    element: <Seasons></Seasons>,
   },
   {
     path: "/movie/popular",
-    element: <Movies></Movies>
+    element: <Movies></Movies>,
   },
   {
-    path: '/search',
-    element: <Search></Search>
-  }
+    path: "/search",
+    element: <Search></Search>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

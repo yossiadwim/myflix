@@ -159,3 +159,19 @@ export const getSearch = async (query, page = 1) => {
   // console.log(response.data);
   return response.data;
 }
+
+export const getSearchMovies = async (query, page = 1) => {
+  const response = await axios.get(`${baseUrl}/search/movie?query=${query}&page=${page}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data);
+  return response.data;
+}
+
+export const getSearchTVSeries = async (query, page = 1) => {
+  const response = await axios.get(`${baseUrl}/search/tv?query=${query}&page=${page}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data);
+  return response.data;
+}

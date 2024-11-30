@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getSearch } from "../axios/api";
+import { useEffect, useRef, useState } from "react";
+import { getSearch, getSearchMovies, getSearchTVSeries } from "../axios/api";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import Card from "../components/Fragment/Card";
@@ -10,28 +10,38 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const [results, setResults] = useState([]);
-  const [category] = useState("all");
+  const [category, setCategory] = useState("all");
   const [page, setPage] = useState();
   const [pageCount, setPageCount] = useState(1);
+  const dataLength = useRef(0);
 
-  const category_list = [
-    "all",
-    "movie",
-    "tv",
-    "person",
-    "collection",
-    "company",
-    "keyword",
-  ];
+  const categoryList = {
+    all: "all",
+    movie: "movies",
+    tv: "tv shows",
+  };
 
   useEffect(() => {
-  
+    window.scrollTo(0, 0);
     const fetchSearch = async () => {
       if (category === "all") {
         const page_number = page ? parseInt(page) : 1;
         const data = await getSearch(query, page_number);
         setResults(data.results);
         setPageCount(data?.total_pages);
+        dataLength.current = data?.total_results;
+      } else if (category === "movie") {
+        const page_number = page ? parseInt(page) : 1;
+        const data = await getSearchMovies(query, page_number);
+        setResults(data.results);
+        setPageCount(data?.total_pages);
+        dataLength.current = data?.total_results;
+      } else if (category === "tv") {
+        const page_number = page ? parseInt(page) : 1;
+        const data = await getSearchTVSeries(query, page_number);
+        setResults(data.results);
+        setPageCount(data?.total_pages);
+        dataLength.current = data?.total_results;
       }
     };
     fetchSearch();
@@ -44,28 +54,31 @@ const Search = () => {
       <div className="container mb-16 mt-28 overflow-y-hidden px-20">
         <div className="">
           <h1 className="text-4xl font-medium text-white">Search: {query}</h1>
-          <p className="text-lg font-medium text-white">
-            {results?.length} results
-          </p>
         </div>
-        <div className="mt-10 flex">
-          <div className="w-1/5">
-            <ul className="mt-10 ">
-              {category_list.map((item) => (
-                <li key={item} className="mb-5">
-                  <a
-                    href={`?query=${query}`}
+        <div className="flex">
+          <div className="mr-5 mt-10 h-fit w-1/5 rounded-xl bg-slate-900">
+            <ul className="m-5">
+              {Object.keys(categoryList).map((item) => (
+                <li
+                  key={item}
+                  className="mb-5 flex items-center justify-between"
+                > 
+                  <button
+                    className={`text-lg capitalize hover:text-red-500 ${category === item ? "text-red-500" : "text-white"}`}
+                    onClick={() => setCategory(item)}
                   >
-                    <p className="text-lg capitalize text-white hover:text-red-500">
-                      {item}
-                    </p>
-                  </a>
+                    {categoryList[item]}
+                  </button>
+                  <p className="rounded-lg bg-slate-700 px-2 text-base text-white">
+                    {" "}
+                    {category === item ? dataLength.current : ""} 
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
           <div className="w-4/5">
-            <div className="grid grid-cols-4 gap-x-5 gap-y-10 py-5">
+            <div className="grid grid-cols-4 gap-x-5 gap-y-10 py-3 ">
               {results?.map((result, i) => {
                 return (
                   <div className="h-[450px]" key={i}>

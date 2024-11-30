@@ -1,18 +1,43 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const CardVideos = ({ video_key, name, id }) => {
+const CardVideos = ({ data }) => {
   const [hidden, setHidden] = useState(true);
+
+  function hoverBackground(backdrop_path) {
+    const element = document.getElementById("trailer");
+    const img = `https://image.tmdb.org/t/p/original${backdrop_path}`;
+    element.style.backgroundImage = `url(${img})`;
+  }
 
   return (
     <>
       <div className="">
         <div
-          className=" mx-5 flex h-60 w-80 items-center justify-center bg-cover bg-center"
+          className=" bg-cover mx-5 flex h-60 w-[450px] items-center justify-center rounded-lg bg-center transition duration-300 hover:scale-105 "
+          onMouseOver={() => hoverBackground(data?.backdrop_path)}
           style={{
-            backgroundImage: `url(https://i.ytimg.com/vi/${video_key}/hqdefault.jpg)`,
+            backgroundImage: `url(https://i.ytimg.com/vi/${
+              data?.videos?.results?.filter(
+                (video) => video.type === "Trailer",
+              )[0]?.key
+            }/hqdefault.jpg)`,
           }}
         >
+          <div className="absolute right-1 top-1 border">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-6 text-white bg-black rounded-full p-1"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.5 12a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
           <div className="flex items-center justify-center">
             <button
               className="rounded-full bg-black px-2 py-2"
@@ -35,7 +60,16 @@ const CardVideos = ({ video_key, name, id }) => {
             </button>
           </div>
         </div>
-        <p className="text-center text-white">{name}</p>
+        <p className="mt-5 text-center font-medium text-white">
+          {data?.name || data?.title}
+        </p>
+        <p className="text-center text-white">
+          {
+            data?.videos?.results?.filter(
+              (video) => video.type === "Trailer",
+            )[0]?.name
+          }
+        </p>
       </div>
 
       <div
@@ -44,12 +78,14 @@ const CardVideos = ({ video_key, name, id }) => {
         <div className="flex h-full w-full items-center justify-center">
           <div className="h-fit w-[1000px] rounded-lg bg-black">
             <div className="mx-5 flex justify-between">
-              <p className="px-2 py-3 text-3xl font-bold text-white">{name}</p>
+              <p className="px-2 py-3 text-3xl font-bold text-white">
+                {data?.name}
+              </p>
               <button
                 className=""
                 onClick={() => {
                   setHidden(true);
-                  document.getElementById(`video-${id}`).src = "";
+                  document.getElementById(`video-${data?.id}`).src = "";
                 }}
               >
                 <svg
@@ -68,8 +104,8 @@ const CardVideos = ({ video_key, name, id }) => {
             </div>
             <iframe
               className="h-[600px] w-full"
-              id={`video-${id}`}
-              src={`https://www.youtube.com/embed/${video_key}`}
+              id={`video-${data?.id}`}
+              src={`https://www.youtube.com/embed/${data?.videos?.results?.filter((video) => video.type === "Trailer" && video.name?.toLowerCase().includes("official trailer"))[0]?.key}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
