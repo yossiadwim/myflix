@@ -14,7 +14,7 @@ const CardVideos = ({ data }) => {
     <>
       <div className="">
         <div
-          className=" bg-cover mx-5 flex h-60 w-[450px] items-center justify-center rounded-lg bg-center transition duration-300 hover:scale-105 "
+          className=" mx-5 flex h-60 w-[450px] items-center justify-center rounded-lg bg-cover bg-center transition duration-300 hover:scale-105 "
           onMouseOver={() => hoverBackground(data?.backdrop_path)}
           style={{
             backgroundImage: `url(https://i.ytimg.com/vi/${
@@ -29,7 +29,7 @@ const CardVideos = ({ data }) => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="size-6 text-white bg-black rounded-full p-1"
+              className="size-6 rounded-full bg-black p-1 text-white"
             >
               <path
                 fillRule="evenodd"
@@ -79,7 +79,7 @@ const CardVideos = ({ data }) => {
           <div className="h-fit w-[1000px] rounded-lg bg-black">
             <div className="mx-5 flex justify-between">
               <p className="px-2 py-3 text-3xl font-bold text-white">
-                {data?.name}
+                {data?.name || data?.title}
               </p>
               <button
                 className=""
@@ -101,7 +101,7 @@ const CardVideos = ({ data }) => {
                   />
                 </svg>
               </button>
-            </div>
+            </div>  
             <iframe
               className="h-[600px] w-full"
               id={`video-${data?.id}`}
