@@ -8,7 +8,7 @@ const CardSeasons = ({ data }) => {
     <>
       <div className="my-5 flex w-full flex-row items-start justify-items-start rounded-lg border border-slate-700 bg-slate-700 px-2">
         <div className="my-5 h-fit w-fit bg-cover">
-          <Link to={`season/${data?.season_number}`}>
+          <Link to={`/seasons/${data?.season_number}`}>
             <img
               src={`https://image.tmdb.org/t/p/w130_and_h195_bestv2${data?.poster_path}`}
               alt="poster"
@@ -17,7 +17,7 @@ const CardSeasons = ({ data }) => {
           </Link>
         </div>
         <div className="mx-5 my-5 w-fit">
-          <Link to={`season/${data?.season_number}`}>
+          <Link to={`seasons/${data?.season_number}`}>
             <p className="text-2xl font-medium text-white hover:text-red-500">
               {data?.name}
             </p>

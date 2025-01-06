@@ -8,6 +8,7 @@ import Seasons from "../components/detail/seasons/Seasons";
 
 const ContentDetail = ({ data, collection, state }) => {
 
+
   return (
     <>
       <div className="mx-12">

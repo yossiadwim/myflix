@@ -13,7 +13,7 @@ const Trailer = () => {
     const fetchTrailer = async () => {
       const data = await getAllTrending();
       const trailer = await Promise.all(
-        data?.map(async (item) => {
+        data?.results.map(async (item) => {
           if (item.media_type === "movie") {
             const detail = await getDetailMovies(item.id);
             return detail;

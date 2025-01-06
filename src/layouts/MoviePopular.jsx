@@ -73,7 +73,7 @@ const MoviePopular = () => {
           <div className="container overflow-y-hidden p-0 ">
             <div className="custom-scrollbar bg-transparent">
               <div className="mx-5 flex h-[500px] min-w-fit flex-row">
-                {datas?.map((data) => {
+                {datas?.results?.map((data) => {
                   return (
                     <Card key={data.id} data={data} state={"movie"}></Card>
                   );

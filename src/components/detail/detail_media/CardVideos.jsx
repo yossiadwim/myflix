@@ -1,8 +1,25 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const CardVideos = ({ data }) => {
   const [hidden, setHidden] = useState(true);
+
+  const iframeRef = useRef(null);
+
+  function handleClose() {
+    iframeRef.current?.contentWindow?.postMessage(
+      "close",
+      "https://www.youtube.com",
+    );
+    setHidden(true);
+    iframeRef.current?.setAttribute(
+      "src",
+      `https://www.youtube.com/embed/${
+        data?.videos?.results?.filter((video) => video.type === "Trailer")[0]
+          ?.key
+      }?mute=1`,
+    );
+  }
 
   function hoverBackground(backdrop_path) {
     const element = document.getElementById("trailer");
@@ -24,20 +41,6 @@ const CardVideos = ({ data }) => {
             }/hqdefault.jpg)`,
           }}
         >
-          <div className="absolute right-1 top-1 border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6 rounded-full bg-black p-1 text-white"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.5 12a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
           <div className="flex items-center justify-center">
             <button
               className="rounded-full bg-black px-2 py-2"
@@ -84,8 +87,7 @@ const CardVideos = ({ data }) => {
               <button
                 className=""
                 onClick={() => {
-                  setHidden(true);
-                  document.getElementById(`video-${data?.id}`).src = "";
+                  handleClose();
                 }}
               >
                 <svg
@@ -101,13 +103,14 @@ const CardVideos = ({ data }) => {
                   />
                 </svg>
               </button>
-            </div>  
+            </div>
             <iframe
               className="h-[600px] w-full"
               id={`video-${data?.id}`}
+              ref={iframeRef}
               src={`https://www.youtube.com/embed/${data?.videos?.results?.filter((video) => video.type === "Trailer" && video.name?.toLowerCase().includes("official trailer"))[0]?.key}`}
               title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; pause;"
               allowFullScreen
             ></iframe>
           </div>

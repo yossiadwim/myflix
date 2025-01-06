@@ -10,8 +10,8 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setIsLoading(false);
     }, 3000);
   }, []);

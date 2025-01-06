@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import CardSeasons from "./CardSeasons";
 
 const Seasons = ({ data }) => {
+
+  
   return (
     <>
       <div className="flex items-end justify-between">

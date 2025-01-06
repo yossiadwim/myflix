@@ -21,10 +21,12 @@ const Seasons = () => {
         fetchData(id);
     },[id])
 
+
+
     return <>
         <Navbar></Navbar>
         <Backdrop data={data}></Backdrop>
-        <ContentSeasons  data={data}></ContentSeasons>
+        <ContentSeasons data={data}></ContentSeasons>
         <Footer></Footer>
     </>
 }

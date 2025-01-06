@@ -53,7 +53,7 @@ const router = createBrowserRouter([
     element: <Seasons></Seasons>,
   },
   {
-    path: "/movie/popular",
+    path: "/movies/:type",
     element: <Movies></Movies>,
   },
   {

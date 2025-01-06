@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// import { getMoviesNowPlaying, getDetailMovies, getAllTrending } from "../../axios/api";
 import {
   getDetailMovies,
   getTVSeriesDetail,
@@ -19,7 +18,7 @@ const CarouselHome = () => {
     const fetchData = async () => {
       const data = await getAllTrending();
       const detailMovies = await Promise.all(
-        data?.map(async (item) => {
+        data?.results?.map(async (item) => {
           if (item.media_type === "movie") {
             const detail = await getDetailMovies(item.id);
             return detail;
@@ -41,8 +40,8 @@ const CarouselHome = () => {
     // eslint-disable-next-line no-undef
     <>
       <div className="h-[750px] w-full object-cover">
-        <Carousel>
-          {datas?.map((data) => (
+        <Carousel pauseOnHover slideInterval={3000} indicators={false}>
+          {datas?.results?.map((data) => (
             <div className="h-[800px] w-full object-cover" key={data?.id}>
               <div className="">
                 <img
@@ -56,10 +55,10 @@ const CarouselHome = () => {
                 <div className="mx-36 mt-20 w-2/5 pb-20 pt-20">
                   <img
                     src={`https://image.tmdb.org/t/p/w300${
-                      detailDatas[datas.indexOf(data)]?.images?.logos?.find(
+                      detailDatas[datas?.results?.indexOf(data)]?.images?.logos?.find(
                         (item) => item?.iso_639_1 === "en",
                       )?.file_path ||
-                      detailDatas[datas.indexOf(data)]?.images?.logos[0]
+                      detailDatas[datas?.results?.indexOf(data)]?.images?.logos[0]
                         ?.file_path
                     }`}
                     className=""
@@ -119,15 +118,42 @@ const CarouselHome = () => {
                       {showMore ? "Show Less" : "Show More"}
                     </button>
                   </div>
-                  <div className="my-10 ">
+                  <div className="my-10 flex">
                     <Link
                       to={`/${data?.media_type}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
                       state={"movie"}
                     >
-                      <button className="rounded-xl border px-10 py-4 font-semibold text-white  hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
+                      <button className="inline-flex rounded-xl border px-10 py-4 font-semibold text-white  hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="size-6 mr-1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
                         Details
                       </button>
                     </Link>
+                    <button className="ml-5 inline-flex rounded-xl border px-10 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="mr-1 size-6"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Watch Trailer
+                    </button>
                   </div>
                 </div>
               </div>

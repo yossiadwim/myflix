@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
+import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from "react-icons/hi";
 
 const Navbar = () => {
   window.onscroll = function () {
@@ -15,11 +16,11 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
 
   const menu_movie = [
-    "Popular",
-    "Top Rated",
-    "Now Playing",
-    "Trending",
-    "Upcoming",
+    { id: "trending", label: "Trending" },
+    { id: "popular", label: "Popular" },
+    { id: "toprated", label: "Top Rated" },
+    { id: "nowplaying", label: "Now Playing" },
+    { id: "upcoming", label: "Upcoming" },
   ];
 
   const menu_tv = ["Popular", "Top Rated", "Airing Today", "On The Air"];
@@ -44,12 +45,13 @@ const Navbar = () => {
                 inline
                 className="border-none bg-slate-900"
               >
-                {menu_movie.map((item, index) => (
+                {menu_movie.map((item) => (
                   <Dropdown.Item
-                    key={index}
-                    className="text-white hover:bg-slate-900 hover:text-red-500"
+                    key={item.id}
+                    className=" text-white hover:bg-slate-900 hover:text-red-500"
+                    href={`/movies/${item.id}`}
                   >
-                    {item}
+                    {item.label}
                   </Dropdown.Item>
                 ))}
               </Dropdown>
@@ -65,6 +67,7 @@ const Navbar = () => {
                   <Dropdown.Item
                     key={index}
                     className="text-white hover:bg-slate-900 hover:text-red-500"
+                  
                   >
                     {item}
                   </Dropdown.Item>
@@ -109,6 +112,38 @@ const Navbar = () => {
                 className="rounded-full border-2 border-white  bg-transparent p-2 pl-10 pr-3 text-white placeholder:text-white focus:border-red-500 focus:outline-none focus:ring-transparent"
               />
             </Form>
+          </div>
+          <div className="ml-5 text-white">
+            <Dropdown
+              label="Account"
+              inline
+              className="border-none bg-slate-900"
+            >
+              <Dropdown.Item
+                className="text-white hover:bg-slate-900 hover:text-red-500"
+                icon={HiViewGrid}
+              >
+                Dashboard
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-white hover:bg-slate-900 hover:text-red-500"
+                icon={HiCog}
+              >
+                Settings
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-white hover:bg-slate-900 hover:text-red-500"
+                icon={HiCurrencyDollar}
+              >
+                Earnings
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-white hover:bg-slate-900 hover:text-red-500"
+                icon={HiLogout}
+              >
+                Sign out
+              </Dropdown.Item>
+            </Dropdown>
           </div>
         </div>
       </div>

@@ -10,45 +10,50 @@ export const getAllTrending = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   console.log(response.data.results);
-  return response.data.results;
-}
-
-export const getMoviesNowPlaying = async () => {
-  const response = await axios.get(`${baseUrl}/movie/now_playing`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  // console.log(response.data.results);
-  return response.data.results;
-};
-export const getMoviesPopular = async () => {
-  const response = await axios.get(`${baseUrl}/movie/popular`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  // console.log(response.data.results);
-  return response.data.results;
+  // return response.data.results;
+  return response.data;
 };
 
-export const getMoviesUpcoming = async () => {
-  const response = await axios.get(`${baseUrl}/movie/upcoming`, {
+export const getMoviesNowPlaying = async (page=1) => {
+  const response = await axios.get(`${baseUrl}/movie/now_playing?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  // return response.data.results;
+  return response.data;
+};
+export const getMoviesPopular = async (page = 1) => {
+  const response = await axios.get(`${baseUrl}/movie/popular?page=${page}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data.results);
+  return response.data;
 };
 
-export const getMovieTopRated = async () => {
-  const response = await axios.get(`${baseUrl}/movie/top_rated`, {
+export const getMoviesUpcoming = async (page=1) => {
+  const response = await axios.get(`${baseUrl}/movie/upcoming?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  // return response.data.results;
+  return response.data;
+};
+
+export const getMovieTopRated = async (page=1) => {
+  const response = await axios.get(`${baseUrl}/movie/top_rated?page=${page}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // console.log(response.data.results);
+  // return response.data.results;
+  return response.data;
 };
 export const getMovieTrending = async () => {
   const response = await axios.get(`${baseUrl}/trending/movie/day`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  // return response.data.results;
+  return response.data;
 };
 export const getTVSeriesTrending = async () => {
   const response = await axios.get(`${baseUrl}/trending/tv/day`, {
@@ -143,35 +148,46 @@ export const getPersonDetails = async (id) => {
   return response.data;
 };
 
-
 export const getSeasonsDetails = async (id, number) => {
-  const response = await axios.get(`${baseUrl}/tv/${id}/season/${number}?append_to_response=images,videos`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axios.get(
+    `${baseUrl}/tv/${id}/season/${number}?append_to_response=images,videos`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
   // console.log(response.data);
   return response.data;
-}
+};
 
 export const getSearch = async (query, page = 1) => {
-  const response = await axios.get(`${baseUrl}/search/multi?query=${query}&page=${page}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axios.get(
+    `${baseUrl}/search/multi?query=${query}&page=${page}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
   // console.log(response.data);
   return response.data;
-}
+};
 
 export const getSearchMovies = async (query, page = 1) => {
-  const response = await axios.get(`${baseUrl}/search/movie?query=${query}&page=${page}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axios.get(
+    `${baseUrl}/search/movie?query=${query}&page=${page}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
   // console.log(response.data);
   return response.data;
-}
+};
 
 export const getSearchTVSeries = async (query, page = 1) => {
-  const response = await axios.get(`${baseUrl}/search/tv?query=${query}&page=${page}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await axios.get(
+    `${baseUrl}/search/tv?query=${query}&page=${page}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
   // console.log(response.data);
   return response.data;
-}
+};
