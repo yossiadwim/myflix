@@ -49,7 +49,7 @@ const Navbar = () => {
                   <Dropdown.Item
                     key={item.id}
                     className=" text-white hover:bg-slate-900 hover:text-red-500"
-                    href={`/movies/${item.id}`}
+                    href={`/movies/${item.id}/`}
                   >
                     {item.label}
                   </Dropdown.Item>
