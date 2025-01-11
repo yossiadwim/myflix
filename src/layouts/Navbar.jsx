@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
 import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   window.onscroll = function () {
@@ -49,9 +50,8 @@ const Navbar = () => {
                   <Dropdown.Item
                     key={item.id}
                     className=" text-white hover:bg-slate-900 hover:text-red-500"
-                    href={`/movies/${item.id}/`}
                   >
-                    {item.label}
+                    <Link to={`/movies/${item.id}`}>{item.label}</Link>
                   </Dropdown.Item>
                 ))}
               </Dropdown>
@@ -67,7 +67,6 @@ const Navbar = () => {
                   <Dropdown.Item
                     key={index}
                     className="text-white hover:bg-slate-900 hover:text-red-500"
-                  
                   >
                     {item}
                   </Dropdown.Item>
