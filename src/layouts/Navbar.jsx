@@ -17,7 +17,6 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
 
   const menu_movie = [
-    { id: "trending", label: "Trending" },
     { id: "popular", label: "Popular" },
     { id: "toprated", label: "Top Rated" },
     { id: "nowplaying", label: "Now Playing" },

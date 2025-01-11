@@ -22,6 +22,7 @@ const MoviePopular = () => {
   ];
 
   useEffect(() => {
+    
     const fetchMovies = async () => {
       if (type === "trending") {
         const data = await getMovieTrending();

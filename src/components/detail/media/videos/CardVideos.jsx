@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from "react";
-const CardMedia = ({ video_key, name, id }) => {
+const CardVideos = ({ data }) => {
+  
   const [hidden, setHidden] = useState(true);
   return (
     <>
+    
       <div
-        className="mx-5 my-5 flex h-60 w-96 items-center justify-center bg-center transition duration-300 hover:scale-105 rounded-xl"
+        className="mx-5 my-5 flex h-60 w-96 items-center justify-center bg-cover transition duration-300 hover:scale-105 rounded-xl"
         style={{
-          backgroundImage: `url(https://i.ytimg.com/vi/${video_key}/hqdefault.jpg)`,
+          backgroundImage: `url(https://i.ytimg.com/vi/${data?.key}/hqdefault.jpg)`,
         }}
       >
         <div className="flex items-center justify-center">
@@ -37,15 +39,15 @@ const CardMedia = ({ video_key, name, id }) => {
       <div
         className={`fixed left-0 top-0 z-[999] ${hidden ? "hidden" : "flex"} h-full w-full `}
       >
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center ">
           <div className="h-fit w-[1100px] rounded-lg bg-black">
             <div className="mx-5 flex justify-between">
-              <p className="px-2 py-3 text-3xl font-bold text-white">{name}</p>
+              <p className="px-2 py-3 text-3xl font-bold text-white">{data?.name}</p>
               <button
-                className=""
+                className="py-3 px-3"
                 onClick={() => {
                   setHidden(true);
-                  document.getElementById(`video-${id}`).src = "";
+                  document.getElementById(`video-${data?.id}`).src = "";
                 }}
               >
                 <svg
@@ -64,8 +66,8 @@ const CardMedia = ({ video_key, name, id }) => {
             </div>
             <iframe
               className="h-[600px] w-full"
-              id={`video-${id}`}
-              src={`https://www.youtube.com/embed/${video_key}`}
+              id={`video-${data?.id}`}
+              src={`https://www.youtube.com/embed/${data?.key}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -77,4 +79,4 @@ const CardMedia = ({ video_key, name, id }) => {
   );
 };
 
-export default CardMedia;
+export default CardVideos;

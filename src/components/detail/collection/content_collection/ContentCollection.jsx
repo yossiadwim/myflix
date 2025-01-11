@@ -100,7 +100,7 @@ const ContentCollection = ({ collection, movies, genres }) => {
 
       <div
         id="movie"
-        className="container h-[700px] w-[85%] p-0 mb-36 rounded-lg bg-cover bg-center border"
+        className="container h-[700px] w-[85%] p-0 mb-36 rounded-lg bg-cover bg-center"
       >
         <div className="bg-black/60 bg-cover pt-14 pb-32 pl-10 pr-10">
           <h1 className="text-4xl font-medium text-white">

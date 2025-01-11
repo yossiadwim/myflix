@@ -14,11 +14,13 @@ const MediaDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchVideos = async (id) => {
-      const getMovieVideos = await getDetailMovies(id);
-      setData(getMovieVideos);
-
-      const getTvVideos = await getTVSeriesDetail(id);
-      setData(getTvVideos);
+      if (state === "movie") {
+        const detail = await getDetailMovies(id);
+        setData(detail);
+      } else if (state === "tv") {
+        const detail = await getTVSeriesDetail(id);
+        setData(detail);
+      }
     };
 
     const fetchLanguage = async () => {
@@ -28,13 +30,18 @@ const MediaDetail = () => {
 
     fetchVideos(id);
     fetchLanguage();
-  }, [id]);
+  }, [id, state]);
 
   return (
     <>
       <Navbar></Navbar>
-      <Backdrop data={data} state={state}  type={type}></Backdrop>
-      <Content data={data} state={state} languages={languages} type={type}></Content>
+      <Backdrop data={data} state={state} type={type}></Backdrop>
+      <Content
+        data={data}
+        state={state}
+        languages={languages}
+        type={type}
+      ></Content>
       <Footer></Footer>
     </>
   );

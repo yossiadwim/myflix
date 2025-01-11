@@ -21,6 +21,9 @@ const ContentMovies = ({type}) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+
+    window.scrollTo(0, 0);
+
     const fetchGenres = async () => {
       const data = await getGenre();
       setGenres(data);
@@ -30,7 +33,7 @@ const ContentMovies = ({type}) => {
       if (type === "trending") {
         const data = await getMovieTrending();
         setData(data);
-      } else if (type === "popular") {
+      } else if (type === "popular") { 
         const data = await getMoviesPopular(page);
         setData(data);
       } else if (type === "toprated") {

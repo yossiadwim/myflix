@@ -123,7 +123,7 @@ const CarouselHome = () => {
                       to={`/${data?.media_type}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-") || data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}`}
                       state={"movie"}
                     >
-                      <button className="inline-flex rounded-xl border px-10 py-4 font-semibold text-white  hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
+                      <button className="inline-flex rounded-xl border px-6 py-4 font-semibold text-white  hover:border-red-500 hover:bg-red-500 hover:text-slate-200 ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ const CarouselHome = () => {
                         Details
                       </button>
                     </Link>
-                    <button className="ml-5 inline-flex rounded-xl border px-10 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
+                    <button className="ml-5 inline-flex rounded-xl border px-6 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"

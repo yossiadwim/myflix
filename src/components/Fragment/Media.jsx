@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 const Media = ({ data, state }) => {
   const [active, setActive] = useState("videos");
 
-
   return (
     <>
       {
@@ -48,7 +47,8 @@ const Media = ({ data, state }) => {
                   ? `/${state}/${data?.id}-${data?.title?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/${active}`
                   : `/${state}/${data?.id}-${data?.name?.toLowerCase().replace(/:/g, "").replace(/ /g, "-")}/${active}`
               }
-            state={[state, active]}>
+              state={[state, active]}
+            >
               <p className="text-white hover:text-red-500">
                 {active === "videos"
                   ? "View All Videos"
@@ -72,14 +72,7 @@ const Media = ({ data, state }) => {
                   ?.sort((a, b) =>
                     (a.name || a.title).localeCompare(b.name || b.title),
                   )
-                  .map((video, i) => (
-                    <CardVideos
-                      key={i}
-                      video_key={video.key}
-                      name={video.name}
-                      id={video.id}
-                    />
-                  ))}
+                  .map((video, i) => <CardVideos key={i} state={state} data={video} />)}
             </div>
           </div>
         </div>
@@ -94,7 +87,7 @@ const Media = ({ data, state }) => {
                   .slice(0, 10)
                   .sort((a, b) => a.vote_average - b.vote_average)
                   .map((backdrop, i) => (
-                    <CardBackdrops key={i} file_path={backdrop.file_path} />
+                    <CardBackdrops key={i} state={state} file_path={backdrop.file_path} />
                   ))}
             </div>
           </div>
@@ -110,8 +103,8 @@ const Media = ({ data, state }) => {
                   .slice(0, 10)
                   .sort((a, b) => a.vote_average - b.vote_average)
                   .map((poster, i) => (
-                    <CardPosters key={i} file_path={poster.file_path} />
-                  ))}
+                    <CardPosters key={i} state={state} file_path={poster.file_path} />
+                  ))} 
             </div>
           </div>
         </div>

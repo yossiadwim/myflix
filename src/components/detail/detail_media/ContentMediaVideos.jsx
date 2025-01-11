@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import CardVideos from "./CardVideos";
+import CardVideos from "../media/videos/CardVideos";
 import { useState } from "react";
 
-const ContentMediaVideos = ({ data, state }) => {
+const ContentMediaVideos = ({ data }) => {
   const [typeVideo, setTypeVideo] = useState("all");
   const [showMore, setShowMore] = useState(false);
 
@@ -16,7 +16,7 @@ const ContentMediaVideos = ({ data, state }) => {
 
   return (
     <>
-      <div className="w-1/6">
+      <div className="w-1/6 ">
         <div className="rounded-t-lg bg-black">
           <p className="px-5 py-5 text-xl text-white">Videos</p>
         </div>
@@ -59,26 +59,14 @@ const ContentMediaVideos = ({ data, state }) => {
             ? videos?.map((video, i) => {
                 return (
                   <>
-                    <CardVideos
-                      key={i}
-                      video_key={video.key}
-                      name={video.name}
-                      state={state}
-                      {...video}
-                    ></CardVideos>
+                    <CardVideos key={i} data={video}></CardVideos>
                   </>
                 );
               })
             : videos?.slice(0, 12).map((video, i) => {
                 return (
                   <>
-                    <CardVideos
-                      key={i}
-                      video_key={video.key}
-                      name={video.name}
-                      state={state}
-                      {...video}
-                    ></CardVideos>
+                    <CardVideos key={i} data={video}></CardVideos>
                   </>
                 );
               })}

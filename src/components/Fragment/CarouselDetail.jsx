@@ -113,7 +113,7 @@ const CarouselDetail = ({ data }) => {
                   }
                 </div>
                 <div className="group">
-                  <p className="mt-5 font-sans text-base font-semibold leading-relaxed tracking-normal text-white">
+                  <p className="mt-5 font-sans text-base font-normal leading-relaxed tracking-normal text-white">
                     {showMore
                       ? data?.overview?.length > 100
                         ? data?.overview
@@ -130,61 +130,47 @@ const CarouselDetail = ({ data }) => {
                 </div>
               </div>
               <div className="mt-5 flex">
-                <div className="flex items-center justify-center rounded-lg border border-gray-400 px-1 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
-                  <button className="mx-1 mb-2 mt-2">
-                    <span className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-5 w-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
-                        />
-                      </svg>
-                    </span>
-                  </button>{" "}
-                  <p className="mx-2 my-4">Watch Trailer</p>
-                </div>
-                <div className="mx-5 flex justify-center items-center rounded-lg border border-gray-400 px-2 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
-                  <button className="mx-1 mb-2 mt-2">
-                    <span className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="#ffffff"
-                        className="h-6 w-6"
-                      >
-                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-                      </svg>
-                    </span>
-                  </button>{" "}
-                  <p className="mx-2 my-4">Add to favorite</p>
-                </div>
-                <div className=" flex justify-center items-center rounded-lg border border-gray-400 px-2 text-base font-medium text-white hover:border-red-500 hover:bg-red-500">
-                  <button className="mx-1 mb-2 mt-2">
-                    <span className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="#ffffff"
-                        className="h-6 w-6"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M2.625 6.75a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0A.75.75 0 0 1 8.25 6h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75ZM2.625 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0ZM7.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 7.5 12Zm-4.875 5.25a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </button>{" "}
-                  <p className="mx-2 my-4">Add to list</p>
-                </div>
+                <button className="inline-flex rounded-xl border px-6 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="mr-1 size-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Watch Trailer
+                </button>
+                <button className="ml-5 inline-flex rounded-xl border px-6 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="#ffffff"
+                    className="mr-1 h-6 w-6"
+                  >
+                    <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                  </svg>
+                  Add to favorite
+                </button>
+                <button className="ml-5 inline-flex rounded-xl border px-6 py-4 font-semibold text-white hover:border-red-500 hover:bg-red-500 hover:text-slate-200">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="#ffffff"
+                    className="mr-1 h-6 w-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M2.625 6.75a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0A.75.75 0 0 1 8.25 6h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75ZM2.625 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0ZM7.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 7.5 12Zm-4.875 5.25a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Add to list
+                </button>
               </div>
               <div className="mt-5 flex">
                 {data?.credits?.crew
@@ -198,7 +184,9 @@ const CarouselDetail = ({ data }) => {
                           {crew.name}
                         </p>
                       </Link>
-                      <p className="font-light text-white text-xs">{crew.job}</p>
+                      <p className="text-xs font-light text-white">
+                        {crew.job}
+                      </p>
                     </div>
                   ))}
               </div>

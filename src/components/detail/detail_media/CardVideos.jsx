@@ -27,6 +27,12 @@ const CardVideos = ({ data }) => {
     element.style.backgroundImage = `url(${img})`;
   }
 
+  const trailerVideoKey = data?.videos?.results?.filter(
+    (video) => video.type === "Trailer",
+  )[0]?.key;
+
+  const backgroundImageUrl = `url(https://i.ytimg.com/vi/${trailerVideoKey}/hqdefault.jpg)`;
+
   return (
     <>
       <div className="">
@@ -34,11 +40,7 @@ const CardVideos = ({ data }) => {
           className=" mx-5 flex h-60 w-[450px] items-center justify-center rounded-lg bg-cover bg-center transition duration-300 hover:scale-105 "
           onMouseOver={() => hoverBackground(data?.backdrop_path)}
           style={{
-            backgroundImage: `url(https://i.ytimg.com/vi/${
-              data?.videos?.results?.filter(
-                (video) => video.type === "Trailer",
-              )[0]?.key
-            }/hqdefault.jpg)`,
+            backgroundImage: backgroundImageUrl,
           }}
         >
           <div className="flex items-center justify-center">

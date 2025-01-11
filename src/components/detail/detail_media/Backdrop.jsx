@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const Backdrop = ({ data, state, type }) => {
+  
+  console.log(data);
+  
+
   return (
     <>
       <div className="bg-opacity-100 ">
@@ -31,7 +35,7 @@ const Backdrop = ({ data, state, type }) => {
           <p className="flex justify-center py-2 text-6xl font-bold text-white">
             {data?.title || data?.name}
           </p>
-          <p className="flex justify-center py-2 text-4xl font-medium tracking-wide text-white capitalize">
+          <p className="flex justify-center py-2 text-4xl font-medium capitalize tracking-wide text-white">
             {type}
           </p>
           <Link

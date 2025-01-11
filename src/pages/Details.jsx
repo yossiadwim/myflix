@@ -22,6 +22,7 @@ const Details = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      setIsLoading(false);
       window.scrollTo(0, 0);
       const fetchDetail = async (id) => {
         try {
@@ -49,8 +50,6 @@ const Details = () => {
           console.error("error : ", error);
         }
       };
-
-      setIsLoading(false);
 
       fetchDetail(id);
     }, 2000);
