@@ -8,7 +8,7 @@ const CardSeasons = ({ data }) => {
     <>
       <div className="my-5 flex w-full flex-row items-start justify-items-start rounded-lg border border-slate-700 bg-slate-700 px-2">
         <div className="my-5 h-fit w-fit bg-cover">
-          <Link to={`/seasons/${data?.season_number}`}>
+          <Link to={``}>
             <img
               src={`https://image.tmdb.org/t/p/w130_and_h195_bestv2${data?.poster_path}`}
               alt="poster"

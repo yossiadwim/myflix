@@ -47,7 +47,7 @@ const TVSeries = () => {
       <div className="mb-36 h-full bg-gradient-to-r from-transparent to-black bg-cover bg-center pt-24 ">
         <div
           id="tv"
-          className="container w-[80%] rounded-lg bg-cover bg-center p-0"
+          className="container w-[80%] rounded-lg bg-cover bg-center p-0 duration-500 ease-in-out"
         >
           <div className=" bg-black/50 p-5">
             <div className="mx-6 my-5 flex">
