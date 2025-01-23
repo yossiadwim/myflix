@@ -12,7 +12,6 @@ const ContentCollection = ({ collection, movies, genres }) => {
     element.style.backgroundImage = `url(${img})`;
   }
 
-
   return (
     <>
       <Backdrop
@@ -20,7 +19,7 @@ const ContentCollection = ({ collection, movies, genres }) => {
         movies={movies}
         genres={genres}
       ></Backdrop>
-      <div className="container pt-[850px] p-20">
+      <div className="container p-20 pt-[850px]">
         <h1 className="text-4xl font-medium text-white">Featured Cast</h1>
         <div className="my-5 grid grid-cols-5 gap-y-5">
           {[
@@ -81,7 +80,11 @@ const ContentCollection = ({ collection, movies, genres }) => {
                     <div className="mr-5 flex items-center justify-start rounded-lg border border-gray-500 hover:border-red-800 hover:bg-red-800">
                       <img
                         key={i}
-                        src={crew?.profile_path ? `https://image.tmdb.org/t/p/w185${crew?.profile_path}` : "/img/white.png"}
+                        src={
+                          crew?.profile_path
+                            ? `https://image.tmdb.org/t/p/w185${crew?.profile_path}`
+                            : "/img/white.png"
+                        }
                         alt=""
                         className="mr-5 h-20 w-20 rounded-l-lg object-cover transition ease-in-out hover:opacity-50"
                       />
@@ -96,25 +99,25 @@ const ContentCollection = ({ collection, movies, genres }) => {
             })}
           </div>
         </div>
-      </div>  
+      </div>
 
       <div
         id="movie"
-        className="container h-[700px] w-[85%] p-0 mb-36 rounded-lg bg-cover bg-center"
+        className="container mb-36 h-[700px] w-[85%] rounded-lg bg-cover bg-center p-0"
       >
-        <div className="bg-black/60 bg-cover pt-14 pb-32 pl-10 pr-10">
+        <div className="h-[700px] bg-black/60 bg-cover pb-32 pl-10 pr-10 pt-14">
           <h1 className="text-4xl font-medium text-white">
             {movies?.length} Movies
           </h1>
-          <div className=" my-5 flex">
-            {movies?.map((movie, i) => {
-              return (
-                <>
-                  <div key={i} className="">
+          <div className="container my-5 w-full overflow-y-hidden">
+            <div className="custom-scrollbar flex min-w-fit justify-center gap-x-5">
+              {movies?.map((movie, i) => {
+                return (
+                  <div key={i} className="w-36 py-6">
                     <img
                       src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
                       alt=""
-                      className={`mr-5 opacity-70 hover:opacity-100 rounded-lg object-cover transition ease-in-out hover:scale-105`}
+                      className={`mr-5 rounded-lg object-cover opacity-100 transition ease-in-out hover:scale-105 hover:opacity-70`}
                       onMouseOver={() => {
                         hoverBackground(movie?.backdrop_path);
                         setHover(movie);
@@ -122,9 +125,9 @@ const ContentCollection = ({ collection, movies, genres }) => {
                       // onMouseOut={() => offHoverBackground()}
                     />
                   </div>
-                </>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
           <div className="w-1/2 rounded-l">
             {hover && (

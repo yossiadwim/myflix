@@ -6,10 +6,10 @@ import { getSeasonsDetails } from "../../../../axios/api";
 const ContentSeasons = ({ data }) => {
   const [seasons, setSeasons] = useState([]);
   const [seasonDetail, setSeasonDetail] = useState([]);
-
   const [currentSeason, setCurrentSeason] = useState([]);
   const [hover, setHover] = useState(false);
   const [hoverEpisode, setHoverEpisode] = useState();
+  const [readMore, setReadMore] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,31 +40,33 @@ const ContentSeasons = ({ data }) => {
           <div className="mt-[900px] " />
         </div>
 
-        <div className="rounded-lg ">
-          <div className="my-14">
-            <div className=" overflow grid grid-cols-7 justify-center gap-5 overflow-y-hidden p-10">
-              {data?.seasons?.map((season, i) => (
-                <>
-                  <img
-                    key={i}
-                    src={`https://image.tmdb.org/t/p/w185${season?.poster_path}`}
-                    alt=""
-                    className="trasition cursor-pointer rounded-lg opacity-50 duration-300 ease-in-out hover:scale-110 hover:opacity-100"
-                    onMouseOver={() => {
-                      setSeasons(season);
-                      setCurrentSeason(season);
-
-                      // background(season?.poster_path);
-                    }}
-                    onClick={() => {
+        <div className="container w-[85%] overflow-y-hidden">
+          <div className="custom-scrollbar flex min-w-fit justify-center gap-x-5">
+            {data?.seasons?.map((season, i) => (
+              <div
+                className="mt-5 h-80 w-40 items-center justify-center transition duration-300 ease-in-out hover:scale-105 hover:opacity-50"
+                key={i}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w185${season?.poster_path}`}
+                  alt=""
+                  key={i}
+                  className="trasition cursor-pointer items-center rounded-lg opacity-80"
+                  onClick={() => {
+                    [
+                      setSeasons(season),
+                      setCurrentSeason(season),
                       document
-                        .getElementById("episodes")
-                        .scrollIntoView({ behavior: "smooth" });
-                    }}
-                  />
-                </>
-              ))}
-            </div>
+                        .getElementById("seasons")
+                        .scrollIntoView({ behavior: "smooth" }),
+                    ];
+                  }}
+                />
+                <p className=" mt-2 text-center text-sm text-white">
+                  {season?.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -75,7 +77,7 @@ const ContentSeasons = ({ data }) => {
           {seasons?.length === 0 ? (
             ""
           ) : (
-            <div className="w-full rounded-md bg-black/75 p-20">
+            <div className="w-full rounded-md bg-black/75 p-20" id="seasons">
               <div className="w-3/4  rounded-lg p-5">
                 <h1 className="text-3xl font-bold text-white">
                   {seasonDetail?.name}{" "}
@@ -87,7 +89,7 @@ const ContentSeasons = ({ data }) => {
                     day: "numeric",
                     year: "numeric",
                   })}{" "}
-                  - {seasonDetail?.episode_count} Episodes
+                  - {seasonDetail?.episodes.length} Episodes
                 </p>
                 <p className="mt-2 flex w-fit items-center rounded-lg border bg-white px-1 py-1 font-medium text-black">
                   <span className="inline-flex">
@@ -133,12 +135,12 @@ const ContentSeasons = ({ data }) => {
                             className="rounded-lg p-1 opacity-70 transition duration-300 ease-in-out hover:scale-105 hover:opacity-100"
                             loading="lazy"
                           />
+                          <p className="mt-2 text-base text-white">
+                            {i + 1 + ". " + episode?.name}
+                          </p>
                           <div
                             className={`${hover && episode?.episode_number === hoverEpisode ? "mt-2 block " : "hidden"}`}
                           >
-                            <p className="mt-2 text-base text-white">
-                              {i + 1 + ". " + episode?.name}
-                            </p>
                             <div className="flex gap-3">
                               <p className="mt-2 text-sm font-light text-white">
                                 {new Date(episode?.air_date).toLocaleDateString(
@@ -164,8 +166,17 @@ const ContentSeasons = ({ data }) => {
                                   : ""}
                               </p>
                             </div>
-                            <p className="mt-2 text-justify text-sm font-light text-white">
-                              {episode?.overview}
+                            <p className="mt-2 cursor-pointer text-justify text-sm font-light text-white">
+                              {readMore == i
+                                ? episode?.overview
+                                : episode?.overview.substring(0, 40) +
+                                  "..."}{" "}
+                              <p
+                                className="font-bold text-red-500"
+                                onClick={() => setReadMore(i)}
+                              >
+                                Read more
+                              </p>
                             </p>
                           </div>
                         </div>
@@ -178,12 +189,17 @@ const ContentSeasons = ({ data }) => {
                   <button
                     className={`inline-flex rounded-lg border ${data?.seasons?.map((season) => season)[currentSeason?.season_number - 1]?.name === undefined ? "hidden" : ""} p-2 text-white hover:border-red-500 hover:bg-red-500 hover:text-white`}
                     onClick={() => {
-                      setCurrentSeason((prev) => {
-                        return {
-                          ...prev,
-                          season_number: prev.season_number - 1,
-                        };
-                      });
+                      [
+                        setCurrentSeason((prev) => {
+                          return {
+                            ...prev,
+                            season_number: prev.season_number - 1,
+                          };
+                        }),
+                        document
+                          .getElementById("seasons")
+                          .scrollIntoView({ behavior: "smooth" }),
+                      ];
 
                       // background(
                       //   data?.seasons?.map((season) => season)[
@@ -216,12 +232,18 @@ const ContentSeasons = ({ data }) => {
                   <button
                     className={`inline-flex rounded-lg border  p-2 text-white hover:border-red-500 hover:bg-red-500 hover:text-white ${data?.seasons?.map((season) => season)[currentSeason?.season_number + 1]?.name === undefined ? "hidden" : ""}`}
                     onClick={() => {
-                      setCurrentSeason((prev) => {
-                        return {
-                          ...prev,
-                          season_number: prev.season_number + 1,
-                        };
-                      });
+                      [
+                        setCurrentSeason((prev) => {
+                          return {
+                            ...prev,
+                            season_number: prev.season_number + 1,
+                          };
+                        }),
+
+                        document
+                          .getElementById("seasons")
+                          .scrollIntoView({ behavior: "smooth" }),
+                      ];
 
                       // background(
                       //   data?.seasons?.map((season) => season)[
