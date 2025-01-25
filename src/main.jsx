@@ -12,8 +12,8 @@ import Collections from "./pages/Collections.jsx";
 import Seasons from "./pages/Seasons.jsx";
 import Movies from "./pages/Movies.jsx";
 import Search from "./pages/Search.jsx";
-import TvSeries from "./pages/TvSeries.jsx";
 import "./index.css";
+import TvSeries from "./pages/TvSeries.jsx";
 
 
 const router = createBrowserRouter([
