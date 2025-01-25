@@ -13,7 +13,7 @@ import Collections from "./pages/Collections.jsx";
 import Seasons from "./pages/Seasons.jsx";
 import Movies from "./pages/Movies.jsx";
 import Search from "./pages/Search.jsx";
-import Tv from "./pages/Tv.jsx";
+import Tvs from "./pages/Tv.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/tv-shows/:type",
-    element: <Tv></Tv>
+    element: <Tvs></Tvs>,
   },
   {
     path: "/search",
