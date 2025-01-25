@@ -14,10 +14,13 @@ export const getAllTrending = async () => {
   return response.data;
 };
 
-export const getMoviesNowPlaying = async (page=1) => {
-  const response = await axios.get(`${baseUrl}/movie/now_playing?page=${page}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const getMoviesNowPlaying = async (page = 1) => {
+  const response = await axios.get(
+    `${baseUrl}/movie/now_playing?page=${page}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
   // console.log(response.data.results);
   // return response.data.results;
   return response.data;
@@ -30,7 +33,7 @@ export const getMoviesPopular = async (page = 1) => {
   return response.data;
 };
 
-export const getMoviesUpcoming = async (page=1) => {
+export const getMoviesUpcoming = async (page = 1) => {
   const response = await axios.get(`${baseUrl}/movie/upcoming?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -39,7 +42,7 @@ export const getMoviesUpcoming = async (page=1) => {
   return response.data;
 };
 
-export const getMovieTopRated = async (page=1) => {
+export const getMovieTopRated = async (page = 1) => {
   const response = await axios.get(`${baseUrl}/movie/top_rated?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -60,36 +63,36 @@ export const getTVSeriesTrending = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  return response.data;
 };
 export const getTVSeriesAiringToday = async () => {
   const response = await axios.get(`${baseUrl}/tv/airing_today`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  return response.data;
 };
-export const getTVSeriesOnTheAir = async () => {
-  const response = await axios.get(`${baseUrl}/tv/on_the_air`, {
+export const getTVSeriesOnTheAir = async (page = 1) => {
+  const response = await axios.get(`${baseUrl}/tv/on_the_air?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  return response.data;
 };
 
-export const getTVSeriesPopular = async () => {
-  const response = await axios.get(`${baseUrl}/tv/popular`, {
+export const getTVSeriesPopular = async (page = 1) => {
+  const response = await axios.get(`${baseUrl}/tv/popular?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  return response.data;
 };
-export const getTVSeriesTopRated = async () => {
-  const response = await axios.get(`${baseUrl}/tv/top_rated`, {
+export const getTVSeriesTopRated = async (page = 1) => {
+  const response = await axios.get(`${baseUrl}/tv/top_rated?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   // console.log(response.data.results);
-  return response.data.results;
+  return response.data;
 };
 
 export const getDetailMovies = async (id) => {

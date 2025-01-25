@@ -18,6 +18,7 @@ const ContentSeasons = ({ data }) => {
         currentSeason?.season_number,
       );
       setSeasonDetail(seasonDetail);
+
     };
     fetchData(data?.id, currentSeason?.season_number);
   }, [
@@ -53,13 +54,7 @@ const ContentSeasons = ({ data }) => {
                   key={i}
                   className="trasition cursor-pointer items-center rounded-lg opacity-80"
                   onClick={() => {
-                    [
-                      setSeasons(season),
-                      setCurrentSeason(season),
-                      document
-                        .getElementById("seasons")
-                        .scrollIntoView({ behavior: "smooth" }),
-                    ];
+                    [setSeasons(season), setCurrentSeason(season),  document.getElementById("seasons").scrollIntoView({ behavior: "smooth" })];
                   }}
                 />
                 <p className=" mt-2 text-center text-sm text-white">
@@ -71,13 +66,13 @@ const ContentSeasons = ({ data }) => {
         </div>
 
         <div
-          id="season"
+          id="seasons"
           className="my-5 flex justify-start rounded-md bg-contain"
         >
           {seasons?.length === 0 ? (
             ""
           ) : (
-            <div className="w-full rounded-md bg-black/75 p-20" id="seasons">
+            <div className="w-full rounded-md bg-black/75 p-20">
               <div className="w-3/4  rounded-lg p-5">
                 <h1 className="text-3xl font-bold text-white">
                   {seasonDetail?.name}{" "}

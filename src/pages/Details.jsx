@@ -67,15 +67,11 @@ const Details = () => {
           <CarouselDetail data={data}></CarouselDetail>
           <div className="container flex pt-64">
             <div className="w-3/4">
-              {state === "movie" ? (
-                <ContentDetail
-                  data={data}
-                  state={state}
-                  collection={collection}
-                ></ContentDetail>
-              ) : (
-                <ContentDetail data={data} state={state}></ContentDetail>
-              )}
+              <ContentDetail
+                data={data}
+                state={state}
+                collection={collection}
+              ></ContentDetail>
             </div>
             <div className="shadow- mr-5 w-1/4">
               <Information data={data} languages={languages}></Information>

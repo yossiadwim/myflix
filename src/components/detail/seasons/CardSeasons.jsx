@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 const CardSeasons = ({ data }) => {
   const [showMore, setShowMore] = useState(false);
 
+  console.log(data);
+
   return (
     <>
       <div className="my-5 flex w-full flex-row items-start justify-items-start rounded-lg border border-slate-700 bg-slate-700 px-2">
@@ -23,7 +25,7 @@ const CardSeasons = ({ data }) => {
             </p>
           </Link>
           <div className="my-3 flex items-center">
-            <div className="mr-3 flex rounded-md border p-1 bg-white">
+            <div className="mr-3 flex rounded-md border bg-white p-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -36,7 +38,7 @@ const CardSeasons = ({ data }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="text-black" >{data?.vote_average}</p>
+              <p className="text-black">{data?.vote_average}</p>
             </div>
             <p className="mr-3 text-white">
               {data?.air_date
@@ -50,14 +52,22 @@ const CardSeasons = ({ data }) => {
             <p className="text-white">{data?.episode_count} episodes</p>
           </div>
           <p className="tex-white text-base leading-relaxed text-white">
-            {showMore ? data?.overview : data?.overview?.slice(0, 150) + "..."}
-            
+            {/* {showMore ? data?.overview : data?.overview?.slice(0, 150) + "..."} */}
+
+            {data?.overview === ""
+              ? "No overview"
+              : data?.overview
+                ? showMore
+                  ? data?.overview
+                  : data?.overview?.slice(0, 150) + "..."
+                : "No overview"}
           </p>
           <button
             onClick={() => setShowMore(!showMore)}
             className="font-medium text-red-500 hover:text-red-700"
           >
-            {showMore ? "Show Less" : "Show More"}
+            {/* {showMore ? "Show Less" : "Show More"} */}
+            {data?.overview === "" ? "" : showMore ? "Show Less" : "Show More"}
           </button>
         </div>
       </div>

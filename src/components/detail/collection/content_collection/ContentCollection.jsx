@@ -110,23 +110,25 @@ const ContentCollection = ({ collection, movies, genres }) => {
             {movies?.length} Movies
           </h1>
           <div className="container my-5 w-full overflow-y-hidden">
-            <div className="custom-scrollbar flex min-w-fit justify-center gap-x-5">
-              {movies?.map((movie, i) => {
-                return (
-                  <div key={i} className="w-36 py-6">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
-                      alt=""
-                      className={`mr-5 rounded-lg object-cover opacity-100 transition ease-in-out hover:scale-105 hover:opacity-70`}
-                      onMouseOver={() => {
-                        hoverBackground(movie?.backdrop_path);
-                        setHover(movie);
-                      }}
-                      // onMouseOut={() => offHoverBackground()}
-                    />
-                  </div>
-                );
-              })}
+            <div className="custom-scrollbar flex min-w-fit gap-x-5">
+              {movies
+                ?.sort((a, b) => b?.release_date - a?.release_date)
+                .map((movie, i) => {
+                  return (
+                    <div key={i} className="w-36 py-6">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
+                        alt=""
+                        className={`mr-5 rounded-lg object-cover opacity-100 transition ease-in-out hover:scale-105 hover:opacity-70`}
+                        onMouseOver={() => {
+                          hoverBackground(movie?.backdrop_path);
+                          setHover(movie);
+                        }}
+                        // onMouseOut={() => offHoverBackground()}
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className="w-1/2 rounded-l">

@@ -53,25 +53,29 @@ const TVSeries = () => {
             <div className="mx-6 my-5 flex">
               <h1 className="text-5xl font-medium text-white">TV Series</h1>
               <div className="mx-2 my-4">
-              {tvTypes.map((item) => (
-                <button
-                  key={item.id}
-                  id={`${item.id}-tv`}
-                  className={`mx-5 rounded-full text-lg pl-3 pr-3 font-semibold ${
-                    type === item.id ? "bg-gradient-to-r from-red-500 to-red-700 text-white" : "text-white"
-                  } hover:text-red-500`}
-                  onClick={() => setType(item.id)}
-                >
-                  {item.label}
-                </button>
-              ))}
+                {tvTypes.map((item) => (
+                  <button
+                    key={item.id}
+                    id={item.id}
+                    className={`mx-5 rounded-full pl-3 pr-3 text-lg font-semibold ${
+                      type === item.id
+                        ? "bg-gradient-to-r from-red-500 to-red-700 text-white"
+                        : "text-white"
+                    } hover:text-red-500`}
+                    onClick={() => setType(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             </div>
-            </div>
-            
+
             <div className=" overflow-y-hidden">
               <div className="flex h-[500px]  min-w-fit flex-row">
-                {datas?.map((data) => {
-                  return <Card key={data.id} data={data} state="tv"></Card>;
+                {datas?.results?.map((data) => {
+                  return (
+                    <Card key={data.id} data={data} state={"tv"}></Card>
+                  )
                 })}
               </div>
             </div>

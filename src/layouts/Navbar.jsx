@@ -23,7 +23,12 @@ const Navbar = () => {
     { id: "upcoming", label: "Upcoming" },
   ];
 
-  const menu_tv = ["Popular", "Top Rated", "Airing Today", "On The Air"];
+  const menu_tv = [
+    { id: "popular", label: "Popular" },
+    { id: "toprated", label: "Top Rated" },
+    { id: "ontheair", label: "On The Air" },
+    { id: "airingtoday", label: "Airing Today" },
+  ];
 
   return (
     <header className="fixed left-0 top-0 z-[999] flex w-full items-center bg-transparent shadow-sm">
@@ -49,6 +54,7 @@ const Navbar = () => {
                   <Dropdown.Item
                     key={item.id}
                     className=" text-white hover:bg-slate-900 hover:text-red-500"
+     
                   >
                     <Link to={`/movies/${item.id}`}>{item.label}</Link>
                   </Dropdown.Item>
@@ -62,12 +68,12 @@ const Navbar = () => {
                 inline
                 className="border-none bg-slate-900"
               >
-                {menu_tv.map((item, index) => (
+                {menu_tv.map((item) => (
                   <Dropdown.Item
-                    key={index}
+                    key={item.id}
                     className="text-white hover:bg-slate-900 hover:text-red-500"
                   >
-                    {item}
+                    <Link to={`/tv-shows/${item.id}`}>{item.label}</Link>
                   </Dropdown.Item>
                 ))}
               </Dropdown>

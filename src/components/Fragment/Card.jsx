@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 const Card = ({ data, state }) => {
+
   // eslint-disable-next-line no-undef
   const baseImgURL = process.env.REACT_APP_BASEIMGURL;
   function hoverBackground(backdrop_path, state) {
@@ -13,7 +14,7 @@ const Card = ({ data, state }) => {
   return (
     <div className="mx-3 my-5 mt-7 h-20 w-56 transition delay-150 duration-300 ease-in-out hover:-translate-y-1  hover:scale-105">
       <Link
-        to={`/${data?.media_type || state}/${data?.id}-${(
+        to={`/${state}/${data?.id}-${(
           data?.title ||
           data?.name ||
           ""

@@ -22,7 +22,6 @@ const MoviePopular = () => {
   ];
 
   useEffect(() => {
-    
     const fetchMovies = async () => {
       if (type === "trending") {
         const data = await getMovieTrending();
@@ -58,7 +57,7 @@ const MoviePopular = () => {
                 <button
                   key={item.id}
                   id={item.id}
-                  className={`mx-5 rounded-full text-lg pl-3 pr-3 font-semibold ${
+                  className={`mx-5 rounded-full pl-3 pr-3 text-lg font-semibold ${
                     type === item.id
                       ? "bg-gradient-to-r from-red-500 to-red-700 text-white"
                       : "text-white"
