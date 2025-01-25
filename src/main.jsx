@@ -5,7 +5,6 @@ import Home from "./pages/Home.jsx";
 import Details from "./pages/Details.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Persons from "./pages/Persons.jsx";
-import "./index.css";
 import MoviesCasts from "./pages/MoviesCasts.jsx";
 import Reviews from "./pages/Reviews.jsx";
 import MediaDetail from "./pages/MediaDetail.jsx";
@@ -14,6 +13,7 @@ import Seasons from "./pages/Seasons.jsx";
 import Movies from "./pages/Movies.jsx";
 import Search from "./pages/Search.jsx";
 import TvSeries from "./pages/TvSeries.jsx";
+import "./index.css";
 
 
 const router = createBrowserRouter([
