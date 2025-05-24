@@ -31,24 +31,21 @@ const ContentMovies = ({ type }) => {
       };
 
       const fetchMovies = async () => {
-        if (type === "trending") {
-          const data = await getMovieTrending();
-          setData(data);
-        } else if (type === "popular") {
-          const data = await getMoviesPopular(page);
-          setData(data);
-        } else if (type === "toprated") {
-          const data = await getMovieTopRated(page);
-          setData(data);
-        } else if (type === "nowplaying") {
-          const data = await getMoviesNowPlaying(page);
-          setData(data);
-        } else if (type === "upcoming") {
-          const data = await getMoviesUpcoming(page);
+        const fetchFunctions = {
+          trending: getMovieTrending,
+          popular: getMoviesPopular,
+          toprated: getMovieTopRated,
+          nowplaying: getMoviesNowPlaying,
+          upcoming: getMoviesUpcoming,
+        };
+      
+        const fetchFunction = fetchFunctions[type];
+        if (fetchFunction) {
+          const data = await fetchFunction(page);
           setData(data);
         }
       };
-
+      
       fetchMovies();
       fetchGenres();
     }, 2000);

@@ -52,27 +52,28 @@ const CarouselDetail = ({ data }) => {
               </div>
               <div className="my-3 flex">
                 <p className="mr-2 text-base font-medium text-white">
-                  {new Date(
-                    data?.release_date || data?.first_air_date,
-                  ).toLocaleString("en-us", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}{" "}
+                  {data?.release_date || data?.first_air_date ? (
+                    <p className="mr-2 text-base font-medium text-white">
+                      {new Date(
+                        data?.release_date || data?.first_air_date,
+                      ).toLocaleString("en-us", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </p>
+                  ) : null}
                 </p>
 
                 <div className="">
                   {
                     <p className="mx-1 text-base font-medium text-white">
-                      {data?.runtime
-                        ? "(" +
-                          Math.floor(data?.runtime / 60) +
-                          " Hour" +
-                          " " +
-                          Math.floor(data?.runtime % 60) +
-                          " min" +
-                          ")"
-                        : ""}
+                      {typeof data?.runtime === "number" && data.runtime > 0 ? (
+                        <p className="mx-1 text-base font-medium text-white">
+                          ({Math.floor(data.runtime / 60)} Hour{" "}
+                          {data.runtime % 60} min)
+                        </p>
+                      ) : null}
                     </p>
                   }
                 </div>
@@ -97,8 +98,13 @@ const CarouselDetail = ({ data }) => {
                   <div className="">
                     {
                       <p className="font-sans text-base text-white">
-                        {Math.round(data?.vote_average * 10) / 10} (
-                        {data?.vote_count} vote )
+                        {typeof data?.vote_average === "number" &&
+                        data?.vote_count !== undefined ? (
+                          <p className="font-sans text-base text-white">
+                            {Math.round(data.vote_average * 10) / 10} (
+                            {data.vote_count} vote)
+                          </p>
+                        ) : null}
                       </p>
                     }
                   </div>
@@ -108,17 +114,25 @@ const CarouselDetail = ({ data }) => {
                 <div className="group">
                   {
                     <p className="mt-5 font-sans text-base font-semibold leading-relaxed tracking-normal text-white">
-                      <i>{data?.tagline}</i>
+                      <i>
+                        {data?.tagline ? (
+                          <p className="mt-5 font-sans text-base font-semibold leading-relaxed tracking-normal text-white">
+                            <i>{data.tagline}</i>
+                          </p>
+                        ) : null}
+                      </i>
                     </p>
                   }
                 </div>
                 <div className="group">
                   <p className="mt-5 font-sans text-base font-normal leading-relaxed tracking-normal text-white">
-                    {showMore
-                      ? data?.overview?.length > 100
-                        ? data?.overview
-                        : data?.overview
-                      : data?.overview?.slice(0, 120) + "..."}
+                    {data?.overview ? (
+                      <p className="mt-5 font-sans text-base font-normal leading-relaxed tracking-normal text-white">
+                        {showMore
+                          ? data.overview
+                          : data.overview.slice(0, 120) + "..."}
+                      </p>
+                    ) : null}
                   </p>
 
                   <button
